@@ -1,0 +1,40 @@
+unit SzczeegolyProduktuUnit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TProduktForm = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProduktForm: TProduktForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TProduktForm.ShowProduktDetails(ADataSet: TDataSet);
+begin
+  if Assigned(ADataSet) and (not ADataSet.IsEmpty) then
+  begin
+    LabelNazwa.Caption := 'Produkt: ' + ADataSet.FieldByName('nazwa').AsString;
+    LabelIlosc.Caption := 'Iloœæ: ' + ADataSet.FieldByName('ilosc').AsString;
+
+    MemoDetails.Lines.Clear;
+    MemoDetails.Lines.Add('ID: ' + ADataSet.FieldByName('id').AsString);
+    MemoDetails.Lines.Add('Nazwa: ' + ADataSet.FieldByName('nazwa').AsString);
+    MemoDetails.Lines.Add('Iloœæ: ' + ADataSet.FieldByName('ilosc').AsString);
+  end;
+end;
+s
+end.

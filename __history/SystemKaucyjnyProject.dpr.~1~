@@ -1,0 +1,14 @@
+program SystemKaucyjnyProject;
+
+uses
+  Vcl.Forms,
+  SystemKaucyjny in 'SystemKaucyjny.pas' {SystemKaucyjnyForm};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TSystemKaucyjnyForm, SystemKaucyjnyForm);
+  Application.Run;
+end.
