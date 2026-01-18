@@ -16,7 +16,8 @@ uses
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
 
-  SzczeegolyProduktuUnit, Vcl.StdCtrls;
+  SzczeegolyProduktuUnit,
+  FrakcjeDRS, Vcl.StdCtrls;
 
 type
   TSystemKaucyjnyForm = class(TForm)
@@ -24,9 +25,11 @@ type
     FDQuery1: TFDQuery;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
+    ButtonFrakcjeDRS: TButton;
     procedure FormCreate(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure ButtonFrakcjeDRSClick(Sender: TObject);
   private
 
   end;
@@ -87,6 +90,11 @@ end;
 procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
 begin
    ProduktForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.ButtonFrakcjeDRSClick(Sender: TObject);
+begin
+FrakcjeDRSForm.Show;
 end;
 
 procedure TSystemKaucyjnyForm.DBGrid1DblClick(Sender: TObject);

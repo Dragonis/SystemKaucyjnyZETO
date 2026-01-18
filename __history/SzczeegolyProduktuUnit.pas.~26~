@@ -1,0 +1,65 @@
+unit SzczeegolyProduktuUnit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TProduktForm = class(TForm)
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    EditId: TEdit;
+    EditNazwa: TEdit;
+    EditIlosc: TEdit;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+   end;
+
+var
+  ProduktForm: TProduktForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TProduktForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  if ComboBox1.ItemIndex = -1 then
+  begin
+    ShowMessage('Proszê wybraæ towar przed zamkniêciem programu!');
+    CanClose := False; // blokuje zamkniêcie okna
+  end
+  else
+    CanClose := True;
+end;
+
+procedure TProduktForm.FormCreate(Sender: TObject);
+begin
+KeyPreview := true;
+
+end;
+
+procedure TProduktForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then  // Esc
+    Close;           // wywo³uje OnCloseQuery
+end;
+
+procedure UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
+begin
+  EditId.Text := IntToStr(AId);
+  EditNazwa.Text := ANazwa;
+  EditIlosc.Text := IntToStr(AIlosc);
+end;
+
+end.
+

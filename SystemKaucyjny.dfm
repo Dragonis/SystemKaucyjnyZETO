@@ -29,6 +29,15 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TitleFont.Style = []
     OnDblClick = DBGrid1DblClick
   end
+  object ButtonFrakcjeDRS: TButton
+    Left = 40
+    Top = 240
+    Width = 105
+    Height = 25
+    Caption = 'Ustaw Frakcje DRS'
+    TabOrder = 1
+    OnClick = ButtonFrakcjeDRSClick
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\Users\wojte\Desktop\System kaucyjny\database\test.db'
