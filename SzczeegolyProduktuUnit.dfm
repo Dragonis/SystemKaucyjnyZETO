@@ -104,28 +104,45 @@ object ProduktForm: TProduktForm
     Top = 128
     Width = 559
     Height = 106
-    ActivePage = tsCena_sprzedazy
+    ActivePage = tsDRS_Kaucja
     TabOrder = 4
     object tsCena_sprzedazy: TTabSheet
       Caption = 'Cena sprzedazy'
-      ExplicitHeight = 81
     end
     object tsOpisdodatkowy: TTabSheet
       Caption = 'Opis dodatkowy'
       ImageIndex = 1
-      ExplicitWidth = 577
-      ExplicitHeight = 165
     end
     object tsDRS_Kaucja: TTabSheet
       Caption = 'DRS Kaucja'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 72
+      object Label3: TLabel
+        Left = 16
+        Top = 24
+        Width = 110
+        Height = 13
+        Caption = 'Frakcja opakowa'#324' DRS'
+      end
+      object Button1: TButton
+        Left = 295
+        Top = 16
+        Width = 34
+        Height = 25
+        Caption = '...'
+        TabOrder = 0
+        OnClick = Button1Click
+      end
+      object EditFrakcjeOpakowan: TEdit
+        Left = 155
+        Top = 16
+        Width = 121
+        Height = 21
+        TabOrder = 1
+      end
     end
     object tsDRS_Rozliczenie: TTabSheet
       Caption = 'DRS Rozliczenie'
       ImageIndex = 3
-      ExplicitLeft = 0
     end
   end
   object ComboBox2: TComboBox

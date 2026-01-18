@@ -23,6 +23,9 @@ type
     Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1DblClick(Sender: TObject);
+  public
+
   end;
 
 var
@@ -30,14 +33,18 @@ var
 
 implementation
 
+uses
+  SzczeegolyProduktuUnit;
+
 {$R *.dfm}
 
 procedure TFrakcjeDRSForm.FormCreate(Sender: TObject);
 var
   Cnt: Integer;
 begin
-  FDConnection1.Connected := True;
   KeyPreview := True;
+
+  FDConnection1.Connected := True;
 
   // tabela
   FDConnection1.ExecSQL(
@@ -49,12 +56,9 @@ begin
     ')'
   );
 
-  // sprawdŸ czy s¹ dane
-  Cnt := FDConnection1.ExecSQLScalar(
-    'SELECT COUNT(*) FROM drs'
-  );
+  // czy sï¿½ dane
+  Cnt := FDConnection1.ExecSQLScalar('SELECT COUNT(*) FROM drs');
 
-  // dane przyk³adowe
   if Cnt = 0 then
   begin
     FDConnection1.ExecSQL(
@@ -71,8 +75,40 @@ begin
   FDQuery1.Open;
 
   DataSource1.DataSet := FDQuery1;
+  DBGrid1.DataSource := DataSource1;
 
   DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
+end;
+
+procedure TFrakcjeDRSForm.DBGrid1DblClick(Sender: TObject);
+var
+  nazwa: string;
+  i: Integer;
+  ProduktFormInstance: TProduktForm;
+begin
+  if not DataSource1.DataSet.IsEmpty then
+  begin
+    nazwa := DataSource1.DataSet.FieldByName('nazwa').AsString;
+    
+    // ZnajdÅº aktywny formularz ProduktForm
+    ProduktFormInstance := nil;
+    for i := 0 to Screen.FormCount - 1 do
+    begin
+      if Screen.Forms[i] is TProduktForm then
+      begin
+        ProduktFormInstance := TProduktForm(Screen.Forms[i]);
+        Break;
+      end;
+    end;
+    
+    // Wstaw wartoÅ›Ä‡ do Edit w formularzu ProduktForm
+    if Assigned(ProduktFormInstance) and ProduktFormInstance.Visible then
+    begin
+      ProduktFormInstance.EditFrakcjeOpakowan.Text := nazwa;
+    end;
+    
+    Close;
+  end;
 end;
 
 procedure TFrakcjeDRSForm.FormKeyPress(Sender: TObject; var Key: Char);

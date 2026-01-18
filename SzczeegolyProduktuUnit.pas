@@ -24,10 +24,14 @@ type
     tsOpisdodatkowy: TTabSheet;
     tsDRS_Kaucja: TTabSheet;
     tsDRS_Rozliczenie: TTabSheet;
+    Label3: TLabel;
+    Button1: TButton;
+    EditFrakcjeOpakowan: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure ComboBox1Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   public
     procedure UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
   end;
@@ -36,6 +40,9 @@ var
   ProduktForm: TProduktForm;
 
 implementation
+
+uses
+  FrakcjeDRS;
 
 {$R *.dfm}
 
@@ -59,23 +66,28 @@ begin
   Msg := '';
 
   if ComboBox1.ItemIndex = -1 then
-    Msg := Msg + '- Proszê wybraæ opcjê z listy "Typ towaru".' + sLineBreak;
+    Msg := Msg + '- Proszï¿½ wybraï¿½ opcjï¿½ z listy "Typ towaru".' + sLineBreak;
 
   if ComboBox2.ItemIndex = -1 then
-    Msg := Msg + '- Proszê wybraæ opcjê z listy "Stawka VAT".';
+    Msg := Msg + '- Proszï¿½ wybraï¿½ opcjï¿½ z listy "Stawka VAT".';
 
   if Msg <> '' then
   begin
-    MessageDlg('Nie mo¿na zamkn¹æ formularza:' + sLineBreak + Msg, mtWarning, [mbOK], 0);
+    MessageDlg('Nie moï¿½na zamknï¿½ï¿½ formularza:' + sLineBreak + Msg, mtWarning, [mbOK], 0);
 
     CanClose := False;
 
-    // ustawia fokus na pierwsze niewype³nione pole
+    // ustawia fokus na pierwsze niewypeï¿½nione pole
     if ComboBox1.ItemIndex = -1 then
       ComboBox1.SetFocus
     else
       ComboBox2.SetFocus;
   end;
+end;
+
+procedure TProduktForm.Button1Click(Sender: TObject);
+begin
+FrakcjeDRSForm.Show;
 end;
 
 procedure TProduktForm.ComboBox1Change(Sender: TObject);
@@ -89,7 +101,7 @@ begin
   PageControl1.Visible := True;
 
   case ComboBox1.ItemIndex of
-    0: // Towar zwyk³y
+    0: // Towar zwykï¿½y
       begin
         tsCena_sprzedazy.TabVisible := True;
         tsOpisdodatkowy.TabVisible := True;

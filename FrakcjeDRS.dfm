@@ -12,6 +12,7 @@ object FrakcjeDRSForm: TFrakcjeDRSForm
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnDblClick = DBGrid1DblClick
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
@@ -36,6 +37,7 @@ object FrakcjeDRSForm: TFrakcjeDRSForm
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnDblClick = DBGrid1DblClick
   end
   object FDConnection1: TFDConnection
     Params.Strings = (

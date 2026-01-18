@@ -1,0 +1,27 @@
+program SystemKaucyjnyProject;
+
+uses
+  Vcl.Forms,
+  // Kolejnoœæ wa¿na: formy u¿ywane przez inne tworzymy wczeœniej
+  FrakcjeDRS in 'FrakcjeDRS.pas' {FrakcjeDRSForm},
+  ZapisanieTowaru in 'ZapisanieTowaru.pas' {ZapisanieTowaruForm},
+  UstawieniaProgramu in 'UstawieniaProgramu.pas' {UstawieniaProgramuForm},
+  SzczeegolyProduktuUnit in 'SzczeegolyProduktuUnit.pas' {ProduktForm},
+  SystemKaucyjny in 'SystemKaucyjny.pas' {SystemKaucyjnyForm};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+
+  // Tworzymy formy w kolejnoœci zale¿noœci
+  Application.CreateForm(TFrakcjeDRSForm, FrakcjeDRSForm);         // potrzebna w ProduktForm
+  Application.CreateForm(TZapisanieTowaruForm, ZapisanieTowaruForm); // potrzebna w ProduktForm
+  Application.CreateForm(TUstawieniaProgramuForm, UstawieniaProgramuForm);
+  Application.CreateForm(TProduktForm, ProduktForm);               // odwo³uje siê do FrakcjeDRSForm i ZapisanieTowaruForm
+  Application.CreateForm(TSystemKaucyjnyForm, SystemKaucyjnyForm);
+
+  Application.Run;
+end.
+

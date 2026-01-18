@@ -1,0 +1,150 @@
+unit SzczeegolyProduktuUnit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Vcl.ComCtrls,
+  ZapisanieTowaru,
+  FrakcjeDRS;
+
+type
+  TProduktForm = class(TForm)
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    EditId: TEdit;
+    EditNazwa: TEdit;
+    EditIlosc: TEdit;
+    ComboBox1: TComboBox; // Typ towaru
+    ComboBox2: TComboBox; // Stawka VAT
+    PageControl1: TPageControl;
+    tsCena_sprzedazy: TTabSheet;
+    tsOpisdodatkowy: TTabSheet;
+    tsDRS_Kaucja: TTabSheet;
+    tsDRS_Rozliczenie: TTabSheet;
+    Label3: TLabel;
+    Label7: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    EditWybranaFrakcja: TEdit;
+    Label8: TLabel;
+    CheckBox1: TCheckBox;
+    ButtonZapisWyjscie: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure ButtonZapisWyjscieClick(Sender: TObject);
+  public
+    procedure UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
+  end;
+
+var
+  ProduktForm: TProduktForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TProduktForm.FormCreate(Sender: TObject);
+begin
+  KeyPreview := True;
+  PageControl1.Visible := False;
+end;
+
+procedure TProduktForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then
+    Close; // przechodzi przez FormCloseQuery
+end;
+
+procedure TProduktForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+var
+  Msg: string;
+begin
+  CanClose := True;
+  Msg := '';
+
+  if ComboBox1.ItemIndex = -1 then
+    Msg := Msg + '- Proszê wybraæ opcjê z listy "Typ towaru".' + sLineBreak;
+
+  if ComboBox2.ItemIndex = -1 then
+    Msg := Msg + '- Proszê wybraæ opcjê z listy "Stawka VAT".';
+
+  if Msg <> '' then
+  begin
+    MessageDlg('Nie mo¿na zamkn¹æ formularza:' + sLineBreak + Msg, mtWarning, [mbOK], 0);
+
+    CanClose := False;
+
+    // ustawia fokus na pierwsze niewype³nione pole
+    if ComboBox1.ItemIndex = -1 then
+      ComboBox1.SetFocus
+    else
+      ComboBox2.SetFocus;
+  end;
+end;
+
+procedure TProduktForm.Button1Click(Sender: TObject);
+begin
+  // poka¿ formularz z DBGrid
+  if FrakcjeDRSForm.ShowModal = mrOk then
+  begin
+    // zak³adam, ¿e FrakcjeDRSForm ma publiczne properties lub metodê GetSelected
+    if Assigned(FrakcjeDRSForm.DBGrid1.DataSource.DataSet) and
+       (not FrakcjeDRSForm.DBGrid1.DataSource.DataSet.IsEmpty) then
+    begin
+      // pobieramy aktualny rekord
+      //EditId.Text := FrakcjeDRSForm.DBGrid1.DataSource.DataSet.FieldByName('id').AsString;
+      EditWybranaFrakcja.Text := FrakcjeDRSForm.DBGrid1.DataSource.DataSet.FieldByName('nazwa').AsString;
+    end;
+  end;
+end;
+
+procedure TProduktForm.ButtonZapisWyjscieClick(Sender: TObject);
+begin
+   ZapisanieTowaruForm.Show;
+end;
+
+procedure TProduktForm.ComboBox1Change(Sender: TObject);
+begin
+  // wszystko ukryte
+  tsCena_sprzedazy.TabVisible := False;
+  tsOpisdodatkowy.TabVisible := False;
+  tsDRS_Kaucja.TabVisible := False;
+  tsDRS_Rozliczenie.TabVisible := False;
+
+  PageControl1.Visible := True;
+
+  case ComboBox1.ItemIndex of
+    0: // Towar zwyk³y
+      begin
+        tsCena_sprzedazy.TabVisible := True;
+        tsOpisdodatkowy.TabVisible := True;
+        PageControl1.ActivePage := tsCena_sprzedazy;
+      end;
+
+    1: // Towar DRS
+      begin
+        tsCena_sprzedazy.TabVisible := True;
+        tsDRS_Kaucja.TabVisible := True;
+        tsDRS_Rozliczenie.TabVisible := True;
+        PageControl1.ActivePage := tsCena_sprzedazy;
+      end;
+  end;
+end;
+
+procedure TProduktForm.UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
+begin
+  EditId.Text := IntToStr(AId);
+  EditNazwa.Text := ANazwa;
+  EditIlosc.Text := IntToStr(AIlosc);
+end;
+
+end.
+
