@@ -5,7 +5,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   ClientHeight = 302
   ClientWidth = 447
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'

@@ -5,7 +5,7 @@ object FrakcjeDRSForm: TFrakcjeDRSForm
   ClientHeight = 249
   ClientWidth = 567
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'

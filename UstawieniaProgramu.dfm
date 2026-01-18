@@ -5,7 +5,7 @@ object UstawieniaProgramuForm: TUstawieniaProgramuForm
   ClientHeight = 329
   ClientWidth = 705
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'

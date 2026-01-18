@@ -5,7 +5,7 @@ object ProduktForm: TProduktForm
   ClientHeight = 325
   ClientWidth = 640
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
@@ -108,14 +108,26 @@ object ProduktForm: TProduktForm
     TabOrder = 4
     object tsCena_sprzedazy: TTabSheet
       Caption = 'Cena sprzedazy'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tsOpisdodatkowy: TTabSheet
       Caption = 'Opis dodatkowy'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tsDRS_Kaucja: TTabSheet
       Caption = 'DRS Kaucja'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label3: TLabel
         Left = 16
         Top = 24
@@ -139,10 +151,22 @@ object ProduktForm: TProduktForm
         Height = 21
         TabOrder = 1
       end
+      object CheckBox1: TCheckBox
+        Left = 352
+        Top = 24
+        Width = 97
+        Height = 17
+        Caption = 'Towar w'#322'asny'
+        TabOrder = 2
+      end
     end
     object tsDRS_Rozliczenie: TTabSheet
       Caption = 'DRS Rozliczenie'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object ComboBox2: TComboBox
@@ -157,5 +181,14 @@ object ProduktForm: TProduktForm
       '5 %'
       '0 %'
       'ZW')
+  end
+  object Button2: TButton
+    Left = 8
+    Top = 292
+    Width = 75
+    Height = 25
+    Caption = 'Zapis i wyjcie'
+    TabOrder = 6
+    OnClick = Button2Click
   end
 end

@@ -1,11 +1,11 @@
 object ZapisanieTowaruForm: TZapisanieTowaruForm
   Left = 0
   Top = 0
-  Caption = 'Zapisanie towaru'
-  ClientHeight = 117
-  ClientWidth = 215
+  Caption = 'ZapisanieTowaru'
+  ClientHeight = 133
+  ClientWidth = 189
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
@@ -13,18 +13,11 @@ object ZapisanieTowaruForm: TZapisanieTowaruForm
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 87
-    Top = 40
-    Width = 108
-    Height = 13
-    Caption = 'Czy napewno zapisa'#263'?'
-  end
   object Image1: TImage
-    Left = 16
+    Left = 8
     Top = 16
-    Width = 57
-    Height = 45
+    Width = 49
+    Height = 41
     Picture.Data = {
       0A544A504547496D61676561070000FFD8FFE000104A46494600010101006000
       600000FFDB004300020101020101020202020202020203050303030303060404
@@ -87,18 +80,25 @@ object ZapisanieTowaruForm: TZapisanieTowaruForm
       00D7A27F2AE9EDBEE1FAD7F30718F13E3338CC6A54C459286892D91FD67C1BC2
       183C83074E8E16EDD45CD26F76CFFFD9}
   end
-  object Button1: TButton
-    Left = 24
-    Top = 84
+  object Label1: TLabel
+    Left = 72
+    Top = 32
+    Width = 102
+    Height = 13
+    Caption = 'Czy napwno zapisa'#263'?'
+  end
+  object ButtonYES: TButton
+    Left = 18
+    Top = 88
     Width = 75
     Height = 25
     Caption = 'TAK'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = ButtonYESClick
   end
   object Button2: TButton
-    Left = 120
-    Top = 80
+    Left = 99
+    Top = 88
     Width = 75
     Height = 25
     Caption = 'NIE'

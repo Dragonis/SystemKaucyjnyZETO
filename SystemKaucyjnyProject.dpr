@@ -5,7 +5,8 @@ uses
   SystemKaucyjny in 'SystemKaucyjny.pas' {SystemKaucyjnyForm},
   SzczeegolyProduktuUnit in 'SzczeegolyProduktuUnit.pas' {ProduktForm},
   FrakcjeDRS in 'FrakcjeDRS.pas' {FrakcjeDRSForm},
-  UstawieniaProgramu in 'UstawieniaProgramu.pas' {UstawieniaProgramuForm};
+  UstawieniaProgramu in 'UstawieniaProgramu.pas' {UstawieniaProgramuForm},
+  ZapisanieTowaru in 'ZapisanieTowaru.pas' {ZapisanieTowaruForm};
 
 {$R *.res}
 
@@ -16,5 +17,6 @@ begin
   Application.CreateForm(TProduktForm, ProduktForm);
   Application.CreateForm(TFrakcjeDRSForm, FrakcjeDRSForm);
   Application.CreateForm(TUstawieniaProgramuForm, UstawieniaProgramuForm);
+  Application.CreateForm(TZapisanieTowaruForm, ZapisanieTowaruForm);
   Application.Run;
 end.

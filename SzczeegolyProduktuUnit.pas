@@ -1,4 +1,4 @@
-unit SzczeegolyProduktuUnit;
+﻿unit SzczeegolyProduktuUnit;
 
 interface
 
@@ -27,11 +27,14 @@ type
     Label3: TLabel;
     Button1: TButton;
     EditFrakcjeOpakowan: TEdit;
+    CheckBox1: TCheckBox;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure ComboBox1Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   public
     procedure UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
   end;
@@ -42,7 +45,8 @@ var
 implementation
 
 uses
-  FrakcjeDRS;
+  FrakcjeDRS,
+  ZapisanieTowaru;
 
 {$R *.dfm}
 
@@ -66,18 +70,18 @@ begin
   Msg := '';
 
   if ComboBox1.ItemIndex = -1 then
-    Msg := Msg + '- Prosz� wybra� opcj� z listy "Typ towaru".' + sLineBreak;
+    Msg := Msg + '- Proszę wybrać opcję z listy "Typ towaru".' + sLineBreak;
 
   if ComboBox2.ItemIndex = -1 then
-    Msg := Msg + '- Prosz� wybra� opcj� z listy "Stawka VAT".';
+    Msg := Msg + '- Proszę wybrać opcję z listy "Stawka VAT".';
 
   if Msg <> '' then
   begin
-    MessageDlg('Nie mo�na zamkn�� formularza:' + sLineBreak + Msg, mtWarning, [mbOK], 0);
+    MessageDlg('Nie można zamknąć formularza:' + sLineBreak + Msg, mtWarning, [mbOK], 0);
 
     CanClose := False;
 
-    // ustawia fokus na pierwsze niewype�nione pole
+    // ustawia fokus na pierwsze niewypełnione pole
     if ComboBox1.ItemIndex = -1 then
       ComboBox1.SetFocus
     else
@@ -123,6 +127,11 @@ begin
   EditId.Text := IntToStr(AId);
   EditNazwa.Text := ANazwa;
   EditIlosc.Text := IntToStr(AIlosc);
+end;
+
+procedure TProduktForm.Button2Click(Sender: TObject);
+begin
+  ZapisanieTowaruForm.Show;
 end;
 
 end.
