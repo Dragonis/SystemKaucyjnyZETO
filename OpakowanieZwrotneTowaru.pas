@@ -15,12 +15,15 @@ type
     Label1: TLabel;
     EditOpakDRS: TEdit;
     ButtonOpakDRS: TButton;
+    Button1: TButton; // User's "Zapisz" button
     procedure ButtonOpakDRSClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject); // Handler for Button1 (Zapisz)
     procedure FormCreate(Sender: TObject);
-    procedure ButtonOKClick(Sender: TObject);
-    procedure ButtonCancelClick(Sender: TObject);
+  private
+    function GetPublicznaNazwa: string;
+    procedure SetPublicznaNazwa(const Value: string);
   public
-    { Public declarations }
+    property publicznaNazwa: string read GetPublicznaNazwa write SetPublicznaNazwa;
   end;
 
 var
@@ -30,6 +33,21 @@ implementation
 
 {$R *.dfm}
 
+procedure TOpakowanieZwrotneTowaruForm.FormCreate(Sender: TObject);
+begin
+  Button1.OnClick := Button1Click;
+end;
+
+function TOpakowanieZwrotneTowaruForm.GetPublicznaNazwa: string;
+begin
+  Result := EditOpakDRS.Text;
+end;
+
+procedure TOpakowanieZwrotneTowaruForm.SetPublicznaNazwa(const Value: string);
+begin
+  EditOpakDRS.Text := Value;
+end;
+
 procedure TOpakowanieZwrotneTowaruForm.ButtonOpakDRSClick(Sender: TObject);
 begin
   if FrakcjeDRSForm.ShowModal = mrOk then
@@ -38,37 +56,13 @@ begin
   end;
 end;
 
-procedure TOpakowanieZwrotneTowaruForm.FormCreate(Sender: TObject);
-var
-  ButtonOK, ButtonCancel: TButton;
+procedure TOpakowanieZwrotneTowaruForm.Button1Click(Sender: TObject); // Renamed handler
 begin
-  // Create OK button
-  ButtonOK := TButton.Create(Self);
-  ButtonOK.Parent := Self;
-  ButtonOK.Caption := 'OK';
-  ButtonOK.ModalResult := mrOk;
-  ButtonOK.Top := Self.Height - 80;
-  ButtonOK.Left := Self.Width - 200;
-  ButtonOK.OnClick := ButtonOKClick;
+     publicznaNazwa := EditOpakDRS.Text;
+  ModalResult := mrOk; // Signal that a value has been selected and saved
+  Close; // Close the modal form
 
-  // Create Cancel button
-  ButtonCancel := TButton.Create(Self);
-  ButtonCancel.Parent := Self;
-  ButtonCancel.Caption := 'Anuluj';
-  ButtonCancel.ModalResult := mrCancel;
-  ButtonCancel.Top := Self.Height - 80;
-  ButtonCancel.Left := Self.Width - 110;
-  ButtonCancel.OnClick := ButtonCancelClick;
-end;
-
-procedure TOpakowanieZwrotneTowaruForm.ButtonOKClick(Sender: TObject);
-begin
-  ModalResult := mrOk;
-end;
-
-procedure TOpakowanieZwrotneTowaruForm.ButtonCancelClick(Sender: TObject);
-begin
-  ModalResult := mrCancel;
+  EditOpakDRS.Text
 end;
 
 end.

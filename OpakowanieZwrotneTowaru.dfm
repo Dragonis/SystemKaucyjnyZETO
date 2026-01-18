@@ -51,4 +51,13 @@ object OpakowanieZwrotneTowaruForm: TOpakowanieZwrotneTowaruForm
       end
     end
   end
+  object Button1: TButton
+    Left = 8
+    Top = 171
+    Width = 75
+    Height = 25
+    Caption = 'Zapisz'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
 end

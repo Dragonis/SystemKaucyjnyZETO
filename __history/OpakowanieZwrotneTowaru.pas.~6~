@@ -1,0 +1,59 @@
+unit OpakowanieZwrotneTowaru;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
+  FrakcjeDRS;
+
+type
+  TOpakowanieZwrotneTowaruForm = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Label1: TLabel;
+    EditOpakDRS: TEdit;
+    ButtonOpakDRS: TButton;
+    ButtonZapisz: TButton;
+    procedure ButtonOpakDRSClick(Sender: TObject);
+    procedure ButtonZapiszClick(Sender: TObject);
+  private
+    function GetPublicznaNazwa: string;
+    procedure SetPublicznaNazwa(const Value: string);
+  public
+    property publicznaNazwa: string read GetPublicznaNazwa write SetPublicznaNazwa;
+  end;
+
+var
+  OpakowanieZwrotneTowaruForm: TOpakowanieZwrotneTowaruForm;
+
+implementation
+
+{$R *.dfm}
+
+function TOpakowanieZwrotneTowaruForm.GetPublicznaNazwa: string;
+begin
+  Result := EditOpakDRS.Text;
+end;
+
+procedure TOpakowanieZwrotneTowaruForm.SetPublicznaNazwa(const Value: string);
+begin
+  EditOpakDRS.Text := Value;
+end;
+
+procedure TOpakowanieZwrotneTowaruForm.ButtonOpakDRSClick(Sender: TObject);
+begin
+  if FrakcjeDRSForm.ShowModal = mrOk then
+  begin
+    EditOpakDRS.Text := FrakcjeDRSForm.publicznaNazwa;
+  end;
+end;
+
+procedure TOpakowanieZwrotneTowaruForm.ButtonZapiszClick(Sender: TObject);
+begin
+  ModalResult := mrOk;
+  Close;
+end;
+
+end.

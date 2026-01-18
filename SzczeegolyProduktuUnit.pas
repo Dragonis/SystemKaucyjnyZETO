@@ -142,7 +142,7 @@ procedure TProduktForm.ButtonOpakZwrotneClick(Sender: TObject);
 begin
   if OpakowanieZwrotneTowaruForm.ShowModal = mrOk then
   begin
-    EditOpakZwrotne.Text := OpakowanieZwrotneTowaruForm.EditOpakDRS.Text;
+    EditOpakZwrotne.Text := OpakowanieZwrotneTowaruForm.publicznaNazwa;
   end;
 end;
 
