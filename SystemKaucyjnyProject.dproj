@@ -107,6 +107,10 @@
             <Form>FrakcjeDRSForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="UstawieniaProgramu.pas">
+            <Form>UstawieniaProgramuForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_SystemKaucyjnyProject\default.txaPackage"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

@@ -38,6 +38,15 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TabOrder = 1
     OnClick = ButtonFrakcjeDRSClick
   end
+  object Button1: TButton
+    Left = 168
+    Top = 240
+    Width = 121
+    Height = 25
+    Caption = 'Ustawienia Programu'
+    TabOrder = 2
+    OnClick = Button1Click
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\Users\wojte\Desktop\System kaucyjny\database\test.db'

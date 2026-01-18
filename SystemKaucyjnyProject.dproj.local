@@ -1,31 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.283,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.328,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.044,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjny.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.413,C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.pas=C:\Users\wojte\Desktop\System kaucyjny\Produkt.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.683,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\SzczeegolyProduktuUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.151,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\UtawieniaProgramuUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.751,=C:\Users\wojte\Desktop\System kaucyjny\ModelSupport_SystemKaucyjnyProject\default.txaPackage</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.503,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.628,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.322,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRSUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.283,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.683,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\SzczeegolyProduktuUnit.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.251,C:\Users\wojte\Desktop\System kaucyjny\Produkt.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.413,C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.dfm=C:\Users\wojte\Desktop\System kaucyjny\Produkt.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.697,C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjnyProject.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.322,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRSUnit.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.679,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjny.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.367,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.151,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\UtawieniaProgramuUnit.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.413,C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.pas=C:\Users\wojte\Desktop\System kaucyjny\Produkt.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.413,C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.dfm=C:\Users\wojte\Desktop\System kaucyjny\Produkt.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.283,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjny.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.751,=C:\Users\wojte\Desktop\System kaucyjny\ModelSupport_SystemKaucyjnyProject\default.txaPackage</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.251,C:\Users\wojte\Desktop\System kaucyjny\Produkt.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.803,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.367,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.679,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.328,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.683,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\SzczeegolyProduktuUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.628,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.283,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.697,C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjnyProject.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjny.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.044,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.151,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\UtawieniaProgramuUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.503,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.322,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRSUnit.pas</Transaction>
     <Transaction>2026.01.18 08:51:47.609,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
     <Transaction>2026.01.18 08:52:45.451,C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRS.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
     <Transaction>2026.01.18 08:52:45.451,C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRS.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>2026.01.18 09:24:05.018,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>2026.01.18 09:24:42.775,C:\Users\wojte\Desktop\System kaucyjny\UstawieniaProgramu.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>2026.01.18 09:24:42.775,C:\Users\wojte\Desktop\System kaucyjny\UstawieniaProgramu.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="ModelSupport_SystemKaucyjnyProject"/>
@@ -36,5 +39,7 @@
     <File Path="SzczeegolyProduktuUnit.dfm"/>
     <File Path="FrakcjeDRS.pas"/>
     <File Path="FrakcjeDRS.dfm"/>
+    <File Path="UstawieniaProgramu.pas"/>
+    <File Path="UstawieniaProgramu.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>
