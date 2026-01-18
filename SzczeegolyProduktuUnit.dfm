@@ -11,6 +11,8 @@ object ProduktForm: TProduktForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object Label4: TLabel
@@ -33,6 +35,13 @@ object ProduktForm: TProduktForm
     Width = 22
     Height = 13
     Caption = 'Ilo'#347#263
+  end
+  object Label1: TLabel
+    Left = 128
+    Top = 64
+    Width = 55
+    Height = 13
+    Caption = 'Typ towaru'
   end
   object EditId: TEdit
     Left = 30
@@ -60,5 +69,24 @@ object ProduktForm: TProduktForm
     Color = cl3DLight
     Enabled = False
     TabOrder = 2
+  end
+  object ComboBox1: TComboBox
+    Left = 194
+    Top = 61
+    Width = 145
+    Height = 21
+    TabOrder = 3
+    Items.Strings = (
+      'towar - zwyk'#322'y'
+      'towar - karton'
+      'towar - winieta'
+      'towar - zestaw'
+      'towar - receptura'
+      'opak. zwrotne'
+      'us'#322'uga'
+      'PrePaid'
+      'op. jednorazowe'
+      'op'#322'ata za op. jedn.'
+      'kaucja DRS')
   end
 end

@@ -14,6 +14,10 @@ type
     EditId: TEdit;
     EditNazwa: TEdit;
     EditIlosc: TEdit;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,6 +30,17 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TProduktForm.FormCreate(Sender: TObject);
+begin
+KeyPreview := True;
+end;
+
+procedure TProduktForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then
+    Close;
+end;
 
 procedure TProduktForm.UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
 begin

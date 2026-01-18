@@ -21,6 +21,7 @@ type
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   end;
 
 var
@@ -35,6 +36,7 @@ var
   Cnt: Integer;
 begin
   FDConnection1.Connected := True;
+  KeyPreview := True;
 
   // tabela
   FDConnection1.ExecSQL(
@@ -65,6 +67,12 @@ begin
   // pokaz w DBGrid
   FDQuery1.SQL.Text := 'SELECT * FROM ustawienia';
   FDQuery1.Open;
+end;
+
+procedure TUstawieniaProgramuForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then
+    Close;
 end;
 
 end.

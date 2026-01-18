@@ -35,6 +35,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ButtonFrakcjeDRSClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
 
   end;
@@ -51,6 +52,7 @@ var
   Cnt: Integer;
 begin
   FDConnection1.Connected := True;
+  KeyPreview := True;
 
   // tabela
   FDConnection1.ExecSQL(
@@ -90,6 +92,12 @@ begin
 
 DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
 
+end;
+
+procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then  // Esc
+    Close;           // wywołuje OnCloseQuery
 end;
 
 procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
