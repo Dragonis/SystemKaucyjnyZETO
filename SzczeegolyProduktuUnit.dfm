@@ -44,6 +44,13 @@ object ProduktForm: TProduktForm
     Height = 13
     Caption = 'Typ towaru'
   end
+  object Label2: TLabel
+    Left = 128
+    Top = 96
+    Width = 57
+    Height = 13
+    Caption = 'Stawka VAT'
+  end
   object EditId: TEdit
     Left = 30
     Top = 19
@@ -93,8 +100,8 @@ object ProduktForm: TProduktForm
       'op'#322'ata za op. jedn.')
   end
   object PageControl1: TPageControl
-    Left = 22
-    Top = 96
+    Left = 30
+    Top = 128
     Width = 559
     Height = 106
     ActivePage = tsCena_sprzedazy
@@ -120,5 +127,18 @@ object ProduktForm: TProduktForm
       ImageIndex = 3
       ExplicitLeft = 0
     end
+  end
+  object ComboBox2: TComboBox
+    Left = 191
+    Top = 88
+    Width = 145
+    Height = 21
+    TabOrder = 5
+    Items.Strings = (
+      '23 %'
+      '8 v'
+      '5 %'
+      '0 %'
+      'ZW')
   end
 end
