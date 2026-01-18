@@ -2,8 +2,8 @@ object ProduktForm: TProduktForm
   Left = 0
   Top = 0
   Caption = 'Produkt'
-  ClientHeight = 201
-  ClientWidth = 447
+  ClientHeight = 325
+  ClientWidth = 640
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object ProduktForm: TProduktForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
@@ -71,13 +72,16 @@ object ProduktForm: TProduktForm
     TabOrder = 2
   end
   object ComboBox1: TComboBox
-    Left = 194
+    Left = 189
     Top = 61
     Width = 145
     Height = 21
     TabOrder = 3
+    OnChange = ComboBox1Change
     Items.Strings = (
       'towar - zwyk'#322'y'
+      'kaucja DRS'
+      ''
       'towar - karton'
       'towar - winieta'
       'towar - zestaw'
@@ -86,7 +90,35 @@ object ProduktForm: TProduktForm
       'us'#322'uga'
       'PrePaid'
       'op. jednorazowe'
-      'op'#322'ata za op. jedn.'
-      'kaucja DRS')
+      'op'#322'ata za op. jedn.')
+  end
+  object PageControl1: TPageControl
+    Left = 22
+    Top = 96
+    Width = 559
+    Height = 106
+    ActivePage = tsCena_sprzedazy
+    TabOrder = 4
+    object tsCena_sprzedazy: TTabSheet
+      Caption = 'Cena sprzedazy'
+      ExplicitHeight = 81
+    end
+    object tsOpisdodatkowy: TTabSheet
+      Caption = 'Opis dodatkowy'
+      ImageIndex = 1
+      ExplicitWidth = 577
+      ExplicitHeight = 165
+    end
+    object tsDRS_Kaucja: TTabSheet
+      Caption = 'DRS Kaucja'
+      ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 72
+    end
+    object tsDRS_Rozliczenie: TTabSheet
+      Caption = 'DRS Rozliczenie'
+      ImageIndex = 3
+      ExplicitLeft = 0
+    end
   end
 end
