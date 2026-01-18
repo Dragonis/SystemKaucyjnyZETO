@@ -25,7 +25,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure DBGrid1DblClick(Sender: TObject);
   public
-
+    publicznaNazwa: string;
   end;
 
 var
@@ -64,7 +64,7 @@ begin
     ')'
   );
 
-  // czy s� dane
+  // czy s dane
   Cnt := FDConnection1.ExecSQLScalar('SELECT COUNT(*) FROM drs');
 
   if Cnt = 0 then
@@ -89,33 +89,11 @@ begin
 end;
 
 procedure TFrakcjeDRSForm.DBGrid1DblClick(Sender: TObject);
-var
-  nazwa: string;
-  i: Integer;
-  ProduktFormInstance: TProduktForm;
 begin
   if not DataSource1.DataSet.IsEmpty then
   begin
-    nazwa := DataSource1.DataSet.FieldByName('nazwa').AsString;
-    
-    // Znajdź aktywny formularz ProduktForm
-    ProduktFormInstance := nil;
-    for i := 0 to Screen.FormCount - 1 do
-    begin
-      if Screen.Forms[i] is TProduktForm then
-      begin
-        ProduktFormInstance := TProduktForm(Screen.Forms[i]);
-        Break;
-      end;
-    end;
-    
-    // Wstaw wartość do Edit w formularzu ProduktForm
-    if Assigned(ProduktFormInstance) and ProduktFormInstance.Visible then
-    begin
-      ProduktFormInstance.EditFrakcjeOpakowan.Text := nazwa;
-    end;
-    
-    Close;
+    publicznaNazwa := DataSource1.DataSet.FieldByName('nazwa').AsString;
+    ModalResult := mrOk;
   end;
 end;
 

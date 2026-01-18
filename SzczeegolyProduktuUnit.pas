@@ -140,7 +140,10 @@ end;
 
 procedure TProduktForm.ButtonOpakZwrotneClick(Sender: TObject);
 begin
-  OpakowanieZwrotneTowaruForm.Show;
+  if OpakowanieZwrotneTowaruForm.ShowModal = mrOk then
+  begin
+    EditOpakZwrotne.Text := OpakowanieZwrotneTowaruForm.EditOpakDRS.Text;
+  end;
 end;
 
 end.
