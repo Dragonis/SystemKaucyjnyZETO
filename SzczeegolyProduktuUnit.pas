@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, OpakowanieZwrotneTowaru;
 
 type
   TProduktForm = class(TForm)
@@ -29,12 +29,16 @@ type
     EditFrakcjeOpakowan: TEdit;
     CheckBox1: TCheckBox;
     Button2: TButton;
+    Label7: TLabel;
+    EditOpakZwrotne: TEdit;
+    ButtonOpakZwrotne: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure ComboBox1Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure ButtonOpakZwrotneClick(Sender: TObject);
   public
     procedure UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
   end;
@@ -132,6 +136,11 @@ end;
 procedure TProduktForm.Button2Click(Sender: TObject);
 begin
   ZapisanieTowaruForm.Show;
+end;
+
+procedure TProduktForm.ButtonOpakZwrotneClick(Sender: TObject);
+begin
+  OpakowanieZwrotneTowaruForm.Show;
 end;
 
 end.

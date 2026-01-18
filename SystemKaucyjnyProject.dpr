@@ -6,7 +6,8 @@ uses
   SzczeegolyProduktuUnit in 'SzczeegolyProduktuUnit.pas' {ProduktForm},
   FrakcjeDRS in 'FrakcjeDRS.pas' {FrakcjeDRSForm},
   UstawieniaProgramu in 'UstawieniaProgramu.pas' {UstawieniaProgramuForm},
-  ZapisanieTowaru in 'ZapisanieTowaru.pas' {ZapisanieTowaruForm};
+  ZapisanieTowaru in 'ZapisanieTowaru.pas' {ZapisanieTowaruForm},
+  OpakowanieZwrotneTowaru in 'OpakowanieZwrotneTowaru.pas' {OpakowanieZwrotneTowaruForm};
 
 {$R *.res}
 
@@ -18,5 +19,6 @@ begin
   Application.CreateForm(TFrakcjeDRSForm, FrakcjeDRSForm);
   Application.CreateForm(TUstawieniaProgramuForm, UstawieniaProgramuForm);
   Application.CreateForm(TZapisanieTowaruForm, ZapisanieTowaruForm);
+  Application.CreateForm(TOpakowanieZwrotneTowaruForm, OpakowanieZwrotneTowaruForm);
   Application.Run;
 end.

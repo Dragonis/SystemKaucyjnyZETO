@@ -104,7 +104,7 @@ object ProduktForm: TProduktForm
     Top = 128
     Width = 559
     Height = 106
-    ActivePage = tsDRS_Kaucja
+    ActivePage = tsOpisdodatkowy
     TabOrder = 4
     object tsCena_sprzedazy: TTabSheet
       Caption = 'Cena sprzedazy'
@@ -112,6 +112,29 @@ object ProduktForm: TProduktForm
     object tsOpisdodatkowy: TTabSheet
       Caption = 'Opis dodatkowy'
       ImageIndex = 1
+      object Label7: TLabel
+        Left = 18
+        Top = 16
+        Width = 71
+        Height = 13
+        Caption = 'Opak. zwrotne'
+      end
+      object EditOpakZwrotne: TEdit
+        Left = 104
+        Top = 3
+        Width = 121
+        Height = 21
+        TabOrder = 0
+      end
+      object ButtonOpakZwrotne: TButton
+        Left = 231
+        Top = 3
+        Width = 46
+        Height = 25
+        Caption = '...'
+        TabOrder = 1
+        OnClick = ButtonOpakZwrotneClick
+      end
     end
     object tsDRS_Kaucja: TTabSheet
       Caption = 'DRS Kaucja'
