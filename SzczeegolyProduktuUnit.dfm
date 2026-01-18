@@ -161,7 +161,7 @@ object ProduktForm: TProduktForm
     TabOrder = 5
     Items.Strings = (
       '23 %'
-      '8 v'
+      '8 %'
       '5 %'
       '0 %'
       'ZW')

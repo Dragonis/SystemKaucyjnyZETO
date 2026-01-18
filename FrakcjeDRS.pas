@@ -1,4 +1,4 @@
-﻿unit FrakcjeDRS;
+unit FrakcjeDRS;
 
 interface
 
@@ -44,7 +44,15 @@ var
 begin
   KeyPreview := True;
 
-  FDConnection1.Connected := True;
+  try
+    FDConnection1.Connected := True;
+  except
+    on E: Exception do
+    begin
+      MessageDlg('Błąd połączenia z bazą danych: ' + E.Message, mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
 
   // tabela
   FDConnection1.ExecSQL(

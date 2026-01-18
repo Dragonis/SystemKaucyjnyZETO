@@ -1,4 +1,4 @@
-﻿unit SystemKaucyjny;
+unit SystemKaucyjny;
 interface
 
 uses
@@ -51,8 +51,17 @@ procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
 var
   Cnt: Integer;
 begin
-  FDConnection1.Connected := True;
   KeyPreview := True;
+  
+  try
+    FDConnection1.Connected := True;
+  except
+    on E: Exception do
+    begin
+      MessageDlg('Błąd połączenia z bazą danych: ' + E.Message, mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
 
   // tabela
   FDConnection1.ExecSQL(
@@ -112,7 +121,6 @@ end;
 
 procedure TSystemKaucyjnyForm.DBGrid1DblClick(Sender: TObject);
 var
-  NowyForm: TProduktForm;
   ProduktID, ProduktIlosc: Integer;
   ProduktNazwa: string;
 begin
@@ -122,12 +130,11 @@ begin
     ProduktNazwa := DataSource1.DataSet.FieldByName('Nazwa').AsString;
     ProduktIlosc := DataSource1.DataSet.FieldByName('Ilosc').AsInteger;
 
-    NowyForm := TProduktForm.Create(Self);
-    try
-      NowyForm.UstawDane(ProduktID, ProduktNazwa, ProduktIlosc);
-      NowyForm.ShowModal;
-    finally
-      NowyForm.Free;
+    // Użyj globalnej instancji ProduktForm
+    if Assigned(ProduktForm) then
+    begin
+      ProduktForm.UstawDane(ProduktID, ProduktNazwa, ProduktIlosc);
+      ProduktForm.ShowModal;
     end;
   end;
 end;

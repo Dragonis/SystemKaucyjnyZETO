@@ -35,14 +35,23 @@ procedure TUstawieniaProgramuForm.FormCreate(Sender: TObject);
 var
   Cnt: Integer;
 begin
-  FDConnection1.Connected := True;
   KeyPreview := True;
+  
+  try
+    FDConnection1.Connected := True;
+  except
+    on E: Exception do
+    begin
+      MessageDlg('B??d po??czenia z baz? danych: ' + E.Message, mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
 
   // tabela
   FDConnection1.ExecSQL(
     'CREATE TABLE IF NOT EXISTS ustawienia (' +
     'id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
-    'opis VARCHAR(80), ' +
+    'opis VARCHAR(60), ' +
     'wartosc VARCHAR(80)' +
     ')'
   );
@@ -65,6 +74,7 @@ begin
   end;
 
   // pokaz w DBGrid
+  FDQuery1.Connection := FDConnection1;
   FDQuery1.SQL.Text := 'SELECT * FROM ustawienia';
   FDQuery1.Open;
 end;

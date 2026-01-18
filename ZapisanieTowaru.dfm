@@ -3,7 +3,7 @@ object ZapisanieTowaruForm: TZapisanieTowaruForm
   Top = 0
   Caption = 'ZapisanieTowaru'
   ClientHeight = 133
-  ClientWidth = 189
+  ClientWidth = 222
   Color = clBtnFace
   Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
@@ -104,5 +104,25 @@ object ZapisanieTowaruForm: TZapisanieTowaruForm
     Caption = 'NIE'
     TabOrder = 1
     OnClick = Button2Click
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 112
+    Top = 48
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=SQLite'
+      
+        'Database=C:\Users\wojte\Desktop\System kaucyjny\database\opakowa' +
+        'nia_drs.db')
+    LoginPrompt = False
+    Left = 48
+    Top = 48
+  end
+  object DataSource1: TDataSource
+    DataSet = FDQuery1
+    Left = 168
+    Top = 48
   end
 end

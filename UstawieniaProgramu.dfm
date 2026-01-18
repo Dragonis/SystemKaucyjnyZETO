@@ -22,7 +22,7 @@ object UstawieniaProgramuForm: TUstawieniaProgramuForm
     Height = 281
     DataSource = DataSource1
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Charset = EASTEUROPE_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
