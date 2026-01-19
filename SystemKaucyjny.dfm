@@ -84,14 +84,11 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 46042.000000000000000000
-    ReportOptions.Description.Strings = (
-      'Raport wszystkich danych z tabeli items')
-    ReportOptions.LastChange = 46042.000000000000000000
+    ReportOptions.CreateDate = 46041.846621273150000000
+    ReportOptions.LastChange = 46041.846621273150000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
-      'begin'
-      'end.')
+      'begin end.')
     Left = 296
     Top = 8
     Datasets = <>
@@ -111,12 +108,12 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
-        Height = 30.000000000000000000
+        Height = 25.000000000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Title: TfrxMemoView
           Width = 755.000000000000000000
-          Height = 30.000000000000000000
+          Height = 25.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -124,19 +121,19 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Raport produkt'#243'w')
+            'Lista przedmiot'#243'w')
           ParentFont = False
           VAlign = vaCenter
         end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
-        Height = 25.000000000000000000
-        Top = 71.811070000000000000
+        Height = 20.000000000000000000
+        Top = 68.031540000000000000
         Width = 718.110700000000000000
         object HeaderID: TfrxMemoView
-          Width = 60.000000000000000000
-          Height = 25.000000000000000000
+          Width = 50.000000000000000000
+          Height = 20.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -149,8 +146,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
         end
         object HeaderName: TfrxMemoView
           Left = 60.000000000000000000
-          Width = 400.000000000000000000
-          Height = 25.000000000000000000
+          Width = 450.000000000000000000
+          Height = 20.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -162,9 +159,9 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
           ParentFont = False
         end
         object HeaderQuantity: TfrxMemoView
-          Left = 460.000000000000000000
+          Left = 520.000000000000000000
           Width = 100.000000000000000000
-          Height = 25.000000000000000000
+          Height = 20.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -178,30 +175,30 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 25.000000000000000000
-        Top = 158.740260000000000000
+        Height = 20.000000000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         DataSet = frxDBItems
         DataSetName = 'Items'
         RowCount = 0
         object MemoID: TfrxMemoView
-          Width = 60.000000000000000000
-          Height = 25.000000000000000000
+          Width = 57.559060000000000000
+          Height = 20.000000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
             '[Items.id]')
         end
         object MemoName: TfrxMemoView
-          Left = 60.000000000000000000
-          Width = 400.000000000000000000
-          Height = 25.000000000000000000
+          Left = 71.338590000000000000
+          Width = 450.000000000000000000
+          Height = 20.000000000000000000
           Memo.UTF8W = (
             '[Items.name]')
         end
         object MemoQuantity: TfrxMemoView
-          Left = 460.000000000000000000
+          Left = 520.000000000000000000
           Width = 100.000000000000000000
-          Height = 25.000000000000000000
+          Height = 20.000000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
             '[Items.quantity]')
@@ -210,7 +207,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 20.000000000000000000
-        Top = 245.669450000000000000
+        Top = 226.771800000000000000
         Width = 718.110700000000000000
         object PageNumber: TfrxMemoView
           Width = 755.000000000000000000

@@ -3,25 +3,32 @@
 interface
 
 uses
+  // Windows & VCL
   Winapi.Windows, Winapi.Messages,
-  System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+
+  // System
+  System.SysUtils, System.Variants, System.Classes, System.IOUtils,
   Data.DB,
-  Vcl.Grids, Vcl.DBGrids,
+
+  // FireDAC
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async,
-  FireDAC.Phys, FireDAC.VCLUI.Wait,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
-  Vcl.StdCtrls,
 
+  // FastReport
   frxClass, frxDBSet,
+
+  // Twoje jednostki
   SzczeegolyProduktuUnit,
   FrakcjeDRS,
   UstawieniaProgramu;
+
 
 type
   TSystemKaucyjnyForm = class(TForm)
@@ -100,9 +107,6 @@ begin
   DataSource1.DataSet := FDQuery1;
   DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
 
-  // ===== FastReport =====
-  frxDBItems.DataSet := FDQuery1;
-  frxDBItems.UserName := 'Items';
 end;
 
 procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
@@ -121,7 +125,12 @@ frxDBItems.UserName := 'Items';
 
 if not FDQuery1.IsEmpty then
 begin
-  frxReport2.Variables['items.id'] := FDQuery1.FieldByName('id').AsInteger;
+ ;
+  frxReport2.LoadFromFile(
+       TPath.Combine('.\raports', 'test.fr3')
+  );
+
+ frxReport2.Variables['items.id'] := FDQuery1.FieldByName('id').AsInteger;
   frxReport2.Variables['items.name'] := QuotedStr(FDQuery1.FieldByName('name').AsString);
   frxReport2.Variables['items.quantity'] := FDQuery1.FieldByName('quantity').AsInteger;
 end;
@@ -129,8 +138,6 @@ end;
 //frxReport2.Variables['items.id'] := 1;
 //frxReport2.Variables['items.name'] := QuotedStr('test');
 //frxReport2.Variables['items.quantity'] := 3
-;
- // frxReport2.LoadFromFile('test.fr3');
 
   frxReport2.ShowReport;
 end;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Version="5.1.5" DotMatrixReport="False" ScriptLanguage="PascalScript" ScriptText.Text="begin end.">
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10">
+    <TfrxReportTitle Name="ReportTitle1" Height="25" Left="0" Top="0" Width="755">
+      <TfrxMemoView Name="Title" Left="0" Top="0" Width="755" Height="25" Font.Name="Arial" Font.Height="-16" Font.Style="1" HAlign="haCenter" VAlign="vaCenter" Text="Lista przedmiotów"/>
+    </TfrxReportTitle>
+    <TfrxPageHeader Name="PageHeader1" Height="20" Left="0" Top="30" Width="755">
+      <TfrxMemoView Name="HeaderID" Left="0" Top="0" Width="50" Height="20" Text="ID" Font.Style="1" HAlign="haCenter"/>
+      <TfrxMemoView Name="HeaderName" Left="60" Top="0" Width="450" Height="20" Text="Nazwa" Font.Style="1" HAlign="haCenter"/>
+      <TfrxMemoView Name="HeaderQuantity" Left="520" Top="0" Width="100" Height="20" Text="Ilość" Font.Style="1" HAlign="haCenter"/>
+    </TfrxPageHeader>
+    <TfrxMasterData Name="MasterData1" Height="20" Left="0" Top="60" Width="755" DataSet="frxDBItems" DataSetName="Items">
+      <TfrxMemoView Name="MemoID" Left="0" Top="0" Width="50" Height="20" Text="[Items.id]" HAlign="haCenter"/>
+      <TfrxMemoView Name="MemoName" Left="60" Top="0" Width="450" Height="20" Text="[Items.name]" HAlign="haLeft"/>
+      <TfrxMemoView Name="MemoQuantity" Left="520" Top="0" Width="100" Height="20" Text="[Items.quantity]" HAlign="haCenter"/>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="PageFooter1" Height="20" Left="0" Top="280" Width="755">
+      <TfrxMemoView Name="PageNumber" Left="0" Top="0" Width="755" Height="20" Text="Strona [Page#]" HAlign="haRight"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>
+

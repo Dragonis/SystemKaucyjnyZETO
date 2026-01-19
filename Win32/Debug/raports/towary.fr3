@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report ScriptLanguage="PascalScript" ReportInfo.Created="2026-01-19" ReportInfo.Modified="2026-01-19" ReportInfo.Name="Lista items">
+  <dictionary>
+    <TableDataSource Name="Items" ReferenceName="Items" DataType="System.Int32" Enabled="true">
+      <Column Name="id" DataType="System.Int32"/>
+      <Column Name="nazwa" DataType="System.String"/>
+      <Column Name="ilosc" DataType="System.Int32"/>
+    </TableDataSource>
+  </dictionary>
+
+  <reportpage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10">
+    
+    <!-- NAGŁÓWEK -->
+    <pageheaderband Name="PageHeader1" Height="30">
+      <textobject Name="Title" Left="0" Top="5" Width="700" Height="20"
+        Text="SYSTEM KAUCYJNY – LISTA PRODUKTÓW"
+        HorzAlign="Center"
+        Font="Arial, 14pt, style=Bold"/>
+    </pageheaderband>
+
+    <!-- HEADER TABELI -->
+    <columnheaderband Name="ColumnHeader1" Height="20">
+      <textobject Left="0" Width="50" Height="20" Text="ID" Border.Lines="All"/>
+      <textobject Left="50" Width="400" Height="20" Text="Nazwa" Border.Lines="All"/>
+      <textobject Left="450" Width="100" Height="20" Text="Ilość" Border.Lines="All"/>
+    </columnheaderband>
+
+    <!-- DANE -->
+    <masterdataband Name="Data1" DataSource="Items" Height="20">
+      <textobject Left="0" Width="50" Height="20" Text="[Items.id]" Border.Lines="All"/>
+      <textobject Left="50" Width="400" Height="20" Text="[Items.nazwa]" Border.Lines="All"/>
+      <textobject Left="450" Width="100" Height="20" Text="[Items.ilosc]" Border.Lines="All"/>
+    </masterdataband>
+
+    <!-- STOPKA -->
+    <pagefooterband Name="PageFooter1" Height="20">
+      <textobject Left="0" Width="300" Height="20"
+        Text="Wygenerowano: [Date]"
+        Font="Arial, 8pt"/>
+      <textobject Left="400" Width="200" Height="20"
+        Text="Strona [Page#] / [TotalPages]"
+        HorzAlign="Right"
+        Font="Arial, 8pt"/>
+    </pagefooterband>
+
+  </reportpage>
+</report>
