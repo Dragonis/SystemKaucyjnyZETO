@@ -113,19 +113,14 @@ end;
 
 procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
 begin
-  FDQuery1.Close;
-  FDQuery1.SQL.Text := 'SELECT * FROM items';
-  FDQuery1.Open;
+FDQuery1.Close;
+FDQuery1.SQL.Text := 'SELECT id AS id, nazwa AS name, ilosc AS quantity FROM items';
+FDQuery1.Open;
+frxDBItems.DataSet := FDQuery1;
+frxDBItems.UserName := 'Items';
 
-  if FDQuery1.IsEmpty then
-  begin
-    ShowMessage('Brak danych do wydruku');
-    Exit;
-  end;
-
-//  frxReport2.LoadFromFile(
-//    ExtractFilePath(Application.ExeName) + 'test.fr3'
-//  );
+frxReport2.Variables['items.name'] :='ssa';
+ // frxReport2.LoadFromFile('test.fr3');
 
   frxReport2.ShowReport;
 end;

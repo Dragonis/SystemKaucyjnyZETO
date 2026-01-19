@@ -118,9 +118,11 @@ FDQuery1.SQL.Text := 'SELECT id AS id, nazwa AS name, ilosc AS quantity FROM ite
 FDQuery1.Open;
 frxDBItems.DataSet := FDQuery1;
 frxDBItems.UserName := 'Items';
-  frxReport2.LoadFromFile(
-    ExtractFilePath(Application.ExeName) + 'test.fr3'
-  );
+
+frxReport2.Variables['items.id'] := 1;
+frxReport2.Variables['items.name'] := 2;
+frxReport2.Variables['items.quantity'] := 3;
+ // frxReport2.LoadFromFile('test.fr3');
 
   frxReport2.ShowReport;
 end;

@@ -118,6 +118,18 @@ FDQuery1.SQL.Text := 'SELECT id AS id, nazwa AS name, ilosc AS quantity FROM ite
 FDQuery1.Open;
 frxDBItems.DataSet := FDQuery1;
 frxDBItems.UserName := 'Items';
+
+if not FDQuery1.IsEmpty then
+begin
+  frxReport2.Variables['items.id'] := FDQuery1.FieldByName('id').AsInteger;
+  frxReport2.Variables['items.name'] := QuotedStr(FDQuery1.FieldByName('name').AsString);
+  frxReport2.Variables['items.quantity'] := FDQuery1.FieldByName('quantity').AsInteger;
+end;
+
+//frxReport2.Variables['items.id'] := 1;
+//frxReport2.Variables['items.name'] := QuotedStr('test');
+//frxReport2.Variables['items.quantity'] := 3
+;
  // frxReport2.LoadFromFile('test.fr3');
 
   frxReport2.ShowReport;
