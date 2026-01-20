@@ -2,8 +2,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   Left = 0
   Top = 0
   Caption = 'System kaucyjny'
-  ClientHeight = 302
-  ClientWidth = 447
+  ClientHeight = 388
+  ClientWidth = 789
   Color = clBtnFace
   Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   object DBGrid1: TDBGrid
     Left = 40
     Top = 72
-    Width = 361
-    Height = 129
+    Width = 729
+    Height = 250
     DataSource = DataSource1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
@@ -31,8 +31,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnDblClick = DBGrid1DblClick
   end
   object ButtonFrakcjeDRS: TButton
-    Left = 40
-    Top = 240
+    Left = 168
+    Top = 328
     Width = 105
     Height = 25
     Caption = 'Ustaw Frakcje DRS'
@@ -40,8 +40,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = ButtonFrakcjeDRSClick
   end
   object Button1: TButton
-    Left = 168
-    Top = 240
+    Left = 296
+    Top = 328
     Width = 121
     Height = 25
     Caption = 'Ustawienia Programu'
@@ -49,8 +49,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = Button1Click
   end
   object ButtonRaport: TButton
-    Left = 326
-    Top = 240
+    Left = 454
+    Top = 328
     Width = 75
     Height = 25
     Caption = 'Drukuj raport'

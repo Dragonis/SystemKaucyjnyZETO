@@ -76,31 +76,34 @@ begin
   end;
 
   // ===== Tabela =====
+FDConnection1.ExecSQL(
+  'CREATE TABLE IF NOT EXISTS Produkty (' +
+  'id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
+  'Nazwa VARCHAR(35), ' +
+  'Ilosc NUMERIC, ' +
+  'Marza_Proc NUMERIC, ' +
+  'Cena_Ew NUMERIC, ' +
+  'Cena_Det NUMERIC' +
+  ');'
+);
+
+// ===== Dane testowe =====
+Cnt := FDConnection1.ExecSQLScalar(
+  'SELECT COUNT(*) FROM Produkty'
+);
+
+if Cnt = 0 then
   FDConnection1.ExecSQL(
-    'CREATE TABLE IF NOT EXISTS items (' +
-    'id INTEGER PRIMARY KEY AUTOINCREMENT,' +
-    'nazwa VARCHAR(30),' +
-    'ilosc INTEGER)'
+    'INSERT INTO Produkty (Nazwa, Ilosc, Marza_Proc, Cena_Ew, Cena_Det) VALUES ' +
+    '("Makaron Krakowski", 0.000, 33.09, 1.36, 1.95), ' +
+    '("Tymbark jabłko 0.33", 1.000, 32.65, 0.49, 0.70), ' +
+    '("Herbatniki Pieguski z rodz 140g", 0.000, 32.56, 1.29, 2.10);'
   );
-
-  // ===== Dane testowe =====
-  Cnt := FDConnection1.ExecSQLScalar('SELECT COUNT(*) FROM items');
-
-  if Cnt = 0 then
-    FDConnection1.ExecSQL(
-      'INSERT INTO items (nazwa, ilosc) VALUES ' +
-      '("Butelka PET 0.5L", 120),' +
-      '("Butelka PET 1.5L", 80),' +
-      '("Butelka szklana 0.33L", 60),' +
-      '("Butelka szklana 0.5L", 40),' +
-      '("Puszka aluminiowa 0.33L", 200),' +
-      '("Puszka aluminiowa 0.5L", 150)'
-    );
 
   // ===== Query =====
   FDQuery1.Close;
   FDQuery1.SQL.Clear;
-  FDQuery1.SQL.Text := 'SELECT * FROM items';
+  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
   FDQuery1.Open;
 
   // ===== DBGrid =====
@@ -115,10 +118,21 @@ begin
     Close;
 end;
 
+
 procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
 begin
 FDQuery1.Close;
-FDQuery1.SQL.Text := 'SELECT id AS id, nazwa AS name, ilosc AS quantity FROM items';
+
+FDQuery1.SQL.Text :=
+  'SELECT ' +
+  'id AS id, ' +
+  'Nazwa AS name, ' +
+  'Ilosc AS quantity, ' +
+  'Marza_Proc AS margin, ' +
+  'Cena_Ew AS cost_price, ' +
+  'Cena_Det AS retail_price ' +
+  'FROM Produkty';
+
 FDQuery1.Open;
 frxDBItems.DataSet := FDQuery1;
 frxDBItems.UserName := 'Items';
