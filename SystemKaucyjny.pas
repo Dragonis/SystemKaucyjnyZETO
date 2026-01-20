@@ -10,7 +10,7 @@ uses
 
   // System
   System.SysUtils, System.Variants, System.Classes, System.IOUtils,
-  Data.DB,
+  Data.DB, Datasnap.DBClient,
 
   // FireDAC
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
@@ -26,10 +26,9 @@ uses
 
   // Twoje jednostki
   SzczeegolyProduktuUnit,
-  FrakcjeDRS,
+  FrakcjeDRS, MidasLib,
   UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
   FireDAC.Comp.Script;
-
 
 type
   TSystemKaucyjnyForm = class(TForm)
@@ -37,6 +36,7 @@ type
     FDQuery1: TFDQuery;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
     ButtonFrakcjeDRS: TButton;
     Button1: TButton;
     ButtonRaport: TButton;
@@ -47,8 +47,8 @@ type
     Label2: TLabel;
     Memo1: TMemo;
     Button2: TButton;
-    DBGrid2: TDBGrid;
-    Paragon: TLabel;
+    CDSLosoweProdukty: TClientDataSet;
+    FDQuery2: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -57,6 +57,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
   private
+    DSLosoweProdukty: TDataSource;
     procedure LosujProdukty;
   end;
 
@@ -87,7 +88,7 @@ begin
     end;
   end;
 
-  // ===== Tabela =====
+  // ===== Inicjalizacja tabeli =====
   SQLPath := TPath.Combine(
     ExtractFilePath(ParamStr(0))+'\sql\',
     'init.sql'
@@ -104,14 +105,21 @@ begin
   FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
   FDQuery1.Open;
 
-  // ===== Dane testowe =====
-  Cnt := FDConnection1.ExecSQLScalar(
-    'SELECT COUNT(*) FROM Produkty'
-  );
-
-  // ===== DBGrid =====
+  // ===== DBGrid1 =====
   DataSource1.DataSet := FDQuery1;
   DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
+
+  // ===== DBGrid2 (ClientDataSet) =====
+
+  CDSLosoweProdukty.FieldDefs.Add('ID', ftInteger);
+  CDSLosoweProdukty.FieldDefs.Add('Nazwa', ftString, 50);
+  CDSLosoweProdukty.FieldDefs.Add('Ilosc', ftInteger);
+  CDSLosoweProdukty.FieldDefs.Add('Cena', ftFloat);
+  CDSLosoweProdukty.CreateDataSet;
+
+  DSLosoweProdukty := TDataSource.Create(Self);
+  DSLosoweProdukty.DataSet := CDSLosoweProdukty;
+  DBGrid2.DataSource := DSLosoweProdukty;
 end;
 
 procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
@@ -123,7 +131,6 @@ end;
 procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
 begin
   FDQuery1.Close;
-
   FDQuery1.SQL.Text :=
     'SELECT ' +
     'id AS id, ' +
@@ -133,51 +140,62 @@ begin
     'Cena_Ew AS cost_price, ' +
     'Cena_Det AS retail_price ' +
     'FROM Produkty';
-
   FDQuery1.Open;
+
   frxDBItems.DataSet := FDQuery1;
   frxDBItems.UserName := 'Items';
-
   frxReport2.ShowReport;
 end;
-
 procedure TSystemKaucyjnyForm.LosujProdukty;
 var
   iloscProduktu: Integer;
   cenaProduktu, suma: Double;
 begin
-  FDQuery1.Close;
-  // Losujemy od 1 do 5 produktów
-  FDQuery1.SQL.Text := 'SELECT id, Nazwa, ilosc, Cena_Det FROM Produkty ORDER BY RANDOM() LIMIT :Limit';
-  FDQuery1.ParamByName('Limit').AsInteger := Random(5) + 1; // 1..5 produktów
-  FDQuery1.Open;
+  // 1. Losowanie produktów z bazy
+  FDQuery2.Close;
+  FDQuery2.SQL.Text := 'SELECT id, Nazwa, ilosc, Cena_Det FROM Produkty ORDER BY RANDOM() LIMIT :Limit';
+  FDQuery2.ParamByName('Limit').AsInteger := Random(5) + 1; // 1..5 produktów
+  FDQuery2.Open;
 
+  // ===== Memo1 (mini-paragon) =====
   Memo1.Lines.Clear;
   suma := 0;
 
-  while not FDQuery1.Eof do
-  begin
-    // Losowa ilość od 1 do 10
-    iloscProduktu := Random(10) + 1;
-    cenaProduktu := FDQuery1.FieldByName('Cena_Det').AsFloat;
+  // Czyścimy DBGrid2
+  if not CDSLosoweProdukty.Active then
+    CDSLosoweProdukty.Open;
+  CDSLosoweProdukty.EmptyDataSet;
 
-    // Dodaj do memo
+  FDQuery2.First;
+  while not FDQuery2.Eof do
+  begin
+    iloscProduktu := Random(10) + 1;
+    cenaProduktu := FDQuery2.FieldByName('Cena_Det').AsFloat;
+
+    // Dodaj do Memo1
     Memo1.Lines.Add(
-      FDQuery1.FieldByName('Nazwa').AsString + ' - ' +
+      FDQuery2.FieldByName('Nazwa').AsString + ' - ' +
       IntToStr(iloscProduktu) + ' szt. - ' +
       FormatFloat('0.00', cenaProduktu) + ' zł'
     );
-
-    // Sumujemy
     suma := suma + (iloscProduktu * cenaProduktu);
 
-    FDQuery1.Next;
+    // Dodaj do DBGrid2
+    CDSLosoweProdukty.Append;
+    CDSLosoweProdukty.FieldByName('ID').AsInteger := FDQuery2.FieldByName('id').AsInteger;
+    CDSLosoweProdukty.FieldByName('Nazwa').AsString := FDQuery2.FieldByName('Nazwa').AsString;
+    CDSLosoweProdukty.FieldByName('Ilosc').AsInteger := iloscProduktu;
+    CDSLosoweProdukty.FieldByName('Cena').AsFloat := cenaProduktu;
+    CDSLosoweProdukty.Post;
+
+    FDQuery2.Next;
   end;
 
-  // Dodajemy sumę na końcu
+  // Podsumowanie w Memo1
   Memo1.Lines.Add('-------------------------');
   Memo1.Lines.Add('SUMA: ' + FormatFloat('0.00', suma) + ' zł');
 end;
+
 
 procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
 begin

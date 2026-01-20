@@ -2,6 +2,7 @@ program SystemKaucyjnyProject;
 
 uses
   Vcl.Forms,
+  Datasnap.DBClient,
   SystemKaucyjny in 'SystemKaucyjny.pas' {SystemKaucyjnyForm},
   SzczeegolyProduktuUnit in 'SzczeegolyProduktuUnit.pas' {ProduktForm},
   FrakcjeDRS in 'FrakcjeDRS.pas' {FrakcjeDRSForm},

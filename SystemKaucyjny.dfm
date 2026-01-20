@@ -18,9 +18,9 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   object Label1: TLabel
     Left = 60
     Top = 8
-    Width = 43
+    Width = 74
     Height = 13
-    Caption = 'Magazyn'
+    Caption = 'Stan magazynu'
   end
   object Label2: TLabel
     Left = 375
@@ -296,5 +296,23 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Params = <>
     Macros = <>
     Top = 168
+  end
+  object DSLosoweProdukty: TDataSource
+    DataSet = FDQuery1
+    Left = 464
+    Top = 232
+  end
+  object CDSLosoweProdukty: TClientDataSet
+    Aggregates = <>
+    MasterSource = DSLosoweProdukty
+    PacketRecords = 0
+    Params = <>
+    Left = 544
+    Top = 232
+  end
+  object FDQuery2: TFDQuery
+    Connection = FDConnection1
+    Left = 392
+    Top = 232
   end
 end
