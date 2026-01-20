@@ -27,7 +27,8 @@ uses
   // Twoje jednostki
   SzczeegolyProduktuUnit,
   FrakcjeDRS,
-  UstawieniaProgramu;
+  UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
+  FireDAC.Comp.Script;
 
 
 type
@@ -41,6 +42,7 @@ type
     ButtonRaport: TButton;
     frxReport2: TfrxReport;
     frxDBItems: TfrxDBDataset;
+    FDScript1: TFDScript;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -60,6 +62,7 @@ implementation
 procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
 var
   Cnt: Integer;
+  SQLPath: string;
 begin
   KeyPreview := True;
 
@@ -76,29 +79,27 @@ begin
   end;
 
   // ===== Tabela =====
-FDConnection1.ExecSQL(
-  'CREATE TABLE IF NOT EXISTS Produkty (' +
-  'id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
-  'Nazwa VARCHAR(35), ' +
-  'Ilosc NUMERIC, ' +
-  'Marza_Proc NUMERIC, ' +
-  'Cena_Ew NUMERIC, ' +
-  'Cena_Det NUMERIC' +
-  ');'
-);
+ SQLPath := TPath.Combine(
+    ExtractFilePath(ParamStr(0))+'\sql\',
+    'init.sql'
+  );
+
+  if not FileExists(SQLPath) then
+    raise Exception.Create('Brak pliku init.sql');
+
+  FDScript1.Connection := FDConnection1;
+  FDScript1.SQLScripts.Clear;
+  FDScript1.SQLScripts.Add.SQL.LoadFromFile(SQLPath);
+  FDScript1.ExecuteAll;
+
+  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
+  FDQuery1.Open;
 
 // ===== Dane testowe =====
 Cnt := FDConnection1.ExecSQLScalar(
   'SELECT COUNT(*) FROM Produkty'
 );
 
-if Cnt = 0 then
-  FDConnection1.ExecSQL(
-    'INSERT INTO Produkty (Nazwa, Ilosc, Marza_Proc, Cena_Ew, Cena_Det) VALUES ' +
-    '("Makaron Krakowski", 0.000, 33.09, 1.36, 1.95), ' +
-    '("Tymbark jabłko 0.33", 1.000, 32.65, 0.49, 0.70), ' +
-    '("Herbatniki Pieguski z rodz 140g", 0.000, 32.56, 1.29, 2.10);'
-  );
 
   // ===== Query =====
   FDQuery1.Close;

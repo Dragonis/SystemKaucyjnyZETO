@@ -241,4 +241,12 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Left = 360
     Top = 8
   end
+  object FDScript1: TFDScript
+    SQLScripts = <>
+    Connection = FDConnection1
+    Params = <>
+    Macros = <>
+    Left = 240
+    Top = 8
+  end
 end
