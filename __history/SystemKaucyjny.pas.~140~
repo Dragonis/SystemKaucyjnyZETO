@@ -1,0 +1,178 @@
+﻿unit SystemKaucyjny;
+
+interface
+
+uses
+  // Windows & VCL
+  Winapi.Windows, Winapi.Messages,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+
+  // System
+  System.SysUtils, System.Variants, System.Classes, System.IOUtils,
+  Data.DB,
+
+  // FireDAC
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
+  FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
+  FireDAC.Stan.ExprFuncs,
+
+  // FastReport
+  frxClass, frxDBSet,
+
+  // Twoje jednostki
+  SzczeegolyProduktuUnit,
+  FrakcjeDRS,
+  UstawieniaProgramu;
+
+
+type
+  TSystemKaucyjnyForm = class(TForm)
+    FDConnection1: TFDConnection;
+    FDQuery1: TFDQuery;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    ButtonFrakcjeDRS: TButton;
+    Button1: TButton;
+    ButtonRaport: TButton;
+    frxReport2: TfrxReport;
+    frxDBItems: TfrxDBDataset;
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure ButtonFrakcjeDRSClick(Sender: TObject);
+    procedure ButtonRaportClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+  private
+  end;
+
+var
+  SystemKaucyjnyForm: TSystemKaucyjnyForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
+var
+  Cnt: Integer;
+begin
+  KeyPreview := True;
+
+  // ===== Połączenie z SQLite =====
+  try
+    FDConnection1.Connected := True;
+  except
+    on E: Exception do
+    begin
+      MessageDlg('Błąd połączenia z bazą danych: ' + E.Message,
+        mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
+
+  // ===== Tabela =====
+  FDConnection1.ExecSQL(
+    'CREATE TABLE IF NOT EXISTS items (' +
+    'id INTEGER PRIMARY KEY AUTOINCREMENT,' +
+    'nazwa VARCHAR(30),' +
+    'ilosc INTEGER)'
+  );
+
+  // ===== Dane testowe =====
+  Cnt := FDConnection1.ExecSQLScalar('SELECT COUNT(*) FROM items');
+
+  if Cnt = 0 then
+    FDConnection1.ExecSQL(
+      'INSERT INTO items (nazwa, ilosc) VALUES ' +
+      '("Butelka PET 0.5L", 120),' +
+      '("Butelka PET 1.5L", 80),' +
+      '("Butelka szklana 0.33L", 60),' +
+      '("Butelka szklana 0.5L", 40),' +
+      '("Puszka aluminiowa 0.33L", 200),' +
+      '("Puszka aluminiowa 0.5L", 150)'
+    );
+
+  // ===== Query =====
+  FDQuery1.Close;
+  FDQuery1.SQL.Clear;
+  FDQuery1.SQL.Text := 'SELECT * FROM items';
+  FDQuery1.Open;
+
+  // ===== DBGrid =====
+  DataSource1.DataSet := FDQuery1;
+  DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
+
+end;
+
+procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then
+    Close;
+end;
+
+procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
+begin
+FDQuery1.Close;
+FDQuery1.SQL.Text := 'SELECT id AS id, nazwa AS name, ilosc AS quantity FROM items';
+FDQuery1.Open;
+frxDBItems.DataSet := FDQuery1;
+frxDBItems.UserName := 'Items';
+
+if not FDQuery1.IsEmpty then
+begin
+ ;
+  frxReport2.LoadFromFile(
+       TPath.Combine('.\raports', 'test.fr3')
+  );
+
+ frxReport2.Variables['items.id'] := FDQuery1.FieldByName('id').AsInteger;
+  frxReport2.Variables['items.name'] := QuotedStr(FDQuery1.FieldByName('name').AsString);
+  frxReport2.Variables['items.quantity'] := FDQuery1.FieldByName('quantity').AsInteger;
+end;
+
+//frxReport2.Variables['items.id'] := 1;
+//frxReport2.Variables['items.name'] := QuotedStr('test');
+//frxReport2.Variables['items.quantity'] := 3
+
+  frxReport2.ShowReport;
+end;
+
+procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
+begin
+  UstawieniaProgramuForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.ButtonFrakcjeDRSClick(Sender: TObject);
+begin
+  FrakcjeDRSForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.DBGrid1DblClick(Sender: TObject);
+var
+  ProduktID, ProduktIlosc: Integer;
+  ProduktNazwa: string;
+begin
+  if DataSource1.DataSet.IsEmpty then Exit;
+
+  ProduktID := DataSource1.DataSet.FieldByName('id').AsInteger;
+  FDQuery1.First;
+while not FDQuery1.Eof do
+begin
+  ShowMessage(FDQuery1.FieldByName('nazwa').AsString);
+  FDQuery1.Next; // idziemy do następnego rekordu
+end;
+  ProduktIlosc := DataSource1.DataSet.FieldByName('ilosc').AsInteger;
+
+  if Assigned(ProduktForm) then
+  begin
+    ProduktForm.UstawDane(ProduktID, ProduktNazwa, ProduktIlosc);
+    ProduktForm.ShowModal;
+  end;
+end;
+
+end.

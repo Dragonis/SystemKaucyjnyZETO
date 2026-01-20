@@ -59,9 +59,10 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\wojte\Desktop\System kaucyjny\database\test.db'
+      
+        'Database=C:\Users\wojte\Desktop\System kaucyjny\database\produkt' +
+        'y.db'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 8
@@ -85,13 +86,17 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 46041.846621273150000000
-    ReportOptions.LastChange = 46041.846621273150000000
+    ReportOptions.LastChange = 46042.660145289350000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin end.')
     Left = 296
     Top = 8
-    Datasets = <>
+    Datasets = <
+      item
+        DataSet = frxDBItems
+        DataSetName = 'Items'
+      end>
     Variables = <>
     Style = <>
     object Data: TfrxDataPage
@@ -184,24 +189,33 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
         object MemoID: TfrxMemoView
           Width = 57.559060000000000000
           Height = 20.000000000000000000
+          DataField = 'id'
+          DataSet = frxDBItems
+          DataSetName = 'Items'
           HAlign = haCenter
           Memo.UTF8W = (
-            '[Items.id]')
+            '[Items."id"]')
         end
         object MemoName: TfrxMemoView
           Left = 71.338590000000000000
           Width = 450.000000000000000000
           Height = 20.000000000000000000
+          DataField = 'name'
+          DataSet = frxDBItems
+          DataSetName = 'Items'
           Memo.UTF8W = (
-            '[Items.name]')
+            '[Items."name"]')
         end
         object MemoQuantity: TfrxMemoView
           Left = 520.000000000000000000
           Width = 100.000000000000000000
           Height = 20.000000000000000000
+          DataField = 'quantity'
+          DataSet = frxDBItems
+          DataSetName = 'Items'
           HAlign = haCenter
           Memo.UTF8W = (
-            '[Items.quantity]')
+            '[Items."quantity"]')
         end
       end
       object PageFooter1: TfrxPageFooter
