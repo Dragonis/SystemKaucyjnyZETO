@@ -15,11 +15,32 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 60
+    Top = 8
+    Width = 43
+    Height = 13
+    Caption = 'Magazyn'
+  end
+  object Label2: TLabel
+    Left = 375
+    Top = 204
+    Width = 51
+    Height = 13
+    Caption = 'Sprzedano'
+  end
+  object Paragon: TLabel
+    Left = 60
+    Top = 204
+    Width = 40
+    Height = 13
+    Caption = 'Paragon'
+  end
   object DBGrid1: TDBGrid
-    Left = 40
-    Top = 72
+    Left = 52
+    Top = 27
     Width = 729
-    Height = 250
+    Height = 166
     DataSource = DataSource1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
@@ -31,8 +52,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnDblClick = DBGrid1DblClick
   end
   object ButtonFrakcjeDRS: TButton
-    Left = 168
-    Top = 328
+    Left = 160
+    Top = 355
     Width = 105
     Height = 25
     Caption = 'Ustaw Frakcje DRS'
@@ -40,8 +61,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = ButtonFrakcjeDRSClick
   end
   object Button1: TButton
-    Left = 296
-    Top = 328
+    Left = 288
+    Top = 355
     Width = 121
     Height = 25
     Caption = 'Ustawienia Programu'
@@ -49,13 +70,41 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = Button1Click
   end
   object ButtonRaport: TButton
-    Left = 454
-    Top = 328
+    Left = 446
+    Top = 355
     Width = 75
     Height = 25
     Caption = 'Drukuj raport'
     TabOrder = 3
     OnClick = ButtonRaportClick
+  end
+  object Memo1: TMemo
+    Left = 52
+    Top = 223
+    Width = 317
+    Height = 126
+    TabOrder = 4
+  end
+  object Button2: TButton
+    Left = 60
+    Top = 355
+    Width = 75
+    Height = 25
+    Caption = 'Losuj Produkty'
+    TabOrder = 5
+    OnClick = Button2Click
+  end
+  object DBGrid2: TDBGrid
+    Left = 375
+    Top = 223
+    Width = 370
+    Height = 126
+    TabOrder = 6
+    TitleFont.Charset = EASTEUROPE_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -63,19 +112,20 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
         'Database=C:\Users\wojte\Desktop\System kaucyjny\database\produkt' +
         'y.db'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
-    Left = 32
-    Top = 8
+    Left = 8
+    Top = 16
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
-    Left = 104
-    Top = 8
+    Left = 8
+    Top = 64
   end
   object DataSource1: TDataSource
     DataSet = FDQuery1
-    Left = 176
-    Top = 8
+    Left = 8
+    Top = 120
   end
   object frxReport2: TfrxReport
     Version = '5.1.5'
@@ -86,12 +136,11 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 46041.846621273150000000
-    ReportOptions.LastChange = 46042.660145289350000000
+    ReportOptions.LastChange = 46042.773922858800000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin end.')
-    Left = 296
-    Top = 8
+    Top = 216
     Datasets = <
       item
         DataSet = frxDBItems
@@ -126,7 +175,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Lista przedmiot'#243'w')
+            'Lista produkt'#243'w na stanie magazynowym')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -238,15 +287,14 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     CloseDataSource = False
     DataSource = DataSource1
     BCDToCurrency = False
-    Left = 360
-    Top = 8
+    Left = 8
+    Top = 264
   end
   object FDScript1: TFDScript
     SQLScripts = <>
     Connection = FDConnection1
     Params = <>
     Macros = <>
-    Left = 240
-    Top = 8
+    Top = 168
   end
 end

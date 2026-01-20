@@ -43,13 +43,21 @@ type
     frxReport2: TfrxReport;
     frxDBItems: TfrxDBDataset;
     FDScript1: TFDScript;
+    Label1: TLabel;
+    Label2: TLabel;
+    Memo1: TMemo;
+    Button2: TButton;
+    DBGrid2: TDBGrid;
+    Paragon: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure ButtonFrakcjeDRSClick(Sender: TObject);
     procedure ButtonRaportClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
+    procedure LosujProdukty;
   end;
 
 var
@@ -64,6 +72,7 @@ var
   Cnt: Integer;
   SQLPath: string;
 begin
+  Randomize; // dla losowania
   KeyPreview := True;
 
   // ===== Połączenie z SQLite =====
@@ -79,7 +88,7 @@ begin
   end;
 
   // ===== Tabela =====
- SQLPath := TPath.Combine(
+  SQLPath := TPath.Combine(
     ExtractFilePath(ParamStr(0))+'\sql\',
     'init.sql'
   );
@@ -95,22 +104,14 @@ begin
   FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
   FDQuery1.Open;
 
-// ===== Dane testowe =====
-Cnt := FDConnection1.ExecSQLScalar(
-  'SELECT COUNT(*) FROM Produkty'
-);
-
-
-  // ===== Query =====
-  FDQuery1.Close;
-  FDQuery1.SQL.Clear;
-  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
-  FDQuery1.Open;
+  // ===== Dane testowe =====
+  Cnt := FDConnection1.ExecSQLScalar(
+    'SELECT COUNT(*) FROM Produkty'
+  );
 
   // ===== DBGrid =====
   DataSource1.DataSet := FDQuery1;
   DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
-
 end;
 
 procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
@@ -119,31 +120,73 @@ begin
     Close;
 end;
 
-
 procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
 begin
-FDQuery1.Close;
+  FDQuery1.Close;
 
-FDQuery1.SQL.Text :=
-  'SELECT ' +
-  'id AS id, ' +
-  'Nazwa AS name, ' +
-  'Ilosc AS quantity, ' +
-  'Marza_Proc AS margin, ' +
-  'Cena_Ew AS cost_price, ' +
-  'Cena_Det AS retail_price ' +
-  'FROM Produkty';
+  FDQuery1.SQL.Text :=
+    'SELECT ' +
+    'id AS id, ' +
+    'Nazwa AS name, ' +
+    'Ilosc AS quantity, ' +
+    'Marza_Proc AS margin, ' +
+    'Cena_Ew AS cost_price, ' +
+    'Cena_Det AS retail_price ' +
+    'FROM Produkty';
 
-FDQuery1.Open;
-frxDBItems.DataSet := FDQuery1;
-frxDBItems.UserName := 'Items';
+  FDQuery1.Open;
+  frxDBItems.DataSet := FDQuery1;
+  frxDBItems.UserName := 'Items';
 
   frxReport2.ShowReport;
+end;
+
+procedure TSystemKaucyjnyForm.LosujProdukty;
+var
+  iloscProduktu: Integer;
+  cenaProduktu, suma: Double;
+begin
+  FDQuery1.Close;
+  // Losujemy od 1 do 5 produktów
+  FDQuery1.SQL.Text := 'SELECT id, Nazwa, ilosc, Cena_Det FROM Produkty ORDER BY RANDOM() LIMIT :Limit';
+  FDQuery1.ParamByName('Limit').AsInteger := Random(5) + 1; // 1..5 produktów
+  FDQuery1.Open;
+
+  Memo1.Lines.Clear;
+  suma := 0;
+
+  while not FDQuery1.Eof do
+  begin
+    // Losowa ilość od 1 do 10
+    iloscProduktu := Random(10) + 1;
+    cenaProduktu := FDQuery1.FieldByName('Cena_Det').AsFloat;
+
+    // Dodaj do memo
+    Memo1.Lines.Add(
+      FDQuery1.FieldByName('Nazwa').AsString + ' - ' +
+      IntToStr(iloscProduktu) + ' szt. - ' +
+      FormatFloat('0.00', cenaProduktu) + ' zł'
+    );
+
+    // Sumujemy
+    suma := suma + (iloscProduktu * cenaProduktu);
+
+    FDQuery1.Next;
+  end;
+
+  // Dodajemy sumę na końcu
+  Memo1.Lines.Add('-------------------------');
+  Memo1.Lines.Add('SUMA: ' + FormatFloat('0.00', suma) + ' zł');
 end;
 
 procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
 begin
   UstawieniaProgramuForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.Button2Click(Sender: TObject);
+begin
+  LosujProdukty;
 end;
 
 procedure TSystemKaucyjnyForm.ButtonFrakcjeDRSClick(Sender: TObject);
@@ -170,3 +213,4 @@ begin
 end;
 
 end.
+

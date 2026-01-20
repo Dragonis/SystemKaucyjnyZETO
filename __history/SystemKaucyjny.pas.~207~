@@ -27,7 +27,8 @@ uses
   // Twoje jednostki
   SzczeegolyProduktuUnit,
   FrakcjeDRS,
-  UstawieniaProgramu;
+  UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
+  FireDAC.Comp.Script;
 
 
 type
@@ -41,6 +42,7 @@ type
     ButtonRaport: TButton;
     frxReport2: TfrxReport;
     frxDBItems: TfrxDBDataset;
+    FDScript1: TFDScript;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -60,6 +62,7 @@ implementation
 procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
 var
   Cnt: Integer;
+  SQLPath: string;
 begin
   KeyPreview := True;
 
@@ -76,31 +79,32 @@ begin
   end;
 
   // ===== Tabela =====
-  FDConnection1.ExecSQL(
-    'CREATE TABLE IF NOT EXISTS items (' +
-    'id INTEGER PRIMARY KEY AUTOINCREMENT,' +
-    'nazwa VARCHAR(30),' +
-    'ilosc INTEGER)'
+ SQLPath := TPath.Combine(
+    ExtractFilePath(ParamStr(0))+'\sql\',
+    'init.sql'
   );
 
-  // ===== Dane testowe =====
-  Cnt := FDConnection1.ExecSQLScalar('SELECT COUNT(*) FROM items');
+  if not FileExists(SQLPath) then
+    raise Exception.Create('Brak pliku init.sql');
 
-  if Cnt = 0 then
-    FDConnection1.ExecSQL(
-      'INSERT INTO items (nazwa, ilosc) VALUES ' +
-      '("Butelka PET 0.5L", 120),' +
-      '("Butelka PET 1.5L", 80),' +
-      '("Butelka szklana 0.33L", 60),' +
-      '("Butelka szklana 0.5L", 40),' +
-      '("Puszka aluminiowa 0.33L", 200),' +
-      '("Puszka aluminiowa 0.5L", 150)'
-    );
+  FDScript1.Connection := FDConnection1;
+  FDScript1.SQLScripts.Clear;
+  FDScript1.SQLScripts.Add.SQL.LoadFromFile(SQLPath);
+  FDScript1.ExecuteAll;
+
+  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
+  FDQuery1.Open;
+
+// ===== Dane testowe =====
+Cnt := FDConnection1.ExecSQLScalar(
+  'SELECT COUNT(*) FROM Produkty'
+);
+
 
   // ===== Query =====
   FDQuery1.Close;
   FDQuery1.SQL.Clear;
-  FDQuery1.SQL.Text := 'SELECT * FROM items';
+  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
   FDQuery1.Open;
 
   // ===== DBGrid =====
@@ -115,29 +119,24 @@ begin
     Close;
 end;
 
+
 procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
 begin
 FDQuery1.Close;
-FDQuery1.SQL.Text := 'SELECT id AS id, nazwa AS name, ilosc AS quantity FROM items';
+
+FDQuery1.SQL.Text :=
+  'SELECT ' +
+  'id AS id, ' +
+  'Nazwa AS name, ' +
+  'Ilosc AS quantity, ' +
+  'Marza_Proc AS margin, ' +
+  'Cena_Ew AS cost_price, ' +
+  'Cena_Det AS retail_price ' +
+  'FROM Produkty';
+
 FDQuery1.Open;
 frxDBItems.DataSet := FDQuery1;
 frxDBItems.UserName := 'Items';
-
-if not FDQuery1.IsEmpty then
-begin
- ;
-  frxReport2.LoadFromFile(
-       TPath.Combine('.\raports', 'test.fr3')
-  );
-
- frxReport2.Variables['items.id'] := FDQuery1.FieldByName('id').AsInteger;
-  frxReport2.Variables['items.name'] := QuotedStr(FDQuery1.FieldByName('name').AsString);
-  frxReport2.Variables['items.quantity'] := FDQuery1.FieldByName('quantity').AsInteger;
-end;
-
-//frxReport2.Variables['items.id'] := 1;
-//frxReport2.Variables['items.name'] := QuotedStr('test');
-//frxReport2.Variables['items.quantity'] := 3
 
   frxReport2.ShowReport;
 end;

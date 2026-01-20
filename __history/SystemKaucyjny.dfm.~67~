@@ -2,8 +2,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   Left = 0
   Top = 0
   Caption = 'System kaucyjny'
-  ClientHeight = 302
-  ClientWidth = 447
+  ClientHeight = 388
+  ClientWidth = 789
   Color = clBtnFace
   Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
@@ -15,11 +15,25 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 60
+    Top = 8
+    Width = 43
+    Height = 13
+    Caption = 'Magazyn'
+  end
+  object Label2: TLabel
+    Left = 52
+    Top = 204
+    Width = 51
+    Height = 13
+    Caption = 'Sprzedano'
+  end
   object DBGrid1: TDBGrid
-    Left = 40
-    Top = 72
-    Width = 361
-    Height = 129
+    Left = 52
+    Top = 27
+    Width = 729
+    Height = 166
     DataSource = DataSource1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
@@ -31,8 +45,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnDblClick = DBGrid1DblClick
   end
   object ButtonFrakcjeDRS: TButton
-    Left = 40
-    Top = 240
+    Left = 160
+    Top = 355
     Width = 105
     Height = 25
     Caption = 'Ustaw Frakcje DRS'
@@ -40,8 +54,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = ButtonFrakcjeDRSClick
   end
   object Button1: TButton
-    Left = 168
-    Top = 240
+    Left = 288
+    Top = 355
     Width = 121
     Height = 25
     Caption = 'Ustawienia Programu'
@@ -49,32 +63,50 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = Button1Click
   end
   object ButtonRaport: TButton
-    Left = 326
-    Top = 240
+    Left = 446
+    Top = 355
     Width = 75
     Height = 25
     Caption = 'Drukuj raport'
     TabOrder = 3
     OnClick = ButtonRaportClick
   end
+  object Memo1: TMemo
+    Left = 52
+    Top = 223
+    Width = 317
+    Height = 126
+    TabOrder = 4
+  end
+  object Button2: TButton
+    Left = 60
+    Top = 355
+    Width = 75
+    Height = 25
+    Caption = 'Losuj Produkty'
+    TabOrder = 5
+    OnClick = Button2Click
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\wojte\Desktop\System kaucyjny\database\test.db'
+      
+        'Database=C:\Users\wojte\Desktop\System kaucyjny\database\produkt' +
+        'y.db'
       'DriverID=SQLite')
     Connected = True
     LoginPrompt = False
-    Left = 32
-    Top = 8
+    Left = 8
+    Top = 16
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
-    Left = 104
-    Top = 8
+    Left = 8
+    Top = 64
   end
   object DataSource1: TDataSource
     DataSet = FDQuery1
-    Left = 176
-    Top = 8
+    Left = 8
+    Top = 120
   end
   object frxReport2: TfrxReport
     Version = '5.1.5'
@@ -84,17 +116,17 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 46042.000000000000000000
-    ReportOptions.Description.Strings = (
-      'Raport wszystkich danych z tabeli items')
-    ReportOptions.LastChange = 46042.000000000000000000
+    ReportOptions.CreateDate = 46041.846621273150000000
+    ReportOptions.LastChange = 46042.773922858800000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
-      'begin'
-      'end.')
-    Left = 296
-    Top = 8
-    Datasets = <>
+      'begin end.')
+    Top = 216
+    Datasets = <
+      item
+        DataSet = frxDBItems
+        DataSetName = 'Items'
+      end>
     Variables = <>
     Style = <>
     object Data: TfrxDataPage
@@ -111,12 +143,12 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
-        Height = 30.000000000000000000
+        Height = 25.000000000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Title: TfrxMemoView
           Width = 755.000000000000000000
-          Height = 30.000000000000000000
+          Height = 25.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -124,19 +156,19 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Raport produkt'#243'w')
+            'Lista produkt'#243'w na stanie magazynowym')
           ParentFont = False
           VAlign = vaCenter
         end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
-        Height = 25.000000000000000000
-        Top = 71.811070000000000000
+        Height = 20.000000000000000000
+        Top = 68.031540000000000000
         Width = 718.110700000000000000
         object HeaderID: TfrxMemoView
-          Width = 60.000000000000000000
-          Height = 25.000000000000000000
+          Width = 50.000000000000000000
+          Height = 20.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -149,8 +181,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
         end
         object HeaderName: TfrxMemoView
           Left = 60.000000000000000000
-          Width = 400.000000000000000000
-          Height = 25.000000000000000000
+          Width = 450.000000000000000000
+          Height = 20.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -162,9 +194,9 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
           ParentFont = False
         end
         object HeaderQuantity: TfrxMemoView
-          Left = 460.000000000000000000
+          Left = 520.000000000000000000
           Width = 100.000000000000000000
-          Height = 25.000000000000000000
+          Height = 20.000000000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -178,39 +210,48 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 25.000000000000000000
-        Top = 158.740260000000000000
+        Height = 20.000000000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         DataSet = frxDBItems
         DataSetName = 'Items'
         RowCount = 0
         object MemoID: TfrxMemoView
-          Width = 60.000000000000000000
-          Height = 25.000000000000000000
+          Width = 57.559060000000000000
+          Height = 20.000000000000000000
+          DataField = 'id'
+          DataSet = frxDBItems
+          DataSetName = 'Items'
           HAlign = haCenter
           Memo.UTF8W = (
-            '[Items.id]')
+            '[Items."id"]')
         end
         object MemoName: TfrxMemoView
-          Left = 60.000000000000000000
-          Width = 400.000000000000000000
-          Height = 25.000000000000000000
+          Left = 71.338590000000000000
+          Width = 450.000000000000000000
+          Height = 20.000000000000000000
+          DataField = 'name'
+          DataSet = frxDBItems
+          DataSetName = 'Items'
           Memo.UTF8W = (
-            '[Items.name]')
+            '[Items."name"]')
         end
         object MemoQuantity: TfrxMemoView
-          Left = 460.000000000000000000
+          Left = 520.000000000000000000
           Width = 100.000000000000000000
-          Height = 25.000000000000000000
+          Height = 20.000000000000000000
+          DataField = 'quantity'
+          DataSet = frxDBItems
+          DataSetName = 'Items'
           HAlign = haCenter
           Memo.UTF8W = (
-            '[Items.quantity]')
+            '[Items."quantity"]')
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 20.000000000000000000
-        Top = 245.669450000000000000
+        Top = 226.771800000000000000
         Width = 718.110700000000000000
         object PageNumber: TfrxMemoView
           Width = 755.000000000000000000
@@ -227,7 +268,14 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     CloseDataSource = False
     DataSource = DataSource1
     BCDToCurrency = False
-    Left = 360
-    Top = 8
+    Left = 8
+    Top = 264
+  end
+  object FDScript1: TFDScript
+    SQLScripts = <>
+    Connection = FDConnection1
+    Params = <>
+    Macros = <>
+    Top = 168
   end
 end
