@@ -3,7 +3,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   Top = 0
   Caption = 'System kaucyjny'
   ClientHeight = 388
-  ClientWidth = 789
+  ClientWidth = 902
   Color = clBtnFace
   Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
@@ -36,10 +36,17 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Height = 13
     Caption = 'Paragon'
   end
+  object Label3: TLabel
+    Left = 640
+    Top = 8
+    Width = 71
+    Height = 13
+    Caption = 'Do zam'#243'wienia'
+  end
   object DBGrid1: TDBGrid
-    Left = 52
+    Left = 60
     Top = 27
-    Width = 729
+    Width = 485
     Height = 166
     DataSource = DataSource1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -100,6 +107,19 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Width = 370
     Height = 126
     TabOrder = 6
+    TitleFont.Charset = EASTEUROPE_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object DBGrid3: TDBGrid
+    Left = 551
+    Top = 27
+    Width = 320
+    Height = 166
+    DataSource = DSCDSSumaWszystkichParagonow
+    TabOrder = 7
     TitleFont.Charset = EASTEUROPE_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -307,12 +327,22 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     MasterSource = DSLosoweProdukty
     PacketRecords = 0
     Params = <>
-    Left = 544
+    Left = 568
     Top = 232
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
     Left = 392
     Top = 232
+  end
+  object DSCDSSumaWszystkichParagonow: TDataSource
+    Left = 568
+    Top = 120
+  end
+  object CDSSumaWszystkichParagonow: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 568
+    Top = 72
   end
 end

@@ -49,15 +49,20 @@ type
     Button2: TButton;
     CDSLosoweProdukty: TClientDataSet;
     FDQuery2: TFDQuery;
+    Label3: TLabel;
+    DBGrid3: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure ButtonFrakcjeDRSClick(Sender: TObject);
     procedure ButtonRaportClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid2DblClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
   private
     DSLosoweProdukty: TDataSource;
+    CDSSumaParagonu: TClientDataSet;
+    DSSumaParagonu: TDataSource;
     procedure LosujProdukty;
   end;
 
@@ -120,6 +125,22 @@ begin
   DSLosoweProdukty := TDataSource.Create(Self);
   DSLosoweProdukty.DataSet := CDSLosoweProdukty;
   DBGrid2.DataSource := DSLosoweProdukty;
+  DBGrid2.Options := DBGrid2.Options + [dgRowSelect] - [dgEditing];
+
+  // ===== DBGrid3 (ClientDataSet) =====
+  CDSSumaParagonu := TClientDataSet.Create(Self);
+  CDSSumaParagonu.FieldDefs.Add('ID', ftInteger);
+  CDSSumaParagonu.FieldDefs.Add('Nazwa', ftString, 50);
+  CDSSumaParagonu.FieldDefs.Add('Ilosc', ftInteger);
+  CDSSumaParagonu.FieldDefs.Add('Cena', ftFloat);
+  CDSSumaParagonu.CreateDataSet;
+
+  DSSumaParagonu := TDataSource.Create(Self);
+  DSSumaParagonu.DataSet := CDSSumaParagonu;
+  DBGrid3.DataSource := DSSumaParagonu;
+  DBGrid3.Options := DBGrid3.Options + [dgRowSelect] - [dgEditing];
+
+  DBGrid2.OnDblClick := DBGrid2DblClick;
 end;
 
 procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
@@ -188,6 +209,14 @@ begin
     CDSLosoweProdukty.FieldByName('Cena').AsFloat := cenaProduktu;
     CDSLosoweProdukty.Post;
 
+    // Dodaj do DBGrid3
+    CDSSumaParagonu.Append;
+    CDSSumaParagonu.FieldByName('ID').AsInteger := FDQuery2.FieldByName('id').AsInteger;
+    CDSSumaParagonu.FieldByName('Nazwa').AsString := FDQuery2.FieldByName('Nazwa').AsString;
+    CDSSumaParagonu.FieldByName('Ilosc').AsInteger := iloscProduktu;
+    CDSSumaParagonu.FieldByName('Cena').AsFloat := cenaProduktu;
+    CDSSumaParagonu.Post;
+
     FDQuery2.Next;
   end;
 
@@ -228,6 +257,18 @@ begin
     ProduktForm.UstawDane(ProduktID, ProduktNazwa, ProduktIlosc);
     ProduktForm.ShowModal;
   end;
+end;
+
+procedure TSystemKaucyjnyForm.DBGrid2DblClick(Sender: TObject);
+begin
+  if CDSLosoweProdukty.IsEmpty then Exit;
+
+  CDSSumaParagonu.Append;
+  CDSSumaParagonu.FieldByName('ID').AsInteger := CDSLosoweProdukty.FieldByName('ID').AsInteger;
+  CDSSumaParagonu.FieldByName('Nazwa').AsString := CDSLosoweProdukty.FieldByName('Nazwa').AsString;
+  CDSSumaParagonu.FieldByName('Ilosc').AsInteger := CDSLosoweProdukty.FieldByName('Ilosc').AsInteger;
+  CDSSumaParagonu.FieldByName('Cena').AsFloat := CDSLosoweProdukty.FieldByName('Cena').AsFloat;
+  CDSSumaParagonu.Post;
 end;
 
 end.
