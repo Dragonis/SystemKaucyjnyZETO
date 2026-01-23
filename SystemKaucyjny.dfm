@@ -2,14 +2,15 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   Left = 0
   Top = 0
   Caption = 'System kaucyjny'
-  ClientHeight = 388
-  ClientWidth = 902
+  ClientHeight = 650
+  ClientWidth = 926
   Color = clBtnFace
   Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
@@ -17,37 +18,44 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   TextHeight = 13
   object Label1: TLabel
     Left = 60
-    Top = 8
+    Top = 40
     Width = 74
     Height = 13
     Caption = 'Stan magazynu'
   end
   object Label2: TLabel
-    Left = 375
-    Top = 204
+    Left = 551
+    Top = 199
     Width = 51
     Height = 13
     Caption = 'Sprzedano'
   end
   object Paragon: TLabel
-    Left = 60
-    Top = 204
+    Left = 68
+    Top = 196
     Width = 40
     Height = 13
     Caption = 'Paragon'
   end
   object Label3: TLabel
     Left = 640
-    Top = 8
+    Top = 40
     Width = 71
     Height = 13
     Caption = 'Do zam'#243'wienia'
   end
+  object Label4: TLabel
+    Left = 68
+    Top = 347
+    Width = 104
+    Height = 13
+    Caption = 'Sprzedaz na wykresie'
+  end
   object DBGrid1: TDBGrid
     Left = 60
-    Top = 27
+    Top = 59
     Width = 485
-    Height = 166
+    Height = 134
     DataSource = DataSource1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
@@ -59,8 +67,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnDblClick = DBGrid1DblClick
   end
   object ButtonFrakcjeDRS: TButton
-    Left = 160
-    Top = 355
+    Left = 208
+    Top = 8
     Width = 105
     Height = 25
     Caption = 'Ustaw Frakcje DRS'
@@ -68,8 +76,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = ButtonFrakcjeDRSClick
   end
   object Button1: TButton
-    Left = 288
-    Top = 355
+    Left = 319
+    Top = 8
     Width = 121
     Height = 25
     Caption = 'Ustawienia Programu'
@@ -77,8 +85,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = Button1Click
   end
   object ButtonRaport: TButton
-    Left = 446
-    Top = 355
+    Left = 127
+    Top = 8
     Width = 75
     Height = 25
     Caption = 'Drukuj raport'
@@ -86,25 +94,25 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = ButtonRaportClick
   end
   object Memo1: TMemo
-    Left = 52
-    Top = 223
-    Width = 317
+    Left = 60
+    Top = 215
+    Width = 485
     Height = 126
     TabOrder = 4
   end
   object Button2: TButton
-    Left = 60
-    Top = 355
-    Width = 75
+    Left = 19
+    Top = 9
+    Width = 102
     Height = 25
     Caption = 'Losuj Produkty'
     TabOrder = 5
     OnClick = Button2Click
   end
   object DBGrid2: TDBGrid
-    Left = 375
-    Top = 223
-    Width = 370
+    Left = 551
+    Top = 215
+    Width = 320
     Height = 126
     TabOrder = 6
     TitleFont.Charset = EASTEUROPE_CHARSET
@@ -115,9 +123,9 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   end
   object DBGrid3: TDBGrid
     Left = 551
-    Top = 27
+    Top = 59
     Width = 320
-    Height = 166
+    Height = 134
     DataSource = DSCDSSumaWszystkichParagonow
     TabOrder = 7
     TitleFont.Charset = EASTEUROPE_CHARSET
@@ -126,26 +134,37 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
+  object Chart1: TChart
+    Left = 48
+    Top = 378
+    Width = 761
+    Height = 243
+    Legend.Visible = False
+    Title.Text.Strings = (
+      'Sumy paragon'#243'w')
+    TabOrder = 8
+    DefaultCanvas = 'TGDIPlusCanvas'
+    ColorPaletteIndex = 13
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       
         'Database=C:\Users\wojte\Desktop\System kaucyjny\database\produkt' +
         'y.db'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
-    Left = 8
-    Top = 16
+    Left = 96
+    Top = 64
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
-    Left = 8
+    Left = 152
     Top = 64
   end
   object DataSource1: TDataSource
     DataSet = FDQuery1
-    Left = 8
-    Top = 120
+    Left = 264
+    Top = 64
   end
   object frxReport2: TfrxReport
     Version = '5.1.5'
@@ -160,7 +179,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin end.')
-    Top = 216
+    Left = 176
+    Top = 24
     Datasets = <
       item
         DataSet = frxDBItems
@@ -307,19 +327,20 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     CloseDataSource = False
     DataSource = DataSource1
     BCDToCurrency = False
-    Left = 8
-    Top = 264
+    Left = 144
+    Top = 24
   end
   object FDScript1: TFDScript
     SQLScripts = <>
     Connection = FDConnection1
     Params = <>
     Macros = <>
-    Top = 168
+    Left = 208
+    Top = 64
   end
   object DSLosoweProdukty: TDataSource
     DataSet = FDQuery1
-    Left = 464
+    Left = 664
     Top = 232
   end
   object CDSLosoweProdukty: TClientDataSet
@@ -327,22 +348,22 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     MasterSource = DSLosoweProdukty
     PacketRecords = 0
     Params = <>
-    Left = 568
+    Left = 600
     Top = 232
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
-    Left = 392
+    Left = 560
     Top = 232
   end
   object DSCDSSumaWszystkichParagonow: TDataSource
-    Left = 568
-    Top = 120
+    Left = 736
+    Top = 80
   end
   object CDSSumaWszystkichParagonow: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 568
-    Top = 72
+    Top = 80
   end
 end

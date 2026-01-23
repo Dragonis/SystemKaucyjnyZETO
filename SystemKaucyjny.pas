@@ -28,7 +28,8 @@ uses
   SzczeegolyProduktuUnit,
   FrakcjeDRS, MidasLib,
   UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
-  FireDAC.Comp.Script;
+  FireDAC.Comp.Script, VclTee.TeeGDIPlus, VCLTee.TeEngine, Vcl.ExtCtrls,
+  VCLTee.TeeProcs, VCLTee.Chart, VCLTee.Series;
 
 type
   TSystemKaucyjnyForm = class(TForm)
@@ -51,6 +52,8 @@ type
     FDQuery2: TFDQuery;
     Label3: TLabel;
     DBGrid3: TDBGrid;
+    Label4: TLabel;
+    Chart1: TChart;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -77,9 +80,14 @@ procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
 var
   Cnt: Integer;
   SQLPath: string;
+  SumSeries: TBarSeries;
 begin
   Randomize; // dla losowania
   KeyPreview := True;
+
+  Self.Position := poScreenCenter;
+  Self.Width := 1000;
+  Self.Height := 700;
 
   // ===== Połączenie z SQLite =====
   try
@@ -141,7 +149,18 @@ begin
   DBGrid3.Options := DBGrid3.Options + [dgRowSelect] - [dgEditing];
 
   DBGrid2.OnDblClick := DBGrid2DblClick;
+
+  // ===== Chart1 =====
+  Chart1.Title.Text.Clear;
+  Chart1.Title.Text.Add('Sumy paragonów');
+  Chart1.Legend.Visible := False;
+
+  SumSeries := TBarSeries.Create(Chart1);
+  Chart1.AddSeries(SumSeries);
+  SumSeries.Title := 'Suma';
+  SumSeries.Marks.Style := smsValue;
 end;
+
 
 procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -171,6 +190,7 @@ procedure TSystemKaucyjnyForm.LosujProdukty;
 var
   iloscProduktu: Integer;
   cenaProduktu, suma: Double;
+  sumSeries: TBarSeries;
 begin
   // 1. Losowanie produktów z bazy
   FDQuery2.Close;
@@ -186,6 +206,8 @@ begin
   if not CDSLosoweProdukty.Active then
     CDSLosoweProdukty.Open;
   CDSLosoweProdukty.EmptyDataSet;
+
+  // No longer interacting with Chart1 for product quantities.
 
   FDQuery2.First;
   while not FDQuery2.Eof do
@@ -223,6 +245,13 @@ begin
   // Podsumowanie w Memo1
   Memo1.Lines.Add('-------------------------');
   Memo1.Lines.Add('SUMA: ' + FormatFloat('0.00', suma) + ' zł');
+
+  // New: Add bar to chart
+  if Chart1.SeriesCount > 0 then
+  begin
+    sumSeries := Chart1.Series[0] as TBarSeries;
+    sumSeries.Add(suma, 'Suma ' + IntToStr(sumSeries.Count + 1));
+  end;
 end;
 
 
