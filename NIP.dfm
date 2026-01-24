@@ -44,8 +44,8 @@ object NIPForm: TNIPForm
     Top = 35
     Width = 75
     Height = 25
-    Caption = 'Anuluj'
     Cancel = True
+    Caption = 'Anuluj'
     TabOrder = 2
     OnClick = AnulujButtonClick
   end

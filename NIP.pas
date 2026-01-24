@@ -52,6 +52,7 @@ end;
 procedure TNIPForm.OKButtonClick(Sender: TObject);
 begin
   TowaryForm.Show;
+  Close;
 end;
 
 end.

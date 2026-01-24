@@ -239,8 +239,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Top = 103
   end
   object DataSource1: TDataSource
-    DataSet = FDQuery1
-    Left = 320
+    DataSet = FDQuery2
+    Left = 336
     Top = 103
   end
   object frxReport2: TfrxReport
@@ -256,7 +256,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin end.')
-    Left = 64
+    Left = 72
     Top = 88
     Datasets = <
       item
