@@ -44,12 +44,75 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Height = 13
     Caption = 'Do zam'#243'wienia'
   end
-  object Label4: TLabel
-    Left = 124
-    Top = 386
-    Width = 104
+  object ParagonLabel: TLabel
+    Left = 16
+    Top = 400
+    Width = 44
     Height = 13
-    Caption = 'Sprzedaz na wykresie'
+    Caption = 'Paragon:'
+  end
+  object ParagonLabelValue: TLabel
+    Left = 18
+    Top = 419
+    Width = 85
+    Height = 13
+    Caption = '[NumerParagonu]'
+  end
+  object Label5: TLabel
+    Left = 18
+    Top = 452
+    Width = 31
+    Height = 13
+    Caption = 'Netto:'
+  end
+  object NettoLabelValue: TLabel
+    Left = 15
+    Top = 471
+    Width = 35
+    Height = 13
+    Caption = '[Netto]'
+  end
+  object Label7: TLabel
+    Left = 16
+    Top = 504
+    Width = 34
+    Height = 13
+    Caption = 'Brutto:'
+  end
+  object BruttoLabelValue: TLabel
+    Left = 15
+    Top = 523
+    Width = 38
+    Height = 13
+    Caption = '[Brutto]'
+  end
+  object Label6: TLabel
+    Left = 15
+    Top = 552
+    Width = 73
+    Height = 13
+    Caption = 'Mar'#380'a narzutu:'
+  end
+  object MarzaNarzutuLabelValue: TLabel
+    Left = 15
+    Top = 571
+    Width = 75
+    Height = 13
+    Caption = '[MarzaNarzutu]'
+  end
+  object Label9: TLabel
+    Left = 16
+    Top = 600
+    Width = 43
+    Height = 13
+    Caption = 'Mar'#380'a %'
+  end
+  object MarzaProcentLabelValue: TLabel
+    Left = 16
+    Top = 619
+    Width = 74
+    Height = 13
+    Caption = '[MarzaProcent]'
   end
   object DBGrid1: TDBGrid
     Left = 116
@@ -135,8 +198,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TitleFont.Style = []
   end
   object Chart1: TChart
-    Left = 115
-    Top = 393
+    Left = 109
+    Top = 399
     Width = 761
     Height = 243
     Legend.Visible = False

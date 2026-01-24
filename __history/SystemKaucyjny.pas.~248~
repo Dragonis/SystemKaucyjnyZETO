@@ -52,18 +52,11 @@ type
     FDQuery2: TFDQuery;
     Label3: TLabel;
     DBGrid3: TDBGrid;
+    Label4: TLabel;
     Chart1: TChart;
     DostawaButton: TButton;
     ParagonLabel: TLabel;
     ParagonLabelValue: TLabel;
-    Label5: TLabel;
-    NettoLabelValue: TLabel;
-    Label7: TLabel;
-    BruttoLabelValue: TLabel;
-    Label6: TLabel;
-    MarzaNarzutuLabelValue: TLabel;
-    Label9: TLabel;
-    MarzaProcentLabelValue: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -78,8 +71,6 @@ type
     CDSSumaParagonu: TClientDataSet;
     DSSumaParagonu: TDataSource;
     FClickCounter: Integer;
-    FSumaCalkowita: Double;
-    FSumaCalkowitaBrutto: Double;
     procedure LosujProdukty;
   end;
 
@@ -99,7 +90,6 @@ begin
   Randomize; // dla losowania
   KeyPreview := True;
   FClickCounter := 0;
-  FSumaCalkowitaBrutto := 0;
 
   Self.Position := poScreenCenter;
   Self.Width := 1000;
@@ -204,54 +194,42 @@ begin
 end;
 
 procedure TSystemKaucyjnyForm.LosujProdukty;
-const
-  VAT = 0.19; // Stawka VAT 19%
 var
   iloscProduktu: Integer;
-  cenaProduktu, sumaKlikniecia, marzaKwota, cenaBrutto, kwotaVAT: Double;
+  cenaProduktu, suma: Double;
   sumSeries: TBarSeries;
-  MarzaProc: Double;
 begin
   // ------------------------
-  // Parametr marży procentowej
-  // ------------------------
-  MarzaProc := 30;
-
-  // ------------------------
-  // Numer kliknięcia
+  // 1. Numer klienta / kliknięcia
   // ------------------------
   Inc(FClickCounter);
   ParagonLabelValue.Caption := FClickCounter.ToString;
 
   // ------------------------
-  // Losowanie produktów
+  // 2. Losowanie produktów z bazy
   // ------------------------
   FDQuery2.Close;
   FDQuery2.SQL.Text :=
     'SELECT id, Nazwa, ilosc, Cena_Det FROM Produkty ORDER BY RANDOM() LIMIT :Limit';
-  FDQuery2.ParamByName('Limit').AsInteger := Random(5) + 1;
+  FDQuery2.ParamByName('Limit').AsInteger := Random(5) + 1; // losujemy 1..5 produktów
   FDQuery2.Open;
 
   // ------------------------
-  // Przygotowanie Memo i sumy kliknięcia
+  // 3. Przygotowanie Memo i sumy
   // ------------------------
   Memo1.Lines.Clear;
-  sumaKlikniecia := 0;
+  suma := 0;
 
-  if not CDSLosoweProdukty.Active then CDSLosoweProdukty.Open;
+  if not CDSLosoweProdukty.Active then
+    CDSLosoweProdukty.Open;
   CDSLosoweProdukty.EmptyDataSet;
 
-  if not CDSSumaParagonu.Active then CDSSumaParagonu.Open;
+  if not CDSSumaParagonu.Active then
+    CDSSumaParagonu.Open;
   CDSSumaParagonu.EmptyDataSet;
 
   // ------------------------
-  // Numer paragonu w Memo
-  // ------------------------
-  Memo1.Lines.Add('Numer paragonu: ' + IntToStr(FClickCounter));
-  Memo1.Lines.Add('-------------------------');
-
-  // ------------------------
-  // Iteracja po produktach
+  // 4. Iteracja po produktach
   // ------------------------
   FDQuery2.First;
   while not FDQuery2.Eof do
@@ -259,18 +237,17 @@ begin
     iloscProduktu := Random(10) + 1;
     cenaProduktu := FDQuery2.FieldByName('Cena_Det').AsFloat;
 
-    // Dodaj do Memo
+    // Dodaj do Memo1 (mini-paragon)
     Memo1.Lines.Add(
       Format('%s - %d szt. - %.2f zł',
         [ FDQuery2.FieldByName('Nazwa').AsString,
           iloscProduktu,
-          cenaProduktu ])
+          cenaProduktu
+        ])
     );
+    suma := suma + (iloscProduktu * cenaProduktu);
 
-    // suma kliknięcia netto
-    sumaKlikniecia := sumaKlikniecia + (iloscProduktu * cenaProduktu);
-
-    // CDSLosoweProdukty
+    // Dodaj do CDSLosoweProdukty
     CDSLosoweProdukty.Append;
     CDSLosoweProdukty.FieldByName('ID').AsInteger := FDQuery2.FieldByName('id').AsInteger;
     CDSLosoweProdukty.FieldByName('Nazwa').AsString := FDQuery2.FieldByName('Nazwa').AsString;
@@ -278,7 +255,7 @@ begin
     CDSLosoweProdukty.FieldByName('Cena').AsFloat := cenaProduktu;
     CDSLosoweProdukty.Post;
 
-    // CDSSumaParagonu
+    // Dodaj do CDSSumaParagonu
     CDSSumaParagonu.Append;
     CDSSumaParagonu.FieldByName('ID').AsInteger := FDQuery2.FieldByName('id').AsInteger;
     CDSSumaParagonu.FieldByName('Nazwa').AsString := FDQuery2.FieldByName('Nazwa').AsString;
@@ -290,43 +267,22 @@ begin
   end;
 
   // ------------------------
-  // Obliczenia marży i brutto
-  // ------------------------
-  marzaKwota := sumaKlikniecia * MarzaProc / 100; // MarzaKwota is still calculated as profit from net revenue
-  kwotaVAT := sumaKlikniecia * VAT;
-  cenaBrutto := sumaKlikniecia + kwotaVAT; // cenaBrutto is now net revenue + VAT
-
-  // kumulacja wszystkich kliknięć netto
-  FSumaCalkowita := FSumaCalkowita + sumaKlikniecia;
-  // kumulacja wszystkich kliknięć brutto
-  FSumaCalkowitaBrutto := FSumaCalkowitaBrutto + cenaBrutto;
-
-  // ------------------------
-  // Wstawianie wartości do labeli
-  // ------------------------
-  NettoLabelValue.Caption := FormatFloat('0.00', FSumaCalkowita) + ' zł';
-  BruttoLabelValue.Caption := FormatFloat('0.00', FSumaCalkowitaBrutto) + ' zł';
-  MarzaNarzutuLabelValue.Caption := FormatFloat('0.00', marzaKwota) + ' zł';
-  MarzaProcentLabelValue.Caption := FormatFloat('0.00', MarzaProc) + ' %';
-
-  // ------------------------
-  // Podsumowanie w Memo
+  // 5. Podsumowanie w Memo
   // ------------------------
   Memo1.Lines.Add('-------------------------');
-  Memo1.Lines.Add('SUMA NETTO tego paragonu: ' + FormatFloat('0.00', sumaKlikniecia) + ' zł');
-  Memo1.Lines.Add('MARŻA: ' + FormatFloat('0.00', marzaKwota) + ' zł');
-  Memo1.Lines.Add(Format('VAT (%d%%): %.2f zł', [Round(VAT * 100), kwotaVAT]));
-  Memo1.Lines.Add('SUMA BRUTTO: ' + FormatFloat('0.00', cenaBrutto) + ' zł');
+  Memo1.Lines.Add('SUMA: ' + FormatFloat('0.00', suma) + ' zł');
 
   // ------------------------
-  // Dodanie sumy do wykresu
+  // 6. Dodanie sumy do wykresu
   // ------------------------
   if Chart1.SeriesCount > 0 then
   begin
     sumSeries := Chart1.Series[0] as TBarSeries;
-    sumSeries.Add(sumaKlikniecia, 'Paragon ' + IntToStr(sumSeries.Count + 1));
+    sumSeries.Add(suma, 'Klient ' + IntToStr(sumSeries.Count + 1));
   end;
 end;
+
+
 
 procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
 begin

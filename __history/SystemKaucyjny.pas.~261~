@@ -62,6 +62,7 @@ type
     BruttoLabelValue: TLabel;
     Label6: TLabel;
     MarzaNarzutuLabelValue: TLabel;
+    MarzaLabelValue: TLabel;
     Label9: TLabel;
     MarzaProcentLabelValue: TLabel;
     procedure FormCreate(Sender: TObject);
@@ -215,7 +216,7 @@ begin
   // ------------------------
   // Parametr marży procentowej
   // ------------------------
-  MarzaProc := 30;
+  MarzaProc := 30; // 30%, możesz zmienić lub wprowadzić z inputu
 
   // ------------------------
   // Numer kliknięcia
@@ -324,7 +325,7 @@ begin
   if Chart1.SeriesCount > 0 then
   begin
     sumSeries := Chart1.Series[0] as TBarSeries;
-    sumSeries.Add(sumaKlikniecia, 'Paragon ' + IntToStr(sumSeries.Count + 1));
+    sumSeries.Add(sumaKlikniecia, 'Klient ' + IntToStr(sumSeries.Count + 1));
   end;
 end;
 
