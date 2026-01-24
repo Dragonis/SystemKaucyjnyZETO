@@ -26,7 +26,7 @@ uses
 
   // Twoje jednostki
   SzczeegolyProduktuUnit,
-  FrakcjeDRS, MidasLib,
+  FrakcjeDRS, MidasLib, NIP,
   UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
   FireDAC.Comp.Script, VclTee.TeeGDIPlus, VCLTee.TeEngine, Vcl.ExtCtrls,
   VCLTee.TeeProcs, VCLTee.Chart, VCLTee.Series;
@@ -54,6 +54,7 @@ type
     DBGrid3: TDBGrid;
     Label4: TLabel;
     Chart1: TChart;
+    DostawaButton: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -62,6 +63,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure DBGrid2DblClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure DostawaButtonClick(Sender: TObject);
   private
     DSLosoweProdukty: TDataSource;
     CDSSumaParagonu: TClientDataSet;
@@ -250,7 +252,7 @@ begin
   if Chart1.SeriesCount > 0 then
   begin
     sumSeries := Chart1.Series[0] as TBarSeries;
-    sumSeries.Add(suma, 'Suma ' + IntToStr(sumSeries.Count + 1));
+    sumSeries.Add(suma, 'Klient ' + IntToStr(sumSeries.Count + 1));
   end;
 end;
 
@@ -298,6 +300,11 @@ begin
   CDSSumaParagonu.FieldByName('Ilosc').AsInteger := CDSLosoweProdukty.FieldByName('Ilosc').AsInteger;
   CDSSumaParagonu.FieldByName('Cena').AsFloat := CDSLosoweProdukty.FieldByName('Cena').AsFloat;
   CDSSumaParagonu.Post;
+end;
+
+procedure TSystemKaucyjnyForm.DostawaButtonClick(Sender: TObject);
+begin
+   NIPForm.Show;
 end;
 
 end.

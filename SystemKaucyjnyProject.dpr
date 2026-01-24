@@ -8,7 +8,9 @@ uses
   FrakcjeDRS in 'FrakcjeDRS.pas' {FrakcjeDRSForm},
   UstawieniaProgramu in 'UstawieniaProgramu.pas' {UstawieniaProgramuForm},
   ZapisanieTowaru in 'ZapisanieTowaru.pas' {ZapisanieTowaruForm},
-  OpakowanieZwrotneTowaru in 'OpakowanieZwrotneTowaru.pas' {OpakowanieZwrotneTowaruForm};
+  OpakowanieZwrotneTowaru in 'OpakowanieZwrotneTowaru.pas' {OpakowanieZwrotneTowaruForm},
+  NIP in 'NIP.pas' {NIPForm},
+  Towary in 'Towary.pas' {TowaryForm};
 
 {$R *.res}
 
@@ -21,5 +23,7 @@ begin
   Application.CreateForm(TUstawieniaProgramuForm, UstawieniaProgramuForm);
   Application.CreateForm(TZapisanieTowaruForm, ZapisanieTowaruForm);
   Application.CreateForm(TOpakowanieZwrotneTowaruForm, OpakowanieZwrotneTowaruForm);
+  Application.CreateForm(TNIPForm, NIPForm);
+  Application.CreateForm(TTowaryForm, TowaryForm);
   Application.Run;
 end.

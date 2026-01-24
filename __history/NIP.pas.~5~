@@ -1,0 +1,36 @@
+unit NIP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Towary, Vcl.StdCtrls;
+
+type
+  TNIPForm = class(TForm)
+    Label1: TLabel;
+    NIPEdit: TEdit;
+    OKButton: TButton;
+    AnulujButton: TButton;
+    procedure OKButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  NIPForm: TNIPForm;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TNIPForm.OKButtonClick(Sender: TObject);
+begin
+  TowaryForm.Show;
+end;
+
+end.

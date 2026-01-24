@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.413,C:\Users\wojte\Desktop\System kaucyjny\Produkt.dfm=C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.283,C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.451,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRS.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.775,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\UstawieniaProgramu.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.683,C:\Users\wojte\Desktop\System kaucyjny\SzczeegolyProduktuUnit.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.446,C:\Users\wojte\Desktop\System kaucyjny\OpakowanieZwrotneTowaru.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.446,C:\Users\wojte\Desktop\System kaucyjny\OpakowanieZwrotneTowaru.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.283,C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.274,C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm=C:\Users\wojte\Desktop\System kaucyjny\ZapisanieTowaru.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.751,=C:\Users\wojte\Desktop\System kaucyjny\ModelSupport_SystemKaucyjnyProject\default.txaPackage</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.322,C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRSUnit.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.413,C:\Users\wojte\Desktop\System kaucyjny\Produkt.pas=C:\Users\wojte\Desktop\System kaucyjny\ProduktUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.251,C:\Users\wojte\Desktop\System kaucyjny\Produkt.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.679,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.367,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.151,C:\Users\wojte\Desktop\System kaucyjny\UtawieniaProgramuUnit.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.803,=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjny.dfm=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.683,C:\Users\wojte\Desktop\System kaucyjny\SzczeegolyProduktuUnit.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.451,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRS.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.274,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\ZapisanieTowaru.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjny.pas=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.151,C:\Users\wojte\Desktop\System kaucyjny\UtawieniaProgramuUnit.dfm=C:\Users\wojte\Desktop\System kaucyjny\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.322,C:\Users\wojte\Desktop\System kaucyjny\FrakcjeDRSUnit.pas=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.697,C:\Users\wojte\Desktop\System kaucyjny\SystemKaucyjnyProject.dproj=C:\Users\wojte\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.775,C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas=C:\Users\wojte\Desktop\System kaucyjny\UstawieniaProgramu.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.609,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.628,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.328,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.044,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.503,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.018,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.634,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.251,=C:\Users\wojte\Desktop\System kaucyjny\Unit1.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="ModelSupport_SystemKaucyjnyProject"/>
+    <File Path="ModelSupport_SystemKaucyjnyProject\default.txaPackage"/>
+    <File Path="SystemKaucyjny.pas"/>
+    <File Path="SystemKaucyjny.dfm"/>
+    <File Path="SzczeegolyProduktuUnit.pas"/>
+    <File Path="SzczeegolyProduktuUnit.dfm"/>
+    <File Path="FrakcjeDRS.pas"/>
+    <File Path="FrakcjeDRS.dfm"/>
+    <File Path="UstawieniaProgramu.pas"/>
+    <File Path="UstawieniaProgramu.dfm"/>
+    <File Path="ZapisanieTowaru.pas"/>
+    <File Path="ZapisanieTowaru.dfm"/>
+    <File Path="OpakowanieZwrotneTowaru.pas"/>
+    <File Path="OpakowanieZwrotneTowaru.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

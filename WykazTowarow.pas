@@ -1,0 +1,80 @@
+﻿unit WykazTowarow;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, frxClass, frxDBSet, FireDAC.Comp.Script, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, Vcl.StdCtrls, SzczeegolyProduktuUnit, System.IOUtils, FireDAC.Comp.Script;
+
+type
+  TWykazTowarowForm = class(TForm)
+    Label1: TLabel;
+    FDConnection1: TFDConnection;
+    FDQuery1: TFDQuery;
+    FDScript1: TFDScript;
+    DataSource1: TDataSource;
+    frxDBItems: TfrxD
+    FDScript2: TFDScript;BDataset;
+    frxReport2: TfrxReport;
+    DBGrid1: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  procedure FormCreate(Sender: TObject);
+  procedure DBGrid1DblClick(Sender: TObject);
+  end;
+
+var
+  WykazTowarowForm: TWykazTowarowForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TWykazTowarowForm.FormCreate(Sender: TObject);
+var
+  SQLPath: string;
+begin
+  // ===== Połączenie z SQLite =====
+  try
+    FDConnection1.Connected := True;
+  except
+    on E: Exception do
+    begin
+      MessageDlg('Błąd połączenia z bazą danych: ' + E.Message,
+        mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
+
+  // ===== Inicjalizacja tabeli =====
+  SQLPath := TPath.Combine(
+    ExtractFilePath(ParamStr(0))+'\sql\',
+    'init.sql'
+  );
+
+  if not FileExists(SQLPath) then
+    raise Exception.Create('Brak pliku init.sql');
+
+  FDScript1.Connection := FDConnection1;
+  FDScript1.SQLScripts.Clear;
+  FDScript1.SQLScripts.Add.SQL.LoadFromFile(SQLPath);
+  FDScript1.ExecuteAll;
+
+  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
+  FDQuery1.Open;
+
+  // ===== DBGrid1 =====
+  DataSource1.DataSet := FDQuery1;
+  DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
+end;
+
+end.
