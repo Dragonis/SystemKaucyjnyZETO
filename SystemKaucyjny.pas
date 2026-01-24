@@ -21,6 +21,8 @@ uses
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
 
+  System.IniFiles,
+
   // FastReport
   frxClass, frxDBSet,
 
@@ -369,6 +371,7 @@ begin
   CDSSumaParagonu.FieldByName('Cena').AsFloat := CDSLosoweProdukty.FieldByName('Cena').AsFloat;
   CDSSumaParagonu.Post;
 end;
+
 
 procedure TSystemKaucyjnyForm.DostawaButtonClick(Sender: TObject);
 begin

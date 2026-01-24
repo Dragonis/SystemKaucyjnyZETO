@@ -11,7 +11,7 @@ uses
   FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
   FireDAC.Comp.Script, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
   Vcl.Grids, Vcl.DBGrids, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
-  FireDAC.Stan.ExprFuncs, CompanyInfo, Vcl.StdCtrls, SzczeegolyProduktuUnit;
+  FireDAC.Stan.ExprFuncs, CompanyInfo, Vcl.StdCtrls, SzczeegolyProduktuUnit, System.IniFiles;
 
 type
   TTowaryForm = class(TForm)
@@ -34,6 +34,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FCompany: TCompanyInfo;
   public
@@ -65,9 +66,61 @@ begin
   end;
 end;
 
+procedure ShowMessageOnce(const MsgID, MsgText: string);
+var
+  Ini: TIniFile;
+  frm: TForm;
+  lbl: TLabel;
+  chk: TCheckBox;
+  btn: TButton;
+  ShowAgain: Boolean;
+  IniFileName: string;
+begin
+  IniFileName := ExtractFilePath(ParamStr(0)) + 'settings.ini';
+  Ini := TIniFile.Create(IniFileName);
+  try
+    ShowAgain := Ini.ReadBool('Messages', MsgID, True);
+    if not ShowAgain then Exit;
+
+    frm := TForm.Create(nil);
+    try
+      frm.Width := 500;
+      frm.Height := 150;
+      frm.Position := poScreenCenter;
+      frm.Caption := 'Informacja';
+      frm.BorderStyle := bsDialog;
+
+      lbl := TLabel.Create(frm);
+      lbl.Parent := frm;
+      lbl.Caption := MsgText;
+      lbl.Left := 20; lbl.Top := 20; lbl.Width := 360;
+
+      chk := TCheckBox.Create(frm);
+      chk.Parent := frm;
+      chk.Caption := 'Nie pokazuj więcej';
+      chk.Left := 20; chk.Top := 60;
+
+      btn := TButton.Create(frm);
+      btn.Parent := frm;
+      btn.Caption := 'OK';
+      btn.ModalResult := mrOk;
+      btn.Left := frm.ClientWidth - btn.Width - 20;
+      btn.Top := frm.ClientHeight - btn.Height - 20;
+
+      if frm.ShowModal = mrOk then
+        Ini.WriteBool('Messages', MsgID, not chk.Checked); // zapisujemy decyzję
+    finally
+      frm.Free;
+    end;
+  finally
+    Ini.Free;
+  end;
+end;
+
 procedure TTowaryForm.FormCreate(Sender: TObject);
 begin
   Self.KeyPreview := True;
+
   try
     FDConnection1.Connected := True;
     FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
@@ -77,6 +130,9 @@ begin
       MessageDlg('Błąd połączenia z bazą danych lub odczytu danych: ' + E.Message,
         mtError, [mbOK], 0);
   end;
+
+
+
 end;
 
 procedure TTowaryForm.SetCompanyInfo(const ACompany: TCompanyInfo);
@@ -96,6 +152,13 @@ procedure TTowaryForm.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = VK_ESCAPE then
     Close;
+end;
+
+procedure TTowaryForm.FormShow(Sender: TObject);
+begin
+  ShowMessageOnce('WelcomeMessage',
+  'Aby edytować szczegóły produktu, kliknij dwukrotnie na wybrany wiersz w tabeli.'
+  );
 end;
 
 end.

@@ -1,0 +1,379 @@
+﻿unit SystemKaucyjny;
+
+interface
+
+uses
+  // Windows & VCL
+  Winapi.Windows, Winapi.Messages,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+
+  // System
+  System.SysUtils, System.Variants, System.Classes, System.IOUtils,
+  Data.DB, Datasnap.DBClient,
+
+  // FireDAC
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
+  FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
+  FireDAC.Stan.ExprFuncs,
+
+  // FastReport
+  frxClass, frxDBSet,
+
+  // Twoje jednostki
+  SzczeegolyProduktuUnit,
+  FrakcjeDRS, MidasLib, NIP,
+  UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
+  FireDAC.Comp.Script, VclTee.TeeGDIPlus, VCLTee.TeEngine, Vcl.ExtCtrls,
+  VCLTee.TeeProcs, VCLTee.Chart, VCLTee.Series;
+
+type
+  TSystemKaucyjnyForm = class(TForm)
+    FDConnection1: TFDConnection;
+    FDQuery1: TFDQuery;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    ButtonFrakcjeDRS: TButton;
+    Button1: TButton;
+    ButtonRaport: TButton;
+    frxReport2: TfrxReport;
+    frxDBItems: TfrxDBDataset;
+    FDScript1: TFDScript;
+    Label1: TLabel;
+    Label2: TLabel;
+    Memo1: TMemo;
+    Button2: TButton;
+    CDSLosoweProdukty: TClientDataSet;
+    FDQuery2: TFDQuery;
+    Label3: TLabel;
+    DBGrid3: TDBGrid;
+    Chart1: TChart;
+    DostawaButton: TButton;
+    ParagonLabel: TLabel;
+    ParagonLabelValue: TLabel;
+    Label5: TLabel;
+    NettoLabelValue: TLabel;
+    Label7: TLabel;
+    BruttoLabelValue: TLabel;
+    Label6: TLabel;
+    MarzaNarzutuLabelValue: TLabel;
+    Label9: TLabel;
+    MarzaProcentLabelValue: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure ButtonFrakcjeDRSClick(Sender: TObject);
+    procedure ButtonRaportClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid2DblClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DostawaButtonClick(Sender: TObject);
+  private
+    DSLosoweProdukty: TDataSource;
+    CDSSumaParagonu: TClientDataSet;
+    DSSumaParagonu: TDataSource;
+    FClickCounter: Integer;
+    FSumaCalkowita: Double;
+    FSumaCalkowitaBrutto: Double;
+    procedure LosujProdukty;
+  end;
+
+var
+  SystemKaucyjnyForm: TSystemKaucyjnyForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
+var
+  Cnt: Integer;
+  SQLPath: string;
+  SumSeries: TBarSeries;
+begin
+  Randomize; // dla losowania
+  KeyPreview := True;
+  FClickCounter := 0;
+  FSumaCalkowitaBrutto := 0;
+
+  Self.Position := poScreenCenter;
+  Self.Width := 1000;
+  Self.Height := 700;
+
+  // ===== Połączenie z SQLite =====
+  try
+    FDConnection1.Connected := True;
+  except
+    on E: Exception do
+    begin
+      MessageDlg('Błąd połączenia z bazą danych: ' + E.Message,
+        mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
+
+  // ===== Inicjalizacja tabeli =====
+  SQLPath := TPath.Combine(
+    ExtractFilePath(ParamStr(0))+'\sql\',
+    'init.sql'
+  );
+
+  if not FileExists(SQLPath) then
+    raise Exception.Create('Brak pliku init.sql');
+
+  FDScript1.Connection := FDConnection1;
+  FDScript1.SQLScripts.Clear;
+  FDScript1.SQLScripts.Add.SQL.LoadFromFile(SQLPath);
+  FDScript1.ExecuteAll;
+
+  FDQuery1.SQL.Text := 'SELECT * FROM Produkty';
+  FDQuery1.Open;
+
+  // ===== DBGrid1 =====
+  DataSource1.DataSet := FDQuery1;
+  DBGrid1.Options := DBGrid1.Options + [dgRowSelect] - [dgEditing];
+
+  // ===== DBGrid2 (ClientDataSet) =====
+
+  CDSLosoweProdukty.FieldDefs.Add('ID', ftInteger);
+  CDSLosoweProdukty.FieldDefs.Add('Nazwa', ftString, 50);
+  CDSLosoweProdukty.FieldDefs.Add('Ilosc', ftInteger);
+  CDSLosoweProdukty.FieldDefs.Add('Cena', ftFloat);
+  CDSLosoweProdukty.CreateDataSet;
+
+  DSLosoweProdukty := TDataSource.Create(Self);
+  DSLosoweProdukty.DataSet := CDSLosoweProdukty;
+  DBGrid2.DataSource := DSLosoweProdukty;
+  DBGrid2.Options := DBGrid2.Options + [dgRowSelect] - [dgEditing];
+
+  // ===== DBGrid3 (ClientDataSet) =====
+  CDSSumaParagonu := TClientDataSet.Create(Self);
+  CDSSumaParagonu.FieldDefs.Add('ID', ftInteger);
+  CDSSumaParagonu.FieldDefs.Add('Nazwa', ftString, 50);
+  CDSSumaParagonu.FieldDefs.Add('Ilosc', ftInteger);
+  CDSSumaParagonu.FieldDefs.Add('Cena', ftFloat);
+  CDSSumaParagonu.CreateDataSet;
+
+  DSSumaParagonu := TDataSource.Create(Self);
+  DSSumaParagonu.DataSet := CDSSumaParagonu;
+  DBGrid3.DataSource := DSSumaParagonu;
+  DBGrid3.Options := DBGrid3.Options + [dgRowSelect] - [dgEditing];
+
+  DBGrid2.OnDblClick := DBGrid2DblClick;
+
+  // ===== Chart1 =====
+  Chart1.Title.Text.Clear;
+  Chart1.Title.Text.Add('Sumy paragonów');
+  Chart1.Legend.Visible := False;
+
+  SumSeries := TBarSeries.Create(Chart1);
+  Chart1.AddSeries(SumSeries);
+  SumSeries.Title := 'Paragon';
+  SumSeries.Marks.Style := smsValue;
+end;
+
+
+procedure TSystemKaucyjnyForm.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then
+    Close;
+end;
+
+procedure TSystemKaucyjnyForm.ButtonRaportClick(Sender: TObject);
+begin
+  FDQuery1.Close;
+  FDQuery1.SQL.Text :=
+    'SELECT ' +
+    'id AS id, ' +
+    'Nazwa AS name, ' +
+    'Ilosc AS quantity, ' +
+    'Marza_Proc AS margin, ' +
+    'Cena_Ew AS cost_price, ' +
+    'Cena_Det AS retail_price ' +
+    'FROM Produkty';
+  FDQuery1.Open;
+
+  frxDBItems.DataSet := FDQuery1;
+  frxDBItems.UserName := 'Items';
+  frxReport2.ShowReport;
+end;
+
+procedure TSystemKaucyjnyForm.LosujProdukty;
+const
+  VAT = 0.19; // Stawka VAT 19%
+var
+  iloscProduktu: Integer;
+  cenaProduktu, sumaKlikniecia, marzaKwota, cenaBrutto, kwotaVAT: Double;
+  sumSeries: TBarSeries;
+  MarzaProc: Double;
+begin
+  // ------------------------
+  // Parametr marży procentowej
+  // ------------------------
+  MarzaProc := 30;
+
+  // ------------------------
+  // Numer kliknięcia
+  // ------------------------
+  Inc(FClickCounter);
+  ParagonLabelValue.Caption := FClickCounter.ToString;
+
+  // ------------------------
+  // Losowanie produktów
+  // ------------------------
+  FDQuery2.Close;
+  FDQuery2.SQL.Text :=
+    'SELECT id, Nazwa, ilosc, Cena_Det FROM Produkty ORDER BY RANDOM() LIMIT :Limit';
+  FDQuery2.ParamByName('Limit').AsInteger := Random(5) + 1;
+  FDQuery2.Open;
+
+  // ------------------------
+  // Przygotowanie Memo i sumy kliknięcia
+  // ------------------------
+  Memo1.Lines.Clear;
+  sumaKlikniecia := 0;
+
+  if not CDSLosoweProdukty.Active then CDSLosoweProdukty.Open;
+  CDSLosoweProdukty.EmptyDataSet;
+
+  // ------------------------
+  // Numer paragonu w Memo
+  // ------------------------
+  Memo1.Lines.Add('Numer paragonu: ' + IntToStr(FClickCounter));
+  Memo1.Lines.Add('-------------------------');
+
+  // ------------------------
+  // Iteracja po produktach
+  // ------------------------
+  FDQuery2.First;
+  while not FDQuery2.Eof do
+  begin
+    iloscProduktu := Random(10) + 1;
+    cenaProduktu := FDQuery2.FieldByName('Cena_Det').AsFloat;
+
+    // Dodaj do Memo
+    Memo1.Lines.Add(
+      Format('%s - %d szt. - %.2f zł',
+        [ FDQuery2.FieldByName('Nazwa').AsString,
+          iloscProduktu,
+          cenaProduktu ])
+    );
+
+    // suma kliknięcia netto
+    sumaKlikniecia := sumaKlikniecia + (iloscProduktu * cenaProduktu);
+
+    // CDSLosoweProdukty
+    CDSLosoweProdukty.Append;
+    CDSLosoweProdukty.FieldByName('ID').AsInteger := FDQuery2.FieldByName('id').AsInteger;
+    CDSLosoweProdukty.FieldByName('Nazwa').AsString := FDQuery2.FieldByName('Nazwa').AsString;
+    CDSLosoweProdukty.FieldByName('Ilosc').AsInteger := iloscProduktu;
+    CDSLosoweProdukty.FieldByName('Cena').AsFloat := cenaProduktu;
+    CDSLosoweProdukty.Post;
+
+    // CDSSumaParagonu
+    CDSSumaParagonu.Append;
+    CDSSumaParagonu.FieldByName('ID').AsInteger := FDQuery2.FieldByName('id').AsInteger;
+    CDSSumaParagonu.FieldByName('Nazwa').AsString := FDQuery2.FieldByName('Nazwa').AsString;
+    CDSSumaParagonu.FieldByName('Ilosc').AsInteger := iloscProduktu;
+    CDSSumaParagonu.FieldByName('Cena').AsFloat := cenaProduktu;
+    CDSSumaParagonu.Post;
+
+    FDQuery2.Next;
+  end;
+
+  // ------------------------
+  // Obliczenia marży i brutto
+  // ------------------------
+  marzaKwota := sumaKlikniecia * MarzaProc / 100; // MarzaKwota is still calculated as profit from net revenue
+  kwotaVAT := sumaKlikniecia * VAT;
+  cenaBrutto := sumaKlikniecia + kwotaVAT; // cenaBrutto is now net revenue + VAT
+
+  // kumulacja wszystkich kliknięć netto
+  FSumaCalkowita := FSumaCalkowita + sumaKlikniecia;
+  // kumulacja wszystkich kliknięć brutto
+  FSumaCalkowitaBrutto := FSumaCalkowitaBrutto + cenaBrutto;
+
+  // ------------------------
+  // Wstawianie wartości do labeli
+  // ------------------------
+  NettoLabelValue.Caption := FormatFloat('0.00', FSumaCalkowita) + ' zł';
+  BruttoLabelValue.Caption := FormatFloat('0.00', FSumaCalkowitaBrutto) + ' zł';
+  MarzaNarzutuLabelValue.Caption := FormatFloat('0.00', marzaKwota) + ' zł';
+  MarzaProcentLabelValue.Caption := FormatFloat('0.00', MarzaProc) + ' %';
+
+  // ------------------------
+  // Podsumowanie w Memo
+  // ------------------------
+  Memo1.Lines.Add('-------------------------');
+  Memo1.Lines.Add('SUMA NETTO tego paragonu: ' + FormatFloat('0.00', sumaKlikniecia) + ' zł');
+  Memo1.Lines.Add('MARŻA: ' + FormatFloat('0.00', marzaKwota) + ' zł');
+  Memo1.Lines.Add(Format('VAT (%d%%): %.2f zł', [Round(VAT * 100), kwotaVAT]));
+  Memo1.Lines.Add('SUMA BRUTTO: ' + FormatFloat('0.00', cenaBrutto) + ' zł');
+
+  // ------------------------
+  // Dodanie sumy do wykresu
+  // ------------------------
+  if Chart1.SeriesCount > 0 then
+  begin
+    sumSeries := Chart1.Series[0] as TBarSeries;
+    sumSeries.Add(sumaKlikniecia, 'Paragon ' + IntToStr(sumSeries.Count + 1));
+  end;
+end;
+
+procedure TSystemKaucyjnyForm.Button1Click(Sender: TObject);
+begin
+  UstawieniaProgramuForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.Button2Click(Sender: TObject);
+begin
+  LosujProdukty;
+end;
+
+procedure TSystemKaucyjnyForm.ButtonFrakcjeDRSClick(Sender: TObject);
+begin
+  FrakcjeDRSForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.DBGrid1DblClick(Sender: TObject);
+var
+  ProduktID, ProduktIlosc: Integer;
+  ProduktNazwa: string;
+begin
+  if DataSource1.DataSet.IsEmpty then Exit;
+
+  ProduktID := DataSource1.DataSet.FieldByName('id').AsInteger;
+  ProduktNazwa := DataSource1.DataSet.FieldByName('nazwa').AsString;
+  ProduktIlosc := DataSource1.DataSet.FieldByName('ilosc').AsInteger;
+
+  if Assigned(ProduktForm) then
+  begin
+    ProduktForm.UstawDane(ProduktID, ProduktNazwa, ProduktIlosc);
+    ProduktForm.ShowModal;
+  end;
+end;
+
+procedure TSystemKaucyjnyForm.DBGrid2DblClick(Sender: TObject);
+begin
+  if CDSLosoweProdukty.IsEmpty then Exit;
+
+  CDSSumaParagonu.Append;
+  CDSSumaParagonu.FieldByName('ID').AsInteger := CDSLosoweProdukty.FieldByName('ID').AsInteger;
+  CDSSumaParagonu.FieldByName('Nazwa').AsString := CDSLosoweProdukty.FieldByName('Nazwa').AsString;
+  CDSSumaParagonu.FieldByName('Ilosc').AsInteger := CDSLosoweProdukty.FieldByName('Ilosc').AsInteger;
+  CDSSumaParagonu.FieldByName('Cena').AsFloat := CDSLosoweProdukty.FieldByName('Cena').AsFloat;
+  CDSSumaParagonu.Post;
+end;
+
+procedure TSystemKaucyjnyForm.DostawaButtonClick(Sender: TObject);
+begin
+   NIPForm.Show;
+end;
+
+end.
+
