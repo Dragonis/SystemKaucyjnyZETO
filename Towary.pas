@@ -83,7 +83,7 @@ begin
 
     frm := TForm.Create(nil);
     try
-      frm.Width := 450;
+      frm.Width := 45=0;
       frm.Height := 150;
       frm.Position := poScreenCenter;
       frm.Caption := 'Informacja';
