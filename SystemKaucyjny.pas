@@ -241,9 +241,6 @@ begin
   if not CDSLosoweProdukty.Active then CDSLosoweProdukty.Open;
   CDSLosoweProdukty.EmptyDataSet;
 
-  if not CDSSumaParagonu.Active then CDSSumaParagonu.Open;
-  CDSSumaParagonu.EmptyDataSet;
-
   // ------------------------
   // Numer paragonu w Memo
   // ------------------------
