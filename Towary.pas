@@ -65,7 +65,6 @@ begin
     ProduktForm.ShowModal;
   end;
 end;
-
 procedure ShowMessageOnce(const MsgID, MsgText: string);
 var
   Ini: TIniFile;
@@ -84,7 +83,7 @@ begin
 
     frm := TForm.Create(nil);
     try
-      frm.Width := 500;
+      frm.Width := 450;
       frm.Height := 150;
       frm.Position := poScreenCenter;
       frm.Caption := 'Informacja';
@@ -93,12 +92,16 @@ begin
       lbl := TLabel.Create(frm);
       lbl.Parent := frm;
       lbl.Caption := MsgText;
-      lbl.Left := 20; lbl.Top := 20; lbl.Width := 360;
+      lbl.Left := 20;
+      lbl.Top := 20;
+      lbl.Width := frm.ClientWidth - 40;  // zostawiamy marginesy
+      lbl.WordWrap := True;               // WAŻNE! pozwala zawijać tekst
 
       chk := TCheckBox.Create(frm);
       chk.Parent := frm;
       chk.Caption := 'Nie pokazuj więcej';
-      chk.Left := 20; chk.Top := 60;
+      chk.Left := 20;
+      chk.Top := lbl.Top + lbl.Height + 10;
 
       btn := TButton.Create(frm);
       btn.Parent := frm;
@@ -116,6 +119,7 @@ begin
     Ini.Free;
   end;
 end;
+
 
 procedure TTowaryForm.FormCreate(Sender: TObject);
 begin
