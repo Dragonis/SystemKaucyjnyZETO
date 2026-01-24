@@ -130,27 +130,27 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnDblClick = DBGrid1DblClick
   end
   object ButtonFrakcjeDRS: TButton
-    Left = 16
-    Top = 160
-    Width = 94
+    Left = 8
+    Top = 151
+    Width = 102
     Height = 25
     Caption = 'Ustaw Frakcje DRS'
     TabOrder = 1
     OnClick = ButtonFrakcjeDRSClick
   end
   object Button1: TButton
-    Left = 16
-    Top = 207
-    Width = 94
+    Left = 8
+    Top = 182
+    Width = 102
     Height = 25
     Caption = 'Ustawienia Programu'
     TabOrder = 2
     OnClick = Button1Click
   end
   object ButtonRaport: TButton
-    Left = 16
+    Left = 8
     Top = 120
-    Width = 94
+    Width = 102
     Height = 25
     Caption = 'Drukuj raport'
     TabOrder = 3
@@ -219,7 +219,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Top = 8
     Width = 74
     Height = 61
-    Caption = 'Dostawa'
+    Caption = 'Towary'
     TabOrder = 9
     OnClick = DostawaButtonClick
   end
@@ -404,8 +404,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     CloseDataSource = False
     DataSource = DataSource1
     BCDToCurrency = False
-    Left = 32
-    Top = 96
+    Left = 40
+    Top = 88
   end
   object FDScript1: TFDScript
     SQLScripts = <>

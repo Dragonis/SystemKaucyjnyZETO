@@ -1,0 +1,16 @@
+unit CompanyInfo;
+
+interface
+
+type
+  // Rekord przechowuj¹cy dane firmy z MF
+  TCompanyInfo = record
+    Name: string;
+//    Nip: string;
+//    StatusVat: string;
+  end;
+
+implementation
+
+end.
+

@@ -3,7 +3,7 @@ object NIPForm: TNIPForm
   Top = 0
   Caption = 'Wybierani kontrahenta wg numeru NIP'
   ClientHeight = 70
-  ClientWidth = 348
+  ClientWidth = 372
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,10 +28,11 @@ object NIPForm: TNIPForm
     Width = 297
     Height = 21
     TabOrder = 0
+    Text = '7120156688'
   end
   object OKButton: TButton
     Left = 79
-    Top = 37
+    Top = 35
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -48,5 +49,12 @@ object NIPForm: TNIPForm
     Caption = 'Anuluj'
     TabOrder = 2
     OnClick = AnulujButtonClick
+  end
+  object HTTP: TNetHTTPClient
+    AllowCookies = True
+    HandleRedirects = True
+    UserAgent = 'Embarcadero URI Client/1.0'
+    Left = 32
+    Top = 24
   end
 end

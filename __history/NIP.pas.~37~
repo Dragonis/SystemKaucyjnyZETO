@@ -1,0 +1,153 @@
+unit NIP;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  System.Net.HttpClient, System.Net.HttpClientComponent,
+  System.Net.URLClient, System.JSON,
+  CompanyInfo, Towary;
+
+type
+  TNIPForm = class(TForm)
+    Label1: TLabel;
+    NIPEdit: TEdit;
+    OKButton: TButton;
+    AnulujButton: TButton;
+    HTTP: TNetHTTPClient;
+    MemoJSON: TMemo; // <-- pokazanie surowego JSON
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure OKButtonClick(Sender: TObject);
+    procedure AnulujButtonClick(Sender: TObject);
+  private
+    FCompany: TCompanyInfo;
+    function ParseCompanyJson(const ARawJson: string): TCompanyInfo;
+    function PrettyJSON(const ARawJson: string): string;
+  public
+    property Company: TCompanyInfo read FCompany;
+  end;
+
+var
+  NIPForm: TNIPForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TNIPForm.FormCreate(Sender: TObject);
+begin
+  KeyPreview := True;
+  HTTP.Accept := 'application/json';
+  //HTTP.SecureProtocols := [THTTPSecureProtocol.TLS12];
+end;
+
+procedure TNIPForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_SPACE then
+    OKButton.Click;
+end;
+
+procedure TNIPForm.AnulujButtonClick(Sender: TObject);
+begin
+  Close;
+end;
+
+// Funkcja formatuj¹ca JSON do czytelnej postaci (Memo)
+//function TNIPForm.PrettyJSON(const ARawJson: string): string;
+//var
+//  JsonValue: TJSONValue;
+//begin
+//  Result := '';
+//  JsonValue := TJSONObject.ParseJSONValue(ARawJson);
+//  try
+//    if Assigned(JsonValue) then
+//      Result := JsonValue.Format(2);
+//  finally
+//    JsonValue.Free;
+//  end;
+//end;
+
+// Parsowanie JSON MF do rekordu
+function TNIPForm.ParseCompanyJson(const ARawJson: string): TCompanyInfo;
+var
+  JsonObj, ResultObj, SubjectObj: TJSONObject;
+begin
+  Result := Default(TCompanyInfo);
+
+  JsonObj := TJSONObject.ParseJSONValue(ARawJson) as TJSONObject;
+  if not Assigned(JsonObj) then
+    raise Exception.Create('Nieprawid³owy JSON');
+
+  try
+    ResultObj := JsonObj.GetValue('result') as TJSONObject;
+    if not Assigned(ResultObj) then
+      raise Exception.Create('Brak sekcji "result" w JSON');
+
+    SubjectObj := ResultObj.GetValue('subject') as TJSONObject;
+    if not Assigned(SubjectObj) then
+      raise Exception.Create('Brak sekcji "subject" w JSON');
+
+    if Assigned(SubjectObj.GetValue('name')) then
+      Result.Name := SubjectObj.GetValue('name').Value;
+
+    if Assigned(SubjectObj.GetValue('nip')) then
+      Result.Nip := SubjectObj.GetValue('nip').Value;
+
+    if Assigned(SubjectObj.GetValue('statusVat')) then
+      Result.StatusVat := SubjectObj.GetValue('statusVat').Value;
+
+  finally
+    JsonObj.Free;
+  end;
+end;
+
+procedure TNIPForm.OKButtonClick(Sender: TObject);
+var
+  Response: IHTTPResponse;
+  URL, NIP, Data, RawJson: string;
+begin
+  NIP := Trim(NIPEdit.Text);
+  Data := '2025-01-24';
+
+  if NIP = '' then
+  begin
+    ShowMessage('Podaj NIP');
+    Exit;
+  end;
+
+  URL := Format('https://wl-api.mf.gov.pl/api/search/nip/%s?date=%s', [NIP, Data]);
+
+  try
+    Response := HTTP.Get(URL);
+
+    if Response.StatusCode = 200 then
+    begin
+      RawJson := Response.ContentAsString(TEncoding.UTF8);
+
+      // poka¿ surowy, sformatowany JSON w Memo
+      MemoJSON.Lines.Text := PrettyJSON(RawJson);
+
+      // parsowanie do rekordu
+      FCompany := ParseCompanyJson(RawJson);
+
+      // przekazanie rekordu do TowaryForm
+      TowaryForm.SetCompanyInfo(FCompany);
+    end
+    else
+      ShowMessage(Format('B³¹d HTTP %d: %s', [Response.StatusCode, Response.StatusText]));
+
+  except
+    on E: Exception do
+      ShowMessage('B³¹d po³¹czenia: ' + E.Message);
+  end;
+
+  TowaryForm.Show;
+  Close;
+end;
+
+end.
+

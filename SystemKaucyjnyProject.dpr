@@ -10,7 +10,8 @@ uses
   ZapisanieTowaru in 'ZapisanieTowaru.pas' {ZapisanieTowaruForm},
   OpakowanieZwrotneTowaru in 'OpakowanieZwrotneTowaru.pas' {OpakowanieZwrotneTowaruForm},
   NIP in 'NIP.pas' {NIPForm},
-  Towary in 'Towary.pas' {TowaryForm};
+  Towary in 'Towary.pas' {TowaryForm},
+  CompanyInfo in 'CompanyInfo.pas';
 
 {$R *.res}
 

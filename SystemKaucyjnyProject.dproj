@@ -126,6 +126,7 @@
             <Form>TowaryForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="CompanyInfo.pas"/>
         <None Include="ModelSupport_SystemKaucyjnyProject\default.txaPackage"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
