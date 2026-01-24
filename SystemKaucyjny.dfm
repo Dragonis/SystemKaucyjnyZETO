@@ -214,13 +214,22 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       34)
     ColorPaletteIndex = 13
   end
-  object DostawaButton: TButton
+  object TowaryButton: TButton
     Left = 116
     Top = 8
     Width = 74
     Height = 61
     Caption = 'Towary'
     TabOrder = 9
+    OnClick = TowaryButtonClick
+  end
+  object DostawaButton: TButton
+    Left = 196
+    Top = 8
+    Width = 77
+    Height = 61
+    Caption = 'Dostawa'
+    TabOrder = 10
     OnClick = DostawaButtonClick
   end
   object FDConnection1: TFDConnection

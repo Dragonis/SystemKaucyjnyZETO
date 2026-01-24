@@ -8,7 +8,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   System.Net.HttpClient, System.Net.HttpClientComponent,
   System.Net.URLClient, System.JSON,
-  CompanyInfo, Towary;
+  CompanyInfo, Towary, Dostawcy;
 
 type
   TNIPForm = class(TForm)
@@ -23,10 +23,15 @@ type
     procedure AnulujButtonClick(Sender: TObject);
   private
     FCompany: TCompanyInfo;
+        FNameNextFormToOpen: string;
     function ParseCompanyJson(const ARawJson: string): TCompanyInfo;
     function PrettyJSON(const ARawJson: string): string;
   public
     property Company: TCompanyInfo read FCompany;
+
+    property NameNextFormToOpen: string
+    read FNameNextFormToOpen
+    write FNameNextFormToOpen;
   end;
 
 var
@@ -153,7 +158,11 @@ begin
       ShowMessage('B³¹d po³¹czenia: ' + E.Message);
   end;
 
-  TowaryForm.Show;
+  if NameNextFormToOpen = 'TowaryForm' then
+    TowaryForm.Show;
+  if NameNextFormToOpen = 'DostawcyForm' then
+    DostawcyForm.Show;
+
   Close;
 end;
 

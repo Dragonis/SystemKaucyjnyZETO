@@ -21,7 +21,7 @@ uses
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
 
-  System.IniFiles,
+  System.IniFiles, Dostawcy,
 
   // FastReport
   frxClass, frxDBSet,
@@ -55,7 +55,7 @@ type
     Label3: TLabel;
     DBGrid3: TDBGrid;
     Chart1: TChart;
-    DostawaButton: TButton;
+    TowaryButton: TButton;
     ParagonLabel: TLabel;
     ParagonLabelValue: TLabel;
     Label5: TLabel;
@@ -66,6 +66,7 @@ type
     MarzaNarzutuLabelValue: TLabel;
     Label9: TLabel;
     MarzaProcentLabelValue: TLabel;
+    DostawaButton: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -74,6 +75,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure DBGrid2DblClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure TowaryButtonClick(Sender: TObject);
     procedure DostawaButtonClick(Sender: TObject);
   private
     DSLosoweProdukty: TDataSource;
@@ -82,7 +84,11 @@ type
     FClickCounter: Integer;
     FSumaCalkowita: Double;
     FSumaCalkowitaBrutto: Double;
+
     procedure LosujProdukty;
+
+  public
+
   end;
 
 var
@@ -375,6 +381,13 @@ end;
 
 procedure TSystemKaucyjnyForm.DostawaButtonClick(Sender: TObject);
 begin
+  NIPForm.NameNextFormToOpen := 'DostawcyForm';
+  NIPForm.Show;
+end;
+
+procedure TSystemKaucyjnyForm.TowaryButtonClick(Sender: TObject);
+begin
+   NIPForm.NameNextFormToOpen := 'TowaryForm';
    NIPForm.Show;
 end;
 

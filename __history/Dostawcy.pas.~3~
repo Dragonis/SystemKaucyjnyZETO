@@ -1,0 +1,39 @@
+unit Dostawcy;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CompanyInfo;
+
+type
+  TDostawcyForm = class(TForm)
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    procedure SetCompanyInfo(const ACompany: TCompanyInfo);
+    { Public declarations }
+  end;
+
+var
+  DostawcyForm: TDostawcyForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDostawcyForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_ESCAPE then
+    Close;
+end;
+
+procedure TDostawcyForm.SetCompanyInfo(const ACompany: TCompanyInfo);
+begin
+  ShowMessage('Odebrano informacje o dostawcy: ' + ACompany.Name);
+  // Here you would typically populate fields on the form with ACompany data
+end;
+
+end.

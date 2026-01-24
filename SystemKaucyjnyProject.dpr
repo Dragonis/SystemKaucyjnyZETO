@@ -11,7 +11,8 @@ uses
   OpakowanieZwrotneTowaru in 'OpakowanieZwrotneTowaru.pas' {OpakowanieZwrotneTowaruForm},
   NIP in 'NIP.pas' {NIPForm},
   Towary in 'Towary.pas' {TowaryForm},
-  CompanyInfo in 'CompanyInfo.pas';
+  CompanyInfo in 'CompanyInfo.pas',
+  Dostawcy in 'Dostawcy.pas' {DostawcyForm};
 
 {$R *.res}
 
@@ -26,5 +27,6 @@ begin
   Application.CreateForm(TOpakowanieZwrotneTowaruForm, OpakowanieZwrotneTowaruForm);
   Application.CreateForm(TNIPForm, NIPForm);
   Application.CreateForm(TTowaryForm, TowaryForm);
+  Application.CreateForm(TDostawcyForm, DostawcyForm);
   Application.Run;
 end.
