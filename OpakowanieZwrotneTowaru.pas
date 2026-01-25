@@ -61,8 +61,6 @@ begin
      publicznaNazwa := EditOpakDRS.Text;
   ModalResult := mrOk; // Signal that a value has been selected and saved
   Close; // Close the modal form
-
-  EditOpakDRS.Text
 end;
 
 end.

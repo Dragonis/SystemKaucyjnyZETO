@@ -108,6 +108,10 @@ object ProduktForm: TProduktForm
     TabOrder = 4
     object tsCena_sprzedazy: TTabSheet
       Caption = 'Cena sprzedazy'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tsOpisdodatkowy: TTabSheet
       Caption = 'Opis dodatkowy'
@@ -139,6 +143,10 @@ object ProduktForm: TProduktForm
     object tsDRS_Kaucja: TTabSheet
       Caption = 'DRS Kaucja'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label3: TLabel
         Left = 16
         Top = 24
@@ -174,6 +182,10 @@ object ProduktForm: TProduktForm
     object tsDRS_Rozliczenie: TTabSheet
       Caption = 'DRS Rozliczenie'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object ComboBox2: TComboBox

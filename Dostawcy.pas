@@ -11,7 +11,7 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.Script, Vcl.Grids,
-  Vcl.DBGrids;
+  Vcl.DBGrids, uShowMessageOnce, SzczegolyDostawcy;
 
 type
   TDostawcyForm = class(TForm)
@@ -22,9 +22,12 @@ type
     DataSource1: TDataSource;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
+
     { Public declarations }
   end;
 
@@ -35,10 +38,26 @@ implementation
 
 {$R *.dfm}
 
+procedure TDostawcyForm.DBGrid1DblClick(Sender: TObject);
+var
+  Nazwa, Skrot: string;
+begin
+  Nazwa := DBGrid1.DataSource.DataSet.FieldByName('Nazwa').AsString;
+  Skrot := DBGrid1.DataSource.DataSet.FieldByName('Skrot').AsString;
+
+  SzczegolyDostawcyForm.SetDostawcaInfo(Nazwa, Skrot);
+
+  SzczegolyDostawcyForm.Show;
+end;
+
+
+
 procedure TDostawcyForm.FormCreate(Sender: TObject);
 begin
   FDScript1.ExecuteAll;
   FDQuery1.Open;
+
+
 end;
 
 procedure TDostawcyForm.FormKeyDown(Sender: TObject; var Key: Word;
@@ -46,6 +65,13 @@ procedure TDostawcyForm.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = VK_ESCAPE then
     Close;
+end;
+
+procedure TDostawcyForm.FormShow(Sender: TObject);
+begin
+  ShowMessageOnce('WelcomeMessage',
+  'Aby edytowaæ szczegó³y produktu, kliknij dwukrotnie na wybrany wiersz w tabeli.'
+  );
 end;
 
 end.

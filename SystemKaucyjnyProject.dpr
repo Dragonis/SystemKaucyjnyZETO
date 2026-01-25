@@ -12,7 +12,9 @@ uses
   NIP in 'NIP.pas' {NIPForm},
   Towary in 'Towary.pas' {TowaryForm},
   CompanyInfo in 'CompanyInfo.pas',
-  Dostawcy in 'Dostawcy.pas' {DostawcyForm};
+  Dostawcy in 'Dostawcy.pas' {DostawcyForm},
+  uShowMessageOnce in 'uShowMessageOnce.pas',
+  SzczegolyDostawcy in 'SzczegolyDostawcy.pas' {SzczegolyDostawcyForm};
 
 {$R *.res}
 
@@ -28,5 +30,6 @@ begin
   Application.CreateForm(TNIPForm, NIPForm);
   Application.CreateForm(TTowaryForm, TowaryForm);
   Application.CreateForm(TDostawcyForm, DostawcyForm);
+  Application.CreateForm(TSzczegolyDostawcyForm, SzczegolyDostawcyForm);
   Application.Run;
 end.

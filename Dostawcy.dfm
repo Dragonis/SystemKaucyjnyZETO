@@ -13,6 +13,7 @@ object DostawcyForm: TDostawcyForm
   OldCreateOrder = False
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object DBGrid1: TDBGrid
@@ -21,13 +22,14 @@ object DostawcyForm: TDostawcyForm
     Width = 409
     Height = 120
     DataSource = DataSource1
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnDblClick = DBGrid1DblClick
   end
   object FDConnection1: TFDConnection
     Params.Strings = (

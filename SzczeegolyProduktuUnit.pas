@@ -1,11 +1,11 @@
-﻿unit SzczeegolyProduktuUnit;
+unit SzczeegolyProduktuUnit;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ComCtrls, OpakowanieZwrotneTowaru;
+  Vcl.ComCtrls, OpakowanieZwrotneTowaru, FrakcjeDRS, ZapisanieTowaru;
 
 type
   TProduktForm = class(TForm)
@@ -41,16 +41,13 @@ type
     procedure ButtonOpakZwrotneClick(Sender: TObject);
   public
     procedure UstawDane(AId: Integer; ANazwa: string; AIlosc: Integer);
+
   end;
 
 var
   ProduktForm: TProduktForm;
 
 implementation
-
-uses
-  FrakcjeDRS,
-  ZapisanieTowaru;
 
 {$R *.dfm}
 
@@ -93,6 +90,7 @@ begin
   end;
 end;
 
+
 procedure TProduktForm.Button1Click(Sender: TObject);
 begin
 FrakcjeDRSForm.Show;
@@ -100,7 +98,7 @@ end;
 
 procedure TProduktForm.ComboBox1Change(Sender: TObject);
 begin
-  // wszystko ukryte
+  // Hide all tabs initially
   tsCena_sprzedazy.TabVisible := False;
   tsOpisdodatkowy.TabVisible := False;
   tsDRS_Kaucja.TabVisible := False;
@@ -109,20 +107,85 @@ begin
   PageControl1.Visible := True;
 
   case ComboBox1.ItemIndex of
-    0: // Towar zwyk�y
-      begin
-        tsCena_sprzedazy.TabVisible := True;
-        tsOpisdodatkowy.TabVisible := True;
-        PageControl1.ActivePage := tsCena_sprzedazy;
-      end;
+    0: // towar - zwykły
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
 
-    1: // Towar DRS
-      begin
-        tsCena_sprzedazy.TabVisible := True;
-        tsDRS_Kaucja.TabVisible := True;
-        tsDRS_Rozliczenie.TabVisible := True;
-        PageControl1.ActivePage := tsCena_sprzedazy;
-      end;
+    1: // kaucja DRS
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsDRS_Kaucja.TabVisible := True;
+      tsDRS_Rozliczenie.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    3: // towar - karton
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    4: // towar - winieta
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    5: // towar - zestaw
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    6: // towar - receptura
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    7: // opak. zwrotne
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    8: // usługa
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    9: // PrePaid
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    10: // op. jednorazowe
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+
+    11: // opłata za op. jedn.
+    begin
+      tsCena_sprzedazy.TabVisible := True;
+      tsOpisdodatkowy.TabVisible := True;
+      PageControl1.ActivePage := tsCena_sprzedazy;
+    end;
+  else
+    PageControl1.Visible := False;
   end;
 end;
 
@@ -147,4 +210,3 @@ begin
 end;
 
 end.
-
