@@ -14,7 +14,8 @@ uses
   CompanyInfo in 'CompanyInfo.pas',
   Dostawcy in 'Dostawcy.pas' {DostawcyForm},
   uShowMessageOnce in 'uShowMessageOnce.pas',
-  SzczegolyDostawcy in 'SzczegolyDostawcy.pas' {SzczegolyDostawcyForm};
+  SzczegolyDostawcy in 'SzczegolyDostawcy.pas' {SzczegolyDostawcyForm},
+  KodTowaru in 'KodTowaru.pas' {KodTowaruForm};
 
 {$R *.res}
 
@@ -31,5 +32,6 @@ begin
   Application.CreateForm(TTowaryForm, TowaryForm);
   Application.CreateForm(TDostawcyForm, DostawcyForm);
   Application.CreateForm(TSzczegolyDostawcyForm, SzczegolyDostawcyForm);
+  Application.CreateForm(TKodTowaruForm, KodTowaruForm);
   Application.Run;
 end.

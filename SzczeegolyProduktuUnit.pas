@@ -1,4 +1,4 @@
-unit SzczeegolyProduktuUnit;
+﻿unit SzczeegolyProduktuUnit;
 
 interface
 
@@ -32,6 +32,9 @@ type
     Label7: TLabel;
     EditOpakZwrotne: TEdit;
     ButtonOpakZwrotne: TButton;
+    Label9: TLabel;
+    Label8: TLabel;
+    Label10: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

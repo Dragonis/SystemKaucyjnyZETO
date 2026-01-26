@@ -1,0 +1,40 @@
+unit KodTowaru;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Towary;
+
+type
+  TKodTowaruForm = class(TForm)
+    Label1: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  KodTowaruForm: TKodTowaruForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TKodTowaruForm.Button1Click(Sender: TObject);
+begin
+Towary.TTowaryForm.Show;
+end;
+
+procedure TKodTowaruForm.Button2Click(Sender: TObject);
+begin
+Close;
+end;
+
+end.

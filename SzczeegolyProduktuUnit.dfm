@@ -3,7 +3,7 @@ object ProduktForm: TProduktForm
   Top = 0
   Caption = 'Produkt'
   ClientHeight = 325
-  ClientWidth = 640
+  ClientWidth = 892
   Color = clBtnFace
   Font.Charset = EASTEUROPE_CHARSET
   Font.Color = clWindowText
@@ -50,6 +50,41 @@ object ProduktForm: TProduktForm
     Width = 57
     Height = 13
     Caption = 'Stawka VAT'
+  end
+  object Label9: TLabel
+    Left = 228
+    Top = 186
+    Width = 147
+    Height = 13
+    Caption = 'Typ towar'#243'w -> Towar zwyk'#322'y'
+  end
+  object Label8: TLabel
+    Left = 34
+    Top = 240
+    Width = 258
+    Height = 21
+    Caption = 'Dla cel'#243'w prezentacyjnch wybeirz:'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clRed
+    Font.Height = -17
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label10: TLabel
+    Left = 34
+    Top = 267
+    Width = 841
+    Height = 21
+    Caption = 
+      'Typ towaru -> towar zwyk'#322'y. ni'#380'ej Opis dodatkowy -> Naci'#347'nij w p' +
+      'rzycisk z ... -> Wybierz element z listy i Zapisz'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clRed
+    Font.Height = -17
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
   end
   object EditId: TEdit
     Left = 30
@@ -108,14 +143,11 @@ object ProduktForm: TProduktForm
     TabOrder = 4
     object tsCena_sprzedazy: TTabSheet
       Caption = 'Cena sprzedazy'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
     object tsOpisdodatkowy: TTabSheet
       Caption = 'Opis dodatkowy'
       ImageIndex = 1
+      ExplicitTop = 28
       object Label7: TLabel
         Left = 18
         Top = 16
@@ -143,10 +175,6 @@ object ProduktForm: TProduktForm
     object tsDRS_Kaucja: TTabSheet
       Caption = 'DRS Kaucja'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label3: TLabel
         Left = 16
         Top = 24
@@ -182,10 +210,6 @@ object ProduktForm: TProduktForm
     object tsDRS_Rozliczenie: TTabSheet
       Caption = 'DRS Rozliczenie'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object ComboBox2: TComboBox

@@ -2,7 +2,7 @@ object SzczegolyDostawcyForm: TSzczegolyDostawcyForm
   Left = 0
   Top = 0
   Caption = 'Szczeg'#243#322'y dostawcy'
-  ClientHeight = 201
+  ClientHeight = 277
   ClientWidth = 447
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,7 @@ object SzczegolyDostawcyForm: TSzczegolyDostawcyForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
@@ -47,7 +48,7 @@ object SzczegolyDostawcyForm: TSzczegolyDostawcyForm
     Top = 80
     Width = 126
     Height = 13
-    Caption = 'Wprowad'#380' numre faktury:'
+    Caption = 'Wprowad'#380' numer faktury:'
   end
   object NrFakturyEdit: TEdit
     Left = 160
@@ -55,5 +56,37 @@ object SzczegolyDostawcyForm: TSzczegolyDostawcyForm
     Width = 121
     Height = 21
     TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    Left = 24
+    Top = 118
+    Width = 320
+    Height = 120
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnDblClick = DBGrid1DblClick
+  end
+  object ZapiszButton: TButton
+    Left = 24
+    Top = 244
+    Width = 75
+    Height = 25
+    Caption = 'Zapisz'
+    TabOrder = 2
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 368
+    Top = 128
+  end
+  object DataSource1: TDataSource
+    Left = 368
+    Top = 184
   end
 end
