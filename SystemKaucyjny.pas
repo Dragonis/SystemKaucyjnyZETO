@@ -67,6 +67,7 @@ type
     Label9: TLabel;
     MarzaProcentLabelValue: TLabel;
     DostawaButton: TButton;
+    FakturaButton: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
@@ -77,6 +78,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure TowaryButtonClick(Sender: TObject);
     procedure DostawaButtonClick(Sender: TObject);
+    procedure FakturaButtonClick(Sender: TObject);
   private
     DSLosoweProdukty: TDataSource;
     CDSSumaParagonu: TClientDataSet;
@@ -97,6 +99,12 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TSystemKaucyjnyForm.FakturaButtonClick(Sender: TObject);
+begin
+   NIPForm.NameNextFormToOpen := 'DostawcyForm';
+   NIPForm.Show;
+end;
 
 procedure TSystemKaucyjnyForm.FormCreate(Sender: TObject);
 var

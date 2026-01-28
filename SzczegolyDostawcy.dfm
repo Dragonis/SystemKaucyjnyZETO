@@ -78,6 +78,7 @@ object SzczegolyDostawcyForm: TSzczegolyDostawcyForm
     Height = 25
     Caption = 'Zapisz'
     TabOrder = 2
+    OnClick = ZapiszButtonClick
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
@@ -88,5 +89,20 @@ object SzczegolyDostawcyForm: TSzczegolyDostawcyForm
   object DataSource1: TDataSource
     Left = 368
     Top = 184
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Users\wojte\Desktop\System kaucyjny\database\faktury' +
+        '.db'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 112
+    Top = 232
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 176
+    Top = 232
   end
 end

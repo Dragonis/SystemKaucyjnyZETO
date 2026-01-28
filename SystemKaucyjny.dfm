@@ -232,6 +232,15 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TabOrder = 10
     OnClick = DostawaButtonClick
   end
+  object FakturaButton: TButton
+    Left = 279
+    Top = 8
+    Width = 73
+    Height = 61
+    Caption = 'Faktura'
+    TabOrder = 11
+    OnClick = FakturaButtonClick
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       
