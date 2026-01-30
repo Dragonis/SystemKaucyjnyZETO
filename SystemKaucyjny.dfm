@@ -11,6 +11,7 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
+  Menu = MainMenu1
   OldCreateOrder = False
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
@@ -460,5 +461,509 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Params = <>
     Left = 624
     Top = 119
+  end
+  object MainMenu1: TMainMenu
+    Left = 400
+    object Dostawcy1: TMenuItem
+      Caption = 'Dostawcy'
+      object Sporzdzaniedokumentw1: TMenuItem
+        Caption = 'Sporz'#261'dzanie dokument'#243'w'
+        object Dostawafakturowana1: TMenuItem
+          Caption = 'Dostawa fakturowana'
+        end
+        object DokumentPZ1: TMenuItem
+          Caption = 'Dokument PZ'
+        end
+        object DokumentMP1: TMenuItem
+          Caption = 'Dokument MP'
+        end
+        object Fakturadostawcy1: TMenuItem
+          Caption = 'Faktura dostawcy'
+        end
+        object Zwrot1: TMenuItem
+          Caption = 'Zwrot'
+        end
+        object Rozbienozdostawy1: TMenuItem
+          Caption = 'Rozbie'#380'no'#347#263' z dostawy'
+        end
+        object Wymianatowaruudostawc1: TMenuItem
+          Caption = 'Wymiana towaru u dostawcy'
+          object Wydanieetowaru1: TMenuItem
+            Caption = 'Wydaniee towaru'
+          end
+          object PrzyjcietowaruMP1: TMenuItem
+            Caption = 'Przyj'#281'cie towaru (MP)'
+          end
+        end
+        object Obrtopakowaniami1: TMenuItem
+          Caption = 'Obr'#243't opakowaniami'
+        end
+        object Fakturakorygujcadostawcy1: TMenuItem
+          Caption = 'Faktura koryguj'#261'ca dostawcy'
+        end
+        object Dostawaprasy1: TMenuItem
+          Caption = 'Dostawa prasy'
+        end
+        object Rozliczenieprasy091: TMenuItem
+          Caption = 'Rozliczenie prasy09'
+        end
+        object Kontraktzdostawc1: TMenuItem
+          Caption = 'Kontrakt z dostawc'#261
+        end
+        object Cennikdostawcy1: TMenuItem
+          Caption = 'Cennik dostawcy'
+        end
+        object Cennikproducenta1: TMenuItem
+          Caption = 'Cennik producenta'
+        end
+        object Minimumzakupowe1: TMenuItem
+          Caption = 'Minimum zakupowe'
+        end
+        object Wykluczenietowarw1: TMenuItem
+          Caption = 'Wykluczenie towar'#243'w'
+        end
+        object ImportzMobilnegoMagazyniera1: TMenuItem
+          Caption = 'Import z Mobilnego Magazyniera'
+          object okumentPZ1: TMenuItem
+            Caption = 'Dokument PZ'
+          end
+          object Zwrot2: TMenuItem
+            Caption = 'Zwrot'
+          end
+        end
+      end
+      object Nowydostawca1: TMenuItem
+        Caption = 'Nowy dostawca'
+      end
+      object Wykazdostawcw1: TMenuItem
+        Caption = 'Wykaz dostawc'#243'w'
+      end
+      object Grupowezmianynakontrahentach1: TMenuItem
+        Caption = 'Grupowe zmiany na kontrahentach'
+      end
+      object Przegldaniedokumentw1: TMenuItem
+        Caption = 'Przegl'#261'danie dokument'#243'w'
+        object Fakturydostawcw1: TMenuItem
+          Caption = 'Faktury dostawc'#243'w'
+        end
+        object DokumentyPZ1: TMenuItem
+          Caption = 'Dokumenty PZ'
+        end
+        object DokumentyMP1: TMenuItem
+          Caption = 'Dokumenty MP'
+        end
+        object Fakturykorygujcedostawcw1: TMenuItem
+          Caption = 'Faktury koryguj'#261'ce dostawc'#243'w'
+        end
+        object Zwroty1: TMenuItem
+          Caption = 'Zwroty'
+        end
+        object Rozbienocizdostaw1: TMenuItem
+          Caption = 'Rozbie'#380'no'#347'ci z dostaw'
+        end
+        object Dokumentywymianytowaru1: TMenuItem
+          Caption = 'Dokumenty wymiany towaru'
+        end
+        object Obrtopakowaniami2: TMenuItem
+          Caption = 'Obr'#243't opakowaniami'
+        end
+        object Fakturywewntrzne1: TMenuItem
+          Caption = 'Faktury wewn'#281'trzne'
+        end
+        object Fakturywewntrznekorygujce1: TMenuItem
+          Caption = 'Faktury wewn'#281'trzne koryguj'#261'ce'
+        end
+        object Fakturyimportowe1: TMenuItem
+          Caption = 'Faktury importowe'
+        end
+        object Fakturyimportowekorygujce1: TMenuItem
+          Caption = 'Faktury importowe koryguj'#261'ce'
+        end
+        object Dostawyprasy1: TMenuItem
+          Caption = 'Dostawy prasy'
+        end
+        object Rozliczeniaprasy1: TMenuItem
+          Caption = 'Rozliczenia prasy'
+        end
+        object Kontraktyzdostawcami1: TMenuItem
+          Caption = 'Kontrakty z dostawcami'
+        end
+        object Cennikidostawcw1: TMenuItem
+          Caption = 'Cenniki dostawc'#243'w'
+        end
+        object Cennikproducenta2: TMenuItem
+          Caption = 'Cennik producenta'
+        end
+        object Minimumzakupowe2: TMenuItem
+          Caption = 'Minimum zakupowe'
+        end
+        object Wykluczenietowarw2: TMenuItem
+          Caption = 'Wykluczenie towar'#243'w'
+        end
+      end
+      object Zamwieniadodostawcw1: TMenuItem
+        Caption = 'Zam'#243'wienia do dostawc'#243'w'
+        object Nowezamwienie1: TMenuItem
+          Caption = 'Nowe zam'#243'wienie'
+        end
+        object Propozycjazamwienia1: TMenuItem
+          Caption = 'Propozycja zam'#243'wienia'
+        end
+        object Generowaniezamowiedowieludostawcow1: TMenuItem
+          Caption = 'Generowanie zamowie'#324' do wielu dostawcow'
+        end
+        object Przegldaniezamwie1: TMenuItem
+          Caption = 'Przegl'#261'danie zam'#243'wie'#324
+        end
+        object Przegldanieautomatycznychpropozycji1: TMenuItem
+          Caption = 'Przegl'#261'danie automatycznych propozycji'
+        end
+      end
+    end
+    object Obiorcy1: TMenuItem
+      Caption = 'Odbiorcy'
+      object Sporzdzaniedokumentw2: TMenuItem
+        Caption = 'Sporz'#261'dzanie dokument'#243'w'
+        object Sprzedafakturowana1: TMenuItem
+          Caption = 'Sprzeda'#380' fakturowana'
+        end
+        object Wydaniezewntrzne1: TMenuItem
+          Caption = 'Wydanie zewn'#281'trzne'
+        end
+        object DokumentMW1: TMenuItem
+          Caption = 'Dokument MW'
+        end
+        object Faktkorygodbiorcw1: TMenuItem
+          Caption = 'Fakt. koryg. odbiorc'#243'w'
+        end
+        object Rozbienozwydania1: TMenuItem
+          Caption = 'Rozbie'#380'no'#347#263' z wydania'
+        end
+        object Zwrot3: TMenuItem
+          Caption = 'Zwrot'
+        end
+        object Zwrotdoparagonu1: TMenuItem
+          Caption = 'Zwrot do paragonu'
+        end
+        object Fakturadoparagonu1: TMenuItem
+          Caption = 'Faktura do paragonu'
+        end
+        object Faktkorygdoparagonu1: TMenuItem
+          Caption = 'Fakt. koryg. do paragonu'
+        end
+        object Obrtopakowaniami3: TMenuItem
+          Caption = 'Obr'#243't opakowaniami'
+        end
+        object Fakturaproforma1: TMenuItem
+          Caption = 'Faktura pro forma'
+        end
+        object Kartaprzewozu1: TMenuItem
+          Caption = 'Karta przewozu'
+        end
+        object Reklamacja1: TMenuItem
+          Caption = 'Reklamacja'
+        end
+        object ImportzMobilnegoMagazyniera2: TMenuItem
+          Caption = 'Import z Mobilnego Magazyniera'
+        end
+      end
+      object Nowyodbiorca1: TMenuItem
+        Caption = 'Nowy odbiorca'
+      end
+      object Wykazodbiorcw1: TMenuItem
+        Caption = 'Wykaz odbiorc'#243'w'
+      end
+      object Grupowezmianynakontrahentach2: TMenuItem
+        Caption = 'Grupowe zmiany na kontrahentach'
+      end
+      object Przegldaniedokumentw2: TMenuItem
+        Caption = 'Przegl'#261'danie dokument'#243'w'
+        object Fakturywasne1: TMenuItem
+          Caption = 'Faktury w'#322'asne'
+        end
+        object DokumentyWZ1: TMenuItem
+          Caption = 'Dokumenty WZ'
+        end
+        object DokumentyMW1: TMenuItem
+          Caption = 'Dokumenty MW'
+        end
+        object Fakturykorygujce1: TMenuItem
+          Caption = 'Faktury koryguj'#261'ce'
+        end
+        object Rozbienocizwydania1: TMenuItem
+          Caption = 'Rozbie'#380'no'#347'ci z wydania'
+        end
+        object Zwroty2: TMenuItem
+          Caption = 'Zwroty'
+        end
+        object Zwrotydoparagonu1: TMenuItem
+          Caption = 'Zwroty do paragonu'
+        end
+        object Fakturydoparagonw1: TMenuItem
+          Caption = 'Faktury do paragon'#243'w'
+        end
+        object Faktkorygdoparagonw1: TMenuItem
+          Caption = 'Fakt. koryg. do paragon'#243'w'
+        end
+        object Obrotyopakowaniami1: TMenuItem
+          Caption = 'Obroty opakowaniami'
+        end
+        object Fakturyproforma1: TMenuItem
+          Caption = 'Faktury pro forma'
+        end
+        object Kartyprzewozu1: TMenuItem
+          Caption = 'Karty przewozu'
+        end
+        object Reklamacie1: TMenuItem
+          Caption = 'Reklamacie'
+        end
+      end
+      object KrajowySystemeFaktur1: TMenuItem
+        Caption = 'Krajowy System e-Faktur'
+      end
+      object Zamowieniaododbiorcow1: TMenuItem
+        Caption = 'Zamowienia od odbiorcow'
+        object Nowezamwienie2: TMenuItem
+          Caption = 'Nowe zam'#243'wienie'
+        end
+        object Komasacjazamwie1: TMenuItem
+          Caption = 'Komasacja zam'#243'wie'#324
+        end
+        object Przegldaniezamwie2: TMenuItem
+          Caption = 'Przegl'#261'danie zam'#243'wie'#324
+        end
+        object Przegldanieautomatycznychpotwierdze1: TMenuItem
+          Caption = 'Przegl'#261'danie automatycznych potwierdze'#324
+        end
+        object Nowakalkulacjazamwienia1: TMenuItem
+          Caption = 'Nowa kalkulacja zam'#243'wienia'
+        end
+        object Przegldaniekalkulacjizamwie1: TMenuItem
+          Caption = 'Przegl'#261'danie kalkulacji zam'#243'wie'#324
+        end
+        object Realizacjawieluzamwie1: TMenuItem
+          Caption = 'Realizacja wielu zam'#243'wie'#324
+        end
+        object czeniewieluzamwieodbiorcwkontrahenta1: TMenuItem
+          Caption = #321#261'czenie wielu zam'#243'wie'#324' odbiorc'#243'w kontrahenta'
+        end
+      end
+      object Sprzedadetaliczna1: TMenuItem
+        Caption = 'Sprzeda'#380' detaliczna'
+        object Nowyparagon1: TMenuItem
+          Caption = 'Nowy paragon'
+        end
+        object Zwrotdoparagonu2: TMenuItem
+          Caption = 'Zwrot do paragonu'
+        end
+        object Sprzedawiniet1: TMenuItem
+          Caption = 'Sprzeda'#380' winiet'
+        end
+        object Zwrotwiniet1: TMenuItem
+          Caption = 'Zwrot winiet'
+        end
+        object Wpatanakas1: TMenuItem
+          Caption = 'Wp'#322'ata na kas'#281
+        end
+        object Wypatazkasy1: TMenuItem
+          Caption = 'Wyp'#322'ata z kasy'
+        end
+        object Otwarciezmianykasjera1: TMenuItem
+          Caption = 'Otwarcie zmiany kasjera'
+        end
+        object Zamkniciezmianykasjera1: TMenuItem
+          Caption = 'Zamkni'#281'cie zmiany kasjera'
+        end
+        object Nowystayklient1: TMenuItem
+          Caption = 'Nowy sta'#322'y klient'
+        end
+        object Listastaychklientw1: TMenuItem
+          Caption = 'Lista sta'#322'ych klient'#243'w'
+        end
+        object Parametrystaychklientw1: TMenuItem
+          Caption = 'Parametry sta'#322'ych klient'#243'w'
+        end
+        object Przegldanietransakcji1: TMenuItem
+          Caption = 'Przegl'#261'danie transakcji'
+        end
+        object Raportydrukarki1: TMenuItem
+          Caption = 'Raporty drukarki'
+        end
+        object Konfiguracja1: TMenuItem
+          Caption = 'Konfiguracja'
+        end
+      end
+    end
+    object Rozliczenia1: TMenuItem
+      Caption = 'Rozliczenia'
+      object Nalenociododbiorcw1: TMenuItem
+        Caption = 'Nale'#380'no'#347'ci od odbiorc'#243'w'
+      end
+      object Zobowizaniawobecdostawcw1: TMenuItem
+        Caption = 'Zobowi'#261'zania wobec dostawc'#243'w'
+      end
+      object Sporzdzaniedokumentw3: TMenuItem
+        Caption = 'Sporz'#261'dzanie dokument'#243'w'
+        object WpataodkontrahentanpKP1: TMenuItem
+          Caption = 'Wp'#322'ata od kontrahenta (np. KP)'
+        end
+        object WypatadlakontrahentanpKW1: TMenuItem
+          Caption = 'Wyp'#322'ata dla kontrahenta (np. KW)'
+        end
+        object Notaksigowaobcieniowa1: TMenuItem
+          Caption = 'Nota ksi'#281'gowa obci'#261#380'eniowa'
+        end
+        object Notaksigowauznaniowa1: TMenuItem
+          Caption = 'Nota ksi'#281'gowa uznaniowa'
+        end
+        object Nalenokontrahentaobcienie1: TMenuItem
+          Caption = 'Nale'#380'no'#347#263' kontrahenta (obci'#261#380'enie)'
+        end
+        object Nalenowobeckontrahentauznanie1: TMenuItem
+          Caption = 'Nale'#380'no'#347#263' wobec kontrahenta (uznanie)'
+        end
+        object Rozliczeniewpaconychzaliczek1: TMenuItem
+          Caption = 'Rozliczenie wp'#322'aconych zaliczek'
+        end
+        object Rozliczeniewypaconychzaliczek1: TMenuItem
+          Caption = 'Rozliczenie wyp'#322'aconych zaliczek'
+        end
+      end
+      object Przegldaniedokumentw3: TMenuItem
+        Caption = 'Przegl'#261'danie dokument'#243'w'
+        object Wpatyodkontrahentw1: TMenuItem
+          Caption = 'Wp'#322'aty od kontrahent'#243'w'
+        end
+        object Wypatydlakontrahentw1: TMenuItem
+          Caption = 'Wyp'#322'aty dla kontrahent'#243'w'
+        end
+        object Notyksigowe1: TMenuItem
+          Caption = 'Noty ksi'#281'gowe'
+        end
+        object Nalenoci1: TMenuItem
+          Caption = 'Nale'#380'no'#347'ci'
+        end
+      end
+      object Rozliczaniekasjerw1: TMenuItem
+        Caption = 'Rozliczanie kasjer'#243'w'
+        object Otwarciezmianykasjera2: TMenuItem
+          Caption = 'Otwarcie zmiany kasjera'
+        end
+        object Zamkniciezmianykasjera2: TMenuItem
+          Caption = 'Zamkni'#281'cie zmiany kasjera'
+        end
+        object Odbirczciowy1: TMenuItem
+          Caption = 'Odbi'#243'r cz'#281#347'ciowy'
+        end
+        object Przegldanierozliczezmiankasjerw1: TMenuItem
+          Caption = 'Przegl'#261'danie rozlicze'#324' zmian kasjer'#243'w'
+        end
+        object Przegldaniedokumentwodbioruczciowego1: TMenuItem
+          Caption = 'Przegl'#261'danie dokument'#243'w odbioru cz'#281#347'ciowego'
+        end
+      end
+    end
+    object owary1: TMenuItem
+      Caption = 'Towary'
+      object Sporzdzaniedokumentw4: TMenuItem
+        Caption = 'Sporz'#261'dzanie dokument'#243'w'
+        object Przyjciewewntrzne1: TMenuItem
+          Caption = 'Przyj'#281'cie wewn'#281'trzne'
+        end
+        object Rozchdwewntrzny1: TMenuItem
+          Caption = 'Rozch'#243'd wewn'#281'trzny'
+        end
+        object PrzesunicieMM1: TMenuItem
+          Caption = 'Przesuni'#281'cie MM'
+        end
+        object Remanent1: TMenuItem
+          Caption = 'Remanent'
+        end
+        object Przecena1: TMenuItem
+          Caption = 'Przecena'
+        end
+        object Dokumentstraty1: TMenuItem
+          Caption = 'Dokument straty'
+        end
+        object Dokumentreceptury1: TMenuItem
+          Caption = 'Dokument receptury'
+        end
+        object PrzesunicieztowarunatowarPrzecena1: TMenuItem
+          Caption = 'Przesuni'#281'cie z towaru na towar. Przecena'
+        end
+        object PrzesunicieztowarunatowarGratisy1: TMenuItem
+          Caption = 'Przesuni'#281'cie z towaru na towar. Gratisy'
+        end
+        object Grupoweodmraaniedokumentwzamroonychprzecen1: TMenuItem
+          Caption = 'Grupowe odmra'#380'anie dokument'#243'w zamro'#380'onych przecen'
+        end
+        object PlanowanazmianastawekVAT1: TMenuItem
+          Caption = 'Planowana zmiana stawek VAT'
+        end
+        object ImportzMobilnegoMagazyniera3: TMenuItem
+          Caption = 'Import z Mobilnego Magazyniera'
+        end
+        object Generowanierecepturzwybranychwzorcw1: TMenuItem
+          Caption = 'Generowanie receptur z wybranych wzorc'#243'w'
+        end
+        object Generowaniezbiorczychrecepturwgdziennejsprzeday1: TMenuItem
+          Caption = 'Generowanie zbiorczych receptur wg dziennej sprzeda'#380'y'
+        end
+      end
+      object Nowytowar1: TMenuItem
+        Caption = 'Nowy towar'
+      end
+      object Wykaztowarw1: TMenuItem
+        Caption = 'Wykaz towar'#243'w'
+      end
+      object Grupoweoperacjenatowarach1: TMenuItem
+        Caption = 'Grupowe operacje na towarach'
+      end
+      object Asortymenty1: TMenuItem
+        Caption = 'Asortymenty'
+      end
+      object Grupoweoperacjenaasortymentach1: TMenuItem
+        Caption = 'Grupowe operacje na asortymentach'
+      end
+      object Kategorieiparametry1: TMenuItem
+        Caption = 'Kategorie i parametry'
+      end
+      object Grupytowarowefiltry1: TMenuItem
+        Caption = 'Grupy towarowe (filtry)'
+      end
+      object Wzorce1: TMenuItem
+        Caption = 'Wzorce'
+      end
+      object Przegldaniedokumentw4: TMenuItem
+        Caption = 'Przegl'#261'danie dokument'#243'w'
+      end
+      object HarmonogramZmianCen1: TMenuItem
+        Caption = 'Harmonogram Zmian Cen'
+      end
+      object CykliczneodnawianiewpiswHZC1: TMenuItem
+        Caption = 'Cykliczne odnawianie wpis'#243'w HZC'
+      end
+      object Wydrukgczekujcychetykiet1: TMenuItem
+        Caption = 'Wydruk gczekuj'#261'cych etykiet'
+      end
+      object Automatyczneetykietyktreasortymenty1: TMenuItem
+        Caption = 'Automatyczne etykiety - kt'#243're asortymenty'
+      end
+      object Parametryetykietopakowaniajednorazowe1: TMenuItem
+        Caption = 'Parametry etykiet - opakowania jednorazowe'
+      end
+      object Eksportdoinwentaryzatora1: TMenuItem
+        Caption = 'Eksport do inwentaryzatora'
+      end
+      object Wirtualnykolektor1: TMenuItem
+        Caption = 'Wirtualny kolektor'
+      end
+      object Zdalnezarzdzaniecenami1: TMenuItem
+        Caption = 'Zdalne zarz'#261'dzanie cenami'
+      end
+      object Podgldkasjerw1: TMenuItem
+        Caption = 'Podgl'#261'd kasjer'#243'w'
+      end
+    end
   end
 end
