@@ -18,37 +18,37 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 116
-    Top = 79
+    Left = 511
+    Top = 505
     Width = 74
     Height = 13
     Caption = 'Stan magazynu'
   end
   object Label2: TLabel
-    Left = 607
-    Top = 238
+    Left = 172
+    Top = 508
     Width = 51
     Height = 13
     Caption = 'Sprzedano'
   end
   object Paragon: TLabel
-    Left = 124
-    Top = 235
+    Left = 172
+    Top = 349
     Width = 40
     Height = 13
     Caption = 'Paragon'
   end
   object Label3: TLabel
-    Left = 696
-    Top = 79
+    Left = 600
+    Top = 346
     Width = 71
     Height = 13
     Caption = 'Do zam'#243'wienia'
   end
   object DBGrid1: TDBGrid
-    Left = 116
-    Top = 98
-    Width = 485
+    Left = 511
+    Top = 524
+    Width = 320
     Height = 134
     DataSource = DataSource1
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -61,26 +61,26 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnDblClick = DBGrid1DblClick
   end
   object ButtonFrakcjeDRS: TButton
-    Left = 8
-    Top = 151
-    Width = 102
+    Left = 32
+    Top = 415
+    Width = 108
     Height = 25
     Caption = 'Ustaw Frakcje DRS'
     TabOrder = 1
     OnClick = ButtonFrakcjeDRSClick
   end
   object Button1: TButton
-    Left = 8
-    Top = 182
-    Width = 102
+    Left = 32
+    Top = 446
+    Width = 108
     Height = 25
     Caption = 'Ustawienia Programu'
     TabOrder = 2
     OnClick = Button1Click
   end
   object ButtonRaport: TButton
-    Left = 8
-    Top = 120
+    Left = 32
+    Top = 384
     Width = 102
     Height = 25
     Caption = 'Drukuj raport'
@@ -88,24 +88,36 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     OnClick = ButtonRaportClick
   end
   object Memo1: TMemo
-    Left = 116
-    Top = 254
-    Width = 485
+    Left = 172
+    Top = 365
+    Width = 320
     Height = 126
     TabOrder = 4
   end
   object Button2: TButton
     Left = 8
     Top = 8
-    Width = 102
+    Width = 156
     Height = 61
-    Caption = 'Losuj Produkty'
+    Caption = 'Generuj zakupy'
+    DisabledImageIndex = 0
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    HotImageIndex = 0
+    ImageIndex = 0
+    ParentFont = False
+    PressedImageIndex = 0
+    SelectedImageIndex = 0
+    StylusHotImageIndex = 0
     TabOrder = 5
     OnClick = Button2Click
   end
   object DBGrid2: TDBGrid
-    Left = 607
-    Top = 254
+    Left = 172
+    Top = 524
     Width = 320
     Height = 126
     TabOrder = 6
@@ -116,10 +128,10 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TitleFont.Style = []
   end
   object DBGrid3: TDBGrid
-    Left = 607
-    Top = 98
+    Left = 511
+    Top = 365
     Width = 320
-    Height = 134
+    Height = 126
     DataSource = DSCDSSumaWszystkichParagonow
     TabOrder = 7
     TitleFont.Charset = EASTEUROPE_CHARSET
@@ -129,8 +141,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     TitleFont.Style = []
   end
   object Chart1: TChart
-    Left = 109
-    Top = 399
+    Left = 150
+    Top = 75
     Width = 761
     Height = 243
     Legend.Visible = False
@@ -157,35 +169,38 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     end
   end
   object TowaryButton: TButton
-    Left = 116
+    Left = 172
     Top = 8
     Width = 74
     Height = 61
     Caption = 'Towary'
+    ImageIndex = 1
     TabOrder = 9
     OnClick = TowaryButtonClick
   end
   object DostawaButton: TButton
-    Left = 196
+    Left = 252
     Top = 8
     Width = 77
     Height = 61
     Caption = 'Dostawa'
+    ImageIndex = 2
     TabOrder = 10
     OnClick = DostawaButtonClick
   end
   object FakturaButton: TButton
-    Left = 279
+    Left = 335
     Top = 8
     Width = 73
     Height = 61
     Caption = 'Faktura'
+    ImageIndex = 3
     TabOrder = 11
     OnClick = FakturaButtonClick
   end
   object Panel1: TPanel
-    Left = 8
-    Top = 378
+    Left = 18
+    Top = 74
     Width = 130
     Height = 246
     AutoSize = True
@@ -330,18 +345,18 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
         'y.db'
       'DriverID=SQLite')
     LoginPrompt = False
-    Left = 152
-    Top = 103
+    Left = 547
+    Top = 522
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
-    Left = 208
-    Top = 103
+    Left = 603
+    Top = 522
   end
   object DataSource1: TDataSource
     DataSet = FDQuery2
-    Left = 336
-    Top = 103
+    Left = 226
+    Top = 392
   end
   object frxReport2: TfrxReport
     Version = '5.1.5'
@@ -356,8 +371,8 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin end.')
-    Left = 72
-    Top = 88
+    Left = 96
+    Top = 352
     Datasets = <
       item
         DataSet = frxDBItems
@@ -504,47 +519,48 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     CloseDataSource = False
     DataSource = DataSource1
     BCDToCurrency = False
-    Left = 40
-    Top = 88
+    Left = 64
+    Top = 352
   end
   object FDScript1: TFDScript
     SQLScripts = <>
     Connection = FDConnection1
     Params = <>
     Macros = <>
-    Left = 264
-    Top = 103
+    Left = 659
+    Top = 522
   end
   object DSLosoweProdukty: TDataSource
     DataSet = FDQuery1
-    Left = 720
-    Top = 271
+    Left = 285
+    Top = 541
   end
   object CDSLosoweProdukty: TClientDataSet
     Aggregates = <>
     MasterSource = DSLosoweProdukty
     PacketRecords = 0
     Params = <>
-    Left = 656
-    Top = 271
+    Left = 221
+    Top = 541
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
-    Left = 616
-    Top = 271
+    Left = 181
+    Top = 541
   end
   object DSCDSSumaWszystkichParagonow: TDataSource
-    Left = 792
-    Top = 119
+    Left = 696
+    Top = 373
   end
   object CDSSumaWszystkichParagonow: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 624
-    Top = 119
+    Left = 528
+    Top = 386
   end
   object MainMenu1: TMainMenu
-    Left = 400
+    Left = 432
+    Top = 16
     object Dostawcy1: TMenuItem
       Caption = 'Dostawcy'
       object Sporzdzaniedokumentw1: TMenuItem

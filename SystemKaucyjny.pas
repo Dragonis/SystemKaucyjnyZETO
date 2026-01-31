@@ -31,7 +31,8 @@ uses
   FrakcjeDRS, MidasLib, NIP,
   UstawieniaProgramu, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
   FireDAC.Comp.Script, VclTee.TeeGDIPlus, VCLTee.TeEngine, Vcl.ExtCtrls,
-  VCLTee.TeeProcs, VCLTee.Chart, VCLTee.Series, Vcl.Menus;
+  VCLTee.TeeProcs, VCLTee.Chart, VCLTee.Series, Vcl.Menus, System.ImageList,
+  Vcl.ImgList;
 
 type
   TSystemKaucyjnyForm = class(TForm)
