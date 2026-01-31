@@ -45,76 +45,6 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Height = 13
     Caption = 'Do zam'#243'wienia'
   end
-  object ParagonLabel: TLabel
-    Left = 16
-    Top = 400
-    Width = 44
-    Height = 13
-    Caption = 'Paragon:'
-  end
-  object ParagonLabelValue: TLabel
-    Left = 18
-    Top = 419
-    Width = 85
-    Height = 13
-    Caption = '[NumerParagonu]'
-  end
-  object Label5: TLabel
-    Left = 18
-    Top = 452
-    Width = 31
-    Height = 13
-    Caption = 'Netto:'
-  end
-  object NettoLabelValue: TLabel
-    Left = 15
-    Top = 471
-    Width = 35
-    Height = 13
-    Caption = '[Netto]'
-  end
-  object Label7: TLabel
-    Left = 16
-    Top = 504
-    Width = 34
-    Height = 13
-    Caption = 'Brutto:'
-  end
-  object BruttoLabelValue: TLabel
-    Left = 15
-    Top = 523
-    Width = 38
-    Height = 13
-    Caption = '[Brutto]'
-  end
-  object Label6: TLabel
-    Left = 15
-    Top = 552
-    Width = 73
-    Height = 13
-    Caption = 'Mar'#380'a narzutu:'
-  end
-  object MarzaNarzutuLabelValue: TLabel
-    Left = 15
-    Top = 571
-    Width = 75
-    Height = 13
-    Caption = '[MarzaNarzutu]'
-  end
-  object Label9: TLabel
-    Left = 16
-    Top = 600
-    Width = 43
-    Height = 13
-    Caption = 'Mar'#380'a %'
-  end
-  object MarzaProcentLabelValue: TLabel
-    Left = 16
-    Top = 619
-    Width = 74
-    Height = 13
-    Caption = '[MarzaProcent]'
-  end
   object DBGrid1: TDBGrid
     Left = 116
     Top = 98
@@ -204,8 +134,6 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Width = 761
     Height = 243
     Legend.Visible = False
-    Title.Text.Strings = (
-      'Sumy paragon'#243'w')
     TabOrder = 8
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
@@ -214,6 +142,19 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       15
       34)
     ColorPaletteIndex = 13
+    object Label4: TLabel
+      Left = 247
+      Top = 0
+      Width = 308
+      Height = 23
+      Caption = 'Sprzeda'#380' detaliczna z wykresem'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clBlue
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
   end
   object TowaryButton: TButton
     Left = 116
@@ -241,6 +182,146 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
     Caption = 'Faktura'
     TabOrder = 11
     OnClick = FakturaButtonClick
+  end
+  object Panel1: TPanel
+    Left = 8
+    Top = 378
+    Width = 130
+    Height = 246
+    AutoSize = True
+    Color = clMenuBar
+    ParentBackground = False
+    TabOrder = 12
+    object ParagonLabel: TLabel
+      Left = 2
+      Top = 1
+      Width = 74
+      Height = 19
+      Caption = 'Paragon:'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clBlue
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ParagonLabelValue: TLabel
+      Left = 2
+      Top = 26
+      Width = 127
+      Height = 19
+      Caption = '[NumerParagonu]'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 1
+      Top = 51
+      Width = 52
+      Height = 19
+      Caption = 'Netto:'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clBlue
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object NettoLabelValue: TLabel
+      Left = 1
+      Top = 76
+      Width = 50
+      Height = 19
+      Caption = '[Netto]'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 1
+      Top = 101
+      Width = 58
+      Height = 19
+      Caption = 'Brutto:'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clBlue
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object BruttoLabelValue: TLabel
+      Left = 1
+      Top = 126
+      Width = 55
+      Height = 19
+      Caption = '[Brutto]'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 1
+      Top = 151
+      Width = 124
+      Height = 19
+      Caption = 'Mar'#380'a narzutu:'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clBlue
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object MarzaNarzutuLabelValue: TLabel
+      Left = 2
+      Top = 176
+      Width = 108
+      Height = 19
+      Caption = '[MarzaNarzutu]'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 2
+      Top = 201
+      Width = 74
+      Height = 19
+      Caption = 'Mar'#380'a %'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clBlue
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object MarzaProcentLabelValue: TLabel
+      Left = 2
+      Top = 226
+      Width = 106
+      Height = 19
+      Caption = '[MarzaProcent]'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -963,6 +1044,374 @@ object SystemKaucyjnyForm: TSystemKaucyjnyForm
       end
       object Podgldkasjerw1: TMenuItem
         Caption = 'Podgl'#261'd kasjer'#243'w'
+      end
+    end
+    object Raporty1: TMenuItem
+      Caption = 'Raporty'
+      object Finansowe1: TMenuItem
+        Caption = 'Finansowe'
+        object Raportobrotu1: TMenuItem
+          Caption = 'Raport obrotu'
+        end
+        object Rejestrzakupw1: TMenuItem
+          Caption = 'Rejestr zakup'#243'w'
+        end
+        object Rejestrsprzeday1: TMenuItem
+          Caption = 'Rejestr sprzeda'#380'y'
+        end
+        object Raportkasowy1: TMenuItem
+          Caption = 'Raport kasowy'
+        end
+        object Raportskupuwalut1: TMenuItem
+          Caption = 'Raport skupu walut'
+        end
+        object Obrotyzdostawcami1: TMenuItem
+          Caption = 'Obroty z dostawcami'
+        end
+        object Obrotyzodbiorcami1: TMenuItem
+          Caption = 'Obroty z odbiorcami'
+        end
+        object Lunedokumentyzakupusprzeday1: TMenuItem
+          Caption = 'Lu'#378'ne dokumenty zakupu / sprzeda'#380'y'
+        end
+        object PorwnaniefakturzpodpitymiPZkami1: TMenuItem
+          Caption = 'Por'#243'wnanie faktur z podpi'#281'tymi PZ-kami'
+        end
+        object Raportkasfiskalnychzadzie1: TMenuItem
+          Caption = 'Raport kas fiskalnych za dzie'#324
+        end
+        object Zestawieniedokumentw1: TMenuItem
+          Caption = 'Zestawienie dokument'#243'w'
+        end
+        object Raportpatnocibiece1: TMenuItem
+          Caption = 'Raport p'#322'atno'#347'ci - bie'#380#261'ce'
+        end
+        object Raportpatnocinadzie1: TMenuItem
+          Caption = 'Raport p'#322'atno'#347'ci - na dzie'#324
+        end
+      end
+      object Ilociowowartociowe1: TMenuItem
+        Caption = 'Ilo'#347'ciowo - warto'#347'ciowe'
+        object Obrotymagazynowe1: TMenuItem
+          Caption = 'Obroty magazynowe'
+        end
+        object Kartamagazynowa1: TMenuItem
+          Caption = 'Karta magazynowa'
+        end
+        object Sprzedatowarw1: TMenuItem
+          Caption = 'Sprzeda'#380' towar'#243'w'
+        end
+        object Sprzedatowarwnakasach1: TMenuItem
+          Caption = 'Sprzeda'#380' towar'#243'w na kasach'
+        end
+        object Zakupytowarw1: TMenuItem
+          Caption = 'Zakupy towar'#243'w'
+        end
+        object Zakupytowarwwgfaktur1: TMenuItem
+          Caption = 'Zakupy towar'#243'w wg faktur'
+        end
+        object Arkuszspisuznatury1: TMenuItem
+          Caption = 'Arkusz spisu z natury'
+        end
+        object Analizaremanentw1: TMenuItem
+          Caption = 'Analiza remanent'#243'w'
+        end
+        object owaryprzeterminowane1: TMenuItem
+          Caption = 'Towary przeterminowane'
+        end
+        object owaryzagrooneprzeterminowaniem1: TMenuItem
+          Caption = 'Towary zagro'#380'one przeterminowaniem'
+        end
+        object Stratyiprzeceny1: TMenuItem
+          Caption = 'Straty i przeceny'
+        end
+        object Ujemnamarachwilowa1: TMenuItem
+          Caption = 'Ujemna mar'#380'a chwilowa'
+        end
+        object Analizatygodniowa1: TMenuItem
+          Caption = 'Analiza tygodniowa'
+        end
+        object Raportdzienny1: TMenuItem
+          Caption = 'Raport dzienny'
+        end
+        object Sprzedawgmagazynw1: TMenuItem
+          Caption = 'Sprzeda'#380' wg magazyn'#243'w'
+        end
+        object owaryzalegajce1: TMenuItem
+          Caption = 'Towary zalegaj'#261'ce'
+        end
+        object Opakowaniazalegajce1: TMenuItem
+          Caption = 'Opakowania zalegaj'#261'ce'
+        end
+        object Historiastanutowaru1: TMenuItem
+          Caption = 'Historia stanu towaru'
+        end
+        object Bilanswymianyopakowa1: TMenuItem
+          Caption = 'Bilans wymiany opakowa'#324
+        end
+        object Rankingdostawcw1: TMenuItem
+          Caption = 'Ranking dostawc'#243'w'
+        end
+        object Rankingproducentw1: TMenuItem
+          Caption = 'Ranking producent'#243'w'
+        end
+        object Analizapromocji1: TMenuItem
+          Caption = 'Analiza promocji'
+        end
+        object Analizacyklicznychpromocji1: TMenuItem
+          Caption = 'Analiza cyklicznych promocji'
+        end
+      end
+      object Wykazy1: TMenuItem
+        Caption = 'Wykazy'
+        object owary2: TMenuItem
+          Caption = 'Towary'
+        end
+        object Kontrahenci1: TMenuItem
+          Caption = 'Kontrahenci'
+        end
+        object Cennik1: TMenuItem
+          Caption = 'Cennik'
+        end
+        object Listatowarwwgkontrahentw1: TMenuItem
+          Caption = 'Lista towar'#243'w wg kontrahent'#243'w'
+        end
+      end
+      object Koszykowe1: TMenuItem
+        Caption = 'Koszykowe'
+        object Godzinowykas1: TMenuItem
+          Caption = 'Godzinowy kas'
+        end
+        object Wartocikoszykw1: TMenuItem
+          Caption = 'Warto'#347'ci koszyk'#243'w'
+        end
+        object Analizakoszykw1: TMenuItem
+          Caption = 'Analiza koszyk'#243'w'
+        end
+        object Kuponyrabatowe1: TMenuItem
+          Caption = 'Kupony rabatowe'
+        end
+        object Analizadziennawgasortymentw1: TMenuItem
+          Caption = 'Analiza dzienna wg asortyment'#243'w'
+        end
+      end
+      object Staliklienci1: TMenuItem
+        Caption = 'Stali klienci'
+        object Obrotywrozbiciunawizyty1: TMenuItem
+          Caption = 'Obroty w rozbiciu na wizyty'
+        end
+        object Obrotysumarycznie1: TMenuItem
+          Caption = 'Obroty sumarycznie'
+        end
+        object Obrotywedugstaychklientw1: TMenuItem
+          Caption = 'Obroty wed'#322'ug sta'#322'ych klient'#243'w'
+        end
+        object Obrotywedugstaychklientwpodokumentach1: TMenuItem
+          Caption = 'Obroty wed'#322'ug sta'#322'ych klient'#243'w po dokumentach'
+        end
+        object Obrotywrozbiciunapozycje1: TMenuItem
+          Caption = 'Obroty w rozbiciu na pozycje'
+        end
+      end
+      object Generatorzamwie1: TMenuItem
+        Caption = 'Generator zam'#243'wie'#324
+        object owarydozamwienia1: TMenuItem
+          Caption = 'Towary do zam'#243'wienia'
+        end
+        object Analizazapasutowarw1: TMenuItem
+          Caption = 'Analiza zapasu towar'#243'w'
+        end
+        object Analizazakupusprzedaymaryizapasu1: TMenuItem
+          Caption = 'Analiza zakupu, sprzeda'#380'y, mar'#380'y i zapasu'
+        end
+        object Raportsprzedaystanuilocizamwionej1: TMenuItem
+          Caption = 'Raport sprzeda'#380'y, stanu, ilo'#347'ci zam'#243'wionej'
+        end
+      end
+      object Rozliczeniakasjerw1: TMenuItem
+        Caption = 'Rozliczenia kasjer'#243'w'
+        object Patnocikasjerw1: TMenuItem
+          Caption = 'P'#322'atno'#347'ci kasjer'#243'w'
+        end
+        object Statystykikasjerw1: TMenuItem
+          Caption = 'Statystyki kasjer'#243'w'
+        end
+        object ransakcjekasjerw1: TMenuItem
+          Caption = 'Transakcje kasjer'#243'w'
+        end
+        object Utargikasjerowprowizje1: TMenuItem
+          Caption = 'Utargi kasjerow (prowizje)'
+        end
+      end
+      object Eksporty1: TMenuItem
+        Caption = 'Eksporty'
+      end
+      object Uproszczone1: TMenuItem
+        Caption = 'Uproszczone'
+      end
+      object Minimumzakupowe3: TMenuItem
+        Caption = 'Minimum zakupowe'
+      end
+      object JPK1: TMenuItem
+        Caption = 'JPK'
+        object Podgld1: TMenuItem
+          Caption = 'Podgl'#261'd'
+          object JPKMAG1: TMenuItem
+            Caption = 'JPK MAG'
+          end
+          object JPKFA1: TMenuItem
+            Caption = 'JPK FA'
+          end
+          object JPKFA5: TMenuItem
+            Caption = 'JPK FA'
+          end
+          object JPKV71: TMenuItem
+            Caption = 'JPK V7'
+          end
+        end
+        object Eksport1: TMenuItem
+          Caption = 'Eksport'
+          object JPKFA2: TMenuItem
+            Caption = 'JPK MAG'
+          end
+          object JPKFA3: TMenuItem
+            Caption = 'JPK FA'
+          end
+          object JPKFA4: TMenuItem
+            Caption = 'JPK FA'
+          end
+          object JPKV72: TMenuItem
+            Caption = 'JPK V7'
+          end
+        end
+      end
+      object Podatekodsprzedaydetalicznej1: TMenuItem
+        Caption = 'Podatek od sprzeda'#380'y detalicznej'
+      end
+      object Raportzbiorczysklepu1: TMenuItem
+        Caption = 'Raport zbiorczy sklepu'
+      end
+    end
+    object SQL1: TMenuItem
+      Caption = 'SQL'
+      object Centrala1: TMenuItem
+        Caption = 'Centrala'
+        object CentralaPorwnanieUtargu1: TMenuItem
+          Caption = 'Centrala - Por'#243'wnanie Utargu'
+        end
+        object Rozbienociuzgodniekontrahentw1: TMenuItem
+          Caption = 'Rozbie'#380'no'#347'ci uzgodnie'#324' kontrahent'#243'w'
+        end
+        object Rozbienociuzgodnietowarw1: TMenuItem
+          Caption = 'Rozbie'#380'no'#347'ci uzgodnie'#324' towar'#243'w'
+        end
+      end
+      object Ilociowowartociowe2: TMenuItem
+        Caption = 'Ilo'#347'ciowo-warto'#347'ciowe'
+        object Historiadostawdlatowaru1: TMenuItem
+          Caption = 'Historia dostaw dla towaru'
+        end
+        object Nadwykatowarw1: TMenuItem
+          Caption = 'Nadwy'#380'ka towar'#243'w'
+        end
+        object Rabatyudzielonenakasie1: TMenuItem
+          Caption = 'Rabaty udzielone na kasie'
+        end
+        object StanTowaru1: TMenuItem
+          Caption = 'Stan Towaru'
+        end
+        object owaryprzypisanedodostawcy1: TMenuItem
+          Caption = 'Towary przypisane do dostawcy'
+        end
+      end
+      object Kasyfiskalne1: TMenuItem
+        Caption = 'Kasy fiskalne'
+        object NrPlunawybranejkasie1: TMenuItem
+          Caption = 'Nr Plu na wybranej kasie'
+        end
+        object RnePLUnadwochkasach1: TMenuItem
+          Caption = 'R'#243#380'ne PLU na dwoch kasach'
+        end
+      end
+      object Monitoring1: TMenuItem
+        Caption = 'Monitoring'
+        object Zmianycenbezdokprzecen1: TMenuItem
+          Caption = 'Zmiany cen bez dok. przecen'
+        end
+        object Zmianycenzkartytowaru1: TMenuItem
+          Caption = 'Zmiany cen z karty towaru'
+        end
+        object Zmianycenzkartybezprzecen1: TMenuItem
+          Caption = 'Zmiany cen z karty bez przecen'
+        end
+        object Uruchamianieprogramw1: TMenuItem
+          Caption = 'Uruchamianie program'#243'w'
+        end
+        object ZmianystawekVAT1: TMenuItem
+          Caption = 'Zmiany stawek VAT'
+        end
+      end
+      object Remanenty1: TMenuItem
+        Caption = 'Remanenty'
+        object NiewidniejcetowarynaREM1: TMenuItem
+          Caption = 'Niewidniej'#261'ce towary na REM'
+        end
+        object Rozbienoscibezporednioporemanencie1: TMenuItem
+          Caption = 'Rozbie'#380'nosci bezpo'#347'rednio po remanencie'
+        end
+      end
+      object Statystyki1: TMenuItem
+        Caption = 'Statystyki'
+        object llodokumentw1: TMenuItem
+          Caption = 'llo'#347#263' dokument'#243'w'
+        end
+      end
+      object Wykazy2: TMenuItem
+        Caption = 'Wykazy'
+        object Brakitowarw1: TMenuItem
+          Caption = 'Braki towar'#243'w'
+        end
+        object Cennik2: TMenuItem
+          Caption = 'Cennik'
+        end
+        object Kodydodatkowe1: TMenuItem
+          Caption = 'Kody dodatkowe'
+        end
+        object Kontrahenci2: TMenuItem
+          Caption = 'Kontrahenci'
+        end
+        object WykazMWpowizanychzMPdladostawprzyjtychwsklepachMiniMarket1: TMenuItem
+          Caption = 
+            'Wykaz MW powi'#261'zanych z MP dla dostaw przyj'#281'tych w sklepach MiniM' +
+            'arket'
+        end
+        object andemy1: TMenuItem
+          Caption = 'Tandemy'
+        end
+      end
+      object Ifstan0thencolorred1: TMenuItem
+        Caption = 'If stan == 0 then color: red'
+      end
+      object Kodypocztowezkontrahentem1: TMenuItem
+        Caption = 'Kody pocztowe z kontrahentem'
+      end
+      object RCP1: TMenuItem
+        Caption = 'RCP'
+      end
+      object RCPSzczegowy1: TMenuItem
+        Caption = 'RCP Szczeg'#243#322'owy'
+      end
+      object RozbienociFVzWZ1: TMenuItem
+        Caption = 'Rozbie'#380'no'#347'ci FV z WZ'
+      end
+      object Sprzedaskadniki1: TMenuItem
+        Caption = 'Sprzeda'#380' - sk'#322'adniki'
+      end
+      object PorwnanieUtarguzparagonami1: TMenuItem
+        Caption = 'Por'#243'wnanie Utargu z paragonami'
+      end
+      object Nowy1: TMenuItem
+        Caption = 'Nowy'
       end
     end
   end
